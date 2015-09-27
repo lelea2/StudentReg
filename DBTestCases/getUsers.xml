@@ -1,14 +1,14 @@
 <TestCase>
     <CaseName>
-        Delete table Users_Courses
+        Get Users
     </CaseName>
     <Tester>
     </Tester>
     <CaseDescription>
-        Delete all entries in Users_Courses table for testing purposes.
+        Get All Users available
     </CaseDescription>
     <SQLScript>
-        DELETE FROM Users_Courses;
+       SELECT * FROM Users;
     </SQLScript>
     <Result>
     </Result>

@@ -6,9 +6,11 @@
     </Tester>
     <CaseDescription>
         Create New Student  -- Student has roleId=2, major='computer science'
+        Step 1: Get your userId from user table. Eg: 0dbced6e-64cb-11e5-b364-0a184912e279
+        Step 2: update user firstname, lastname
     </CaseDescription>
     <SQLScript>
-        INSERT Users (userId, email, firstname, lastname, passwd, roleId, majorId) values (UUID(), 'tom@cmpe272.com', 'tom', 'group8', PASSWORD('456abcd'), 2, 2);
+    UPDATE Users set firstname='tom2' where userId='0dbced6e-64cb-11e5-b364-0a184912e279';
     </SQLScript>
     <Result>
     </Result>

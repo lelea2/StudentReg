@@ -1,14 +1,14 @@
 <TestCase>
     <CaseName>
-        Delete table Users_Courses
+        Get Courses By Majors
     </CaseName>
     <Tester>
     </Tester>
     <CaseDescription>
-        Delete all entries in Users_Courses table for testing purposes.
+        Get Courses By Major (UI cases: display list of course by Users' major)
     </CaseDescription>
     <SQLScript>
-        DELETE FROM Users_Courses;
+       SELECT * FROM Courses where majorId=2
     </SQLScript>
     <Result>
     </Result>

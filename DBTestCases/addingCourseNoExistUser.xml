@@ -1,0 +1,18 @@
+<TestCase>
+    <CaseName>
+        Register Course with non-existing user
+    </CaseName>
+    <Tester>
+    </Tester>
+    <CaseDescription>
+        User register single course:
+            -- Step 1: SELECT * FROM Users to get UserId (you won't need that in actual flow, since identitify user through cookies after user signin)
+            -- Step 2: SELECT * FROM Courses to get courseId
+            -- Step 3: Register course with non-existing user
+    </CaseDescription>
+    <SQLScript>
+        INSERT INTO Users_Courses (userId, courseId) values ('fakeuser', '');
+    </SQLScript>
+    <Result>
+    </Result>
+</TestCase>
