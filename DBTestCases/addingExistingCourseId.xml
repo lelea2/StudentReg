@@ -1,0 +1,15 @@
+<TestCase>
+    <CaseName>
+        Inserting exisiting courseId
+    </CaseName>
+    <Tester>
+    </Tester>
+    <CaseDescription>
+        Insert exisiting courseId, query should fail
+    </CaseDescription>
+    <SQLScript>
+        INSERT INTO Courses (courseId, courseName, courseNumber, majorId, scheduleId, stateId, description, location) values (UUID(), 'Software Platforms', 272, 3, 1, 'On', 'Enterprise Software Platforms', 'Misson College');
+    </SQLScript>
+    <Result>
+    </Result>
+</TestCase>

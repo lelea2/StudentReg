@@ -1,0 +1,15 @@
+<TestCase>
+    <CaseName>
+        Inserting user with no existing majorId
+    </CaseName>
+    <Tester>
+    </Tester>
+    <CaseDescription>
+        Insert user with no existing majorId, should fail insertion
+    </CaseDescription>
+    <SQLScript>
+        INSERT INTO Users (userId, email, firstname, lastname, passwd, roleId, majorId) values (UUID(), 'major@test.com', 'majortest', 'majortest', PASSWORD('123efgh'), 2, 4);
+    </SQLScript>
+    <Result>
+    </Result>
+</TestCase>

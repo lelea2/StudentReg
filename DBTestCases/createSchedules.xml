@@ -1,0 +1,15 @@
+<TestCase>
+    <CaseName>
+        Create Schedules
+    </CaseName>
+    <Tester>
+    </Tester>
+    <CaseDescription>
+        Create Schedule: eg -- insert 2 different schedule at a time
+    </CaseDescription>
+    <SQLScript>
+        INSERT INTO Schedules (scheduleId, day, startTime, endTime) values (1,'Mon', '9am', '11am'), (2, 'Tue', '6pm', '8pm');
+    </SQLScript>
+    <Result>
+    </Result>
+</TestCase>

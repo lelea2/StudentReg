@@ -1,0 +1,15 @@
+<TestCase>
+    <CaseName>
+        Register Course
+    </CaseName>
+    <Tester>
+    </Tester>
+    <CaseDescription>
+        User register single course
+    </CaseDescription>
+    <SQLScript>
+
+    </SQLScript>
+    <Result>
+    </Result>
+</TestCase>

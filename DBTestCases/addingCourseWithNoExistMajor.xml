@@ -1,0 +1,15 @@
+<TestCase>
+    <CaseName>
+        Adding Course with no existing major
+    </CaseName>
+    <Tester>
+    </Tester>
+    <CaseDescription>
+        Insert course with no exiting major -- queries should fail
+    </CaseDescription>
+    <SQLScript>
+        INSERT INTO Courses (courseId, courseName, courseNumber, majorId, scheduleId, stateId, description) values (UUID(), 'Acct 101', 271, 4, 1, 'On', 'Account');
+    </SQLScript>
+    <Result>
+    </Result>
+</TestCase>

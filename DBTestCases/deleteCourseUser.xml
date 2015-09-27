@@ -1,0 +1,15 @@
+<TestCase>
+    <CaseName>
+        Delete table Users_Courses
+    </CaseName>
+    <Tester>
+    </Tester>
+    <CaseDescription>
+        Delete all entries in Users_Courses table for testing purposes.
+    </CaseDescription>
+    <SQLScript>
+        DELETE FROM Users_Courses
+    </SQLScript>
+    <Result>
+    </Result>
+</TestCase>

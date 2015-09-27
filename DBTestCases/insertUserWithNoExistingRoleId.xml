@@ -1,0 +1,15 @@
+<TestCase>
+    <CaseName>
+        Inserting user with non-existing role
+    </CaseName>
+    <Tester>
+    </Tester>
+    <CaseDescription>
+        Inserting user with non-existing role, query should fail
+    </CaseDescription>
+    <SQLScript>
+        INSERT INTO Users (userId, email, firstname, lastname, passwd, roleId, majorId) values (UUID(), 'role@test.com', 'role', 'role', PASSWORD('123efgh'), 4, 1);
+    </SQLScript>
+    <Result>
+    </Result>
+</TestCase>

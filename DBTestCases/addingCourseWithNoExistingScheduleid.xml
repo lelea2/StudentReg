@@ -1,0 +1,17 @@
+<TestCase>
+    <CaseName>
+        Adding Course with no existing scheduleId
+    </CaseName>
+    <Tester>
+    </Tester>
+    <CaseDescription>
+        Insert course with no exiting scheduleId -- queries should fail
+        Expected Error:
+        Cannot add or update a child row: a foreign key constraint fails (`CMPE272Database`.`Courses`, CONSTRAINT `Courses_ibfk_2` FOREIGN KEY (`scheduleId`) REFERENCES `Schedules` (`scheduleId`) ON DELETE CASCADE ON UPDATE CASCADE)
+    </CaseDescription>
+    <SQLScript>
+        INSERT INTO Courses (courseId, courseName, courseNumber, majorId, scheduleId, stateId, description) values (UUID(), 'Cloud 101', 281, 3, 4, 'On', 'Cloud Technology');
+    </SQLScript>
+    <Result>
+    </Result>
+</TestCase>

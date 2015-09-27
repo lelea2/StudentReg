@@ -1,0 +1,15 @@
+<TestCase>
+    <CaseName>
+        Create New Student
+    </CaseName>
+    <Tester>
+    </Tester>
+    <CaseDescription>
+        Create New Student  -- Student has roleId=2, major='computer science'
+    </CaseDescription>
+    <SQLScript>
+        INSERT INTO Users (userId, email, firstname, lastname, passwd, roleId, majorId) values (UUID(), 'tom@cmpe272.com', 'tom', 'group8', PASSWORD('456abcd'), 2, 2);
+    </SQLScript>
+    <Result>
+    </Result>
+</TestCase>

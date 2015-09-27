@@ -1,0 +1,15 @@
+<TestCase>
+    <CaseName>
+        Inserting exisiting user
+    </CaseName>
+    <Tester>
+    </Tester>
+    <CaseDescription>
+        Inserting existing user -- The transaction should be failed because the majorId doesn’t exist in table majors which violates the referential integrity.
+    </CaseDescription>
+    <SQLScript>
+        INSERT INTO Users (userId, email, firstname, lastname, passwd, roleId, majorId) values (UUID(), 'tom@cmpe272.com', 'admin', 'admin', PASSWORD('123efgh'), 1, 1);
+    </SQLScript>
+    <Result>
+    </Result>
+</TestCase>

@@ -1,0 +1,15 @@
+<TestCase>
+    <CaseName>
+        Create Roles
+    </CaseName>
+    <Tester>
+    </Tester>
+    <CaseDescription>
+        Create Roles: admin and student
+    </CaseDescription>
+    <SQLScript>
+        INSERT INTO Roles (roleId, roleName) values (1, 'admin'), (2, 'student');
+    </SQLScript>
+    <Result>
+    </Result>
+</TestCase>

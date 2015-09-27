@@ -1,0 +1,15 @@
+<TestCase>
+    <CaseName>
+        Create Admin User
+    </CaseName>
+    <Tester>
+    </Tester>
+    <CaseDescription>
+        Create Admin user, admin user with roleId=1
+    </CaseDescription>
+    <SQLScript>
+        INSERT INTO Users (userId, email, firstname, lastname, passwd, roleId, majorId) values (UUID(), 'admin@cmpe272.com', 'admin', 'admin', PASSWORD('123abcd'), 1, 1);
+    </SQLScript>
+    <Result>
+    </Result>
+</TestCase>
