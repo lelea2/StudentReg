@@ -1,0 +1,16 @@
+<TestCase>
+    <CaseName>
+        Student drop courses
+    </CaseName>
+    <Tester>
+    </Tester>
+    <CaseDescription>
+        Handle case for user drop courses
+        -- Find courseId and userId to delete
+    </CaseDescription>
+    <SQLScript>
+       DELETE FROM Users_Courses where userId='' and courseId=''
+    </SQLScript>
+    <Result>
+    </Result>
+</TestCase>
