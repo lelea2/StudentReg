@@ -6,13 +6,10 @@
     </Tester>
     <CaseDescription>
         Create Roles: admin and student
-        Expected result:
-        The inserted roles should show in table select clause
     </CaseDescription>
     <SQLScript>
         delete from Roles;
         insert into Roles (roleId, roleName) values (1, 'admin'), (2, 'student');
-        select * from Roles;
     </SQLScript>
     <Result>
     </Result>
