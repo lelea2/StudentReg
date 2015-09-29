@@ -6,13 +6,10 @@
     </Tester>
     <CaseDescription>
         Create Major: Software Engineer, Computer Sciene...
-        Expected result:
-        The inserted majors should show in table select clause
     </CaseDescription>
     <SQLScript>
         delete from Majors;
         insert into Majors (majorId, majorName) values (1, 'default'), (2, 'computer science'), (3, 'software engineering');
-        select * from Majors;
     </SQLScript>
     <Result>
     </Result>
