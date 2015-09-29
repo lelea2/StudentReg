@@ -6,9 +6,12 @@
     </Tester>
     <CaseDescription>
         Delete all entries in Users_Courses table for testing purposes.
+        Expected result:
+        The returned result set should be empty for table select clause
     </CaseDescription>
     <SQLScript>
-        DELETE FROM Users_Courses;
+        delect from Users_Courses;
+        select * from Users_Courses;
     </SQLScript>
     <Result>
     </Result>
