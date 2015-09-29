@@ -5,11 +5,15 @@
     <Tester>
     </Tester>
     <CaseDescription>
-        Handle case for user drop courses
-        -- Find courseId and userId to delete
+        Handle case for user drop courses:
+        Use passing-in courseId and userId to delete
+        Expected result:
+        The returned result set should be empty for the select clause
     </CaseDescription>
     <SQLScript>
-       DELETE FROM Users_Courses where userId='' and courseId=''
+        select @courseId := courseId, @userId := userId from Users_Courses order by 1 limit 1;
+	    delete from Users_Courses where userId = @userId and courseId = @courseId;
+        select * from Users_Courses where userId = @userId and courseId = @courseId;
     </SQLScript>
     <Result>
     </Result>
