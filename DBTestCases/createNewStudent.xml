@@ -6,11 +6,14 @@
     </Tester>
     <CaseDescription>
         Create New Student  -- Student has roleId=2, major='computer science'
-        Checking student being created by queries below (this query used for login case in the future)
-        --- SELECT * FROM Users where email='tom@cmpe272.com' and passwd=PASSWORD('456abcd');
+        Expected result:
+        The inserted student user should show in table select clause
     </CaseDescription>
     <SQLScript>
-        INSERT INTO Users (userId, email, firstname, lastname, passwd, roleId, majorId) values (UUID(), 'tom@cmpe272.com', 'tom', 'group8', PASSWORD('456abcd'), 2, 2);
+        set @roleId = 2;
+        delete from Users where roleId = @roleId;
+        insert into Users (userId, email, firstname, lastname, password, roleId, majorId) values (UUID(), 'tom@cmpe272.com', 'tom', 'group8', PASSWORD('456abcd'), @roleId, 2);
+        select * from Users;
     </SQLScript>
     <Result>
     </Result>
