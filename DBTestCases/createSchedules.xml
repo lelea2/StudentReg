@@ -6,13 +6,10 @@
     </Tester>
     <CaseDescription>
         Create Schedule: eg -- insert 2 different schedules
-        Expected result:
-        The inserted schedules should show in table select clause
     </CaseDescription>
     <SQLScript>
         delete from Schedules;
         insert into Schedules (scheduleId, day, startTime, endTime) values (1,'Mon', '9am', '11am'), (2, 'Tue', '6pm', '8pm');
-        select * from Schedules;
     </SQLScript>
     <Result>
     </Result>
