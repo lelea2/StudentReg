@@ -1,14 +1,14 @@
 <TestCase>
     <CaseName>
-        Get Courses By Majors
+        Get user-course
     </CaseName>
     <Tester>
     </Tester>
     <CaseDescription>
-        Get Courses By Major (UI cases: display list of course by Users' major)
+        Get user-course registration result from Users_Courses
     </CaseDescription>
     <SQLScript>
-       SELECT * FROM Courses where majorId=2
+       SELECT * FROM User_Courses;
     </SQLScript>
     <Result>
     </Result>
