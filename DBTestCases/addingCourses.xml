@@ -6,10 +6,13 @@
     </Tester>
     <CaseDescription>
         Create Course: CMPE 272, CMPE283...
+        Expected result:
+        The inserted result should show in table select clause;
     </CaseDescription>
     <SQLScript>
         delete from Courses;
-        INSERT INTO Courses (courseId, courseName, courseNumber, majorId, scheduleId, stateId, description, location) values (UUID(), 'Ent Software Platforms', 272, 3, 1, 'On', 'Enterprise Software Platforms', 'Misson College'), (UUID(), 'Virtualization Technology', 273, 3, 2, 'On', 'Virtualization Technology', 'Mission College');
+        insert into Courses (courseId, courseName, courseNumber, majorId, scheduleId, stateId, description, location) values (UUID(), 'Ent Software Platforms', 272, 3, 1, 'On', 'Enterprise Software Platforms', 'Misson College'), (UUID(), 'Virtualization Technology', 273, 3, 2, 'On', 'Virtualization Technology', 'Mission College');
+        select * from Courses;
     </SQLScript>
     <Result>
     </Result>
