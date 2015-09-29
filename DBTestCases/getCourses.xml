@@ -8,7 +8,7 @@
         Get All Courses available
     </CaseDescription>
     <SQLScript>
-       SELECT * FROM Courses;
+       select * from Courses;
     </SQLScript>
     <Result>
     </Result>
