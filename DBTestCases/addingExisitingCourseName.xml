@@ -1,0 +1,18 @@
+<TestCase>
+    <CaseName>
+        Inserting exisiting courseName
+    </CaseName>
+    <Tester>
+    </Tester>
+    <CaseDescription>
+        Insert exisiting courseName, query should fail
+        Expected error: 
+        Can not add due to UNIQUE constraint on courseName
+    </CaseDescription>
+    <SQLScript>
+        select @courseName := courseName from Courses order by 1 limit 1;
+        INSERT INTO Courses (courseId, courseName, courseNumber, majorId, scheduleId, stateId, description, location) values (UUID(), @courseName, 260, 3, 1, 'On', 'Enterprise Software Platforms', 'Misson College');
+    </SQLScript>
+    <Result>
+    </Result>
+</TestCase>
