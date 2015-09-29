@@ -1,14 +1,17 @@
 <TestCase>
     <CaseName>
-        Inserting exisiting user
+        Inserting existing user
     </CaseName>
     <Tester>
     </Tester>
     <CaseDescription>
-        Inserting existing user -- The transaction should be failed because the majorId doesn’t exist in table majors which violates the referential integrity.
+        Inserting user with duplicate email address 
+        Expected error:
+        Can not add due to UNIQUE constraint on email 
     </CaseDescription>
     <SQLScript>
-        INSERT INTO Users (userId, email, firstname, lastname, passwd, roleId, majorId) values (UUID(), 'tom@cmpe272.com', 'admin', 'admin', PASSWORD('123efgh'), 1, 1);
+        select @email := email from Users order by 1 desc limit 1;
+	    insert into Users (userId, email, firstname, lastname, password, roleId, majorId) values (UUID(), @email, 'admin', 'admin', PASSWORD('123abcd'), 1, 1);
     </SQLScript>
     <Result>
     </Result>
