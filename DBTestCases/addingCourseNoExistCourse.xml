@@ -6,8 +6,8 @@
     </Tester>
     <CaseDescription>
         User register single course:
-            -- Step 1: SELECT * FROM Users to get UserId (you won't need that in actual flow, since identitify user through cookies after user signin)
-            -- Step 2: SELECT * FROM Courses to make sure courseId doesn't exist
+            -- Step 1: select * from Users to get UserId (you won't need that in actual flow, since identitify user through cookies after user signin)
+            -- Step 2: set the courseId to add and make sure courseId doesn't exist
             -- Step 3: adding non-existing course
         Expect: error return for invalid courseId key
     </CaseDescription>
