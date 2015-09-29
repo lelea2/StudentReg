@@ -6,14 +6,11 @@
     </Tester>
     <CaseDescription>
         Create Admin user, admin user with roleId=1
-        Expected result: 
-        The inserted admin user should show in table select clause
     </CaseDescription>
     <SQLScript>
         set @roleId = 1;
         delete from Users where roleId = @roleId;
         insert into Users (userId, email, firstname, lastname, password, roleId, majorId) values (UUID(), 'admin@cmpe272.com', 'admin', 'admin', PASSWORD('123abcd'), @roleId, 1);
-        select * from Users;
     </SQLScript>
     <Result>
     </Result>
