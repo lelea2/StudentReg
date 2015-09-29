@@ -6,12 +6,15 @@
     </Tester>
     <CaseDescription>
         User register single course:
-            -- Step 1: SELECT * FROM Users to get UserId (you won't need that in actual flow, since identitify user through cookies after user signin)
-            -- Step 2: SELECT * FROM Courses to get courseId
+            -- Step 1: select * from Courses to get courseId
+            -- Step 2: set userId to add and make sure it doesn't exist in Users;
             -- Step 3: Register course with non-existing user
     </CaseDescription>
     <SQLScript>
-        INSERT INTO Users_Courses (userId, courseId) values ('fakeuser', '');
+        select @courseId := courseId from Courses order by 1 limit 1;
+        set @userId = 'Fake User';
+        select * from Users where userId = @userId;
+        insert into Users_Courses (userId, courseId) values (@userId, @courseId);
     </SQLScript>
     <Result>
     </Result>
