@@ -7,12 +7,15 @@
     <CaseDescription>
         User register single course:
             -- Step 1: SELECT * FROM Users to get UserId (you won't need that in actual flow, since identitify user through cookies after user signin)
-            -- Step 2: SELECT * FROM Courses to get courseId
+            -- Step 2: SELECT * FROM Courses to make sure courseId doesn't exist
             -- Step 3: adding non-existing course
         Expect: error return for invalid courseId key
     </CaseDescription>
     <SQLScript>
-        INSERT INTO Users_Courses (userId, courseId) values ('0dbced6e-64cb-11e5-b364-0a184912e279', 'fakecourses');
+        select @userId := userId from Users order by 1 limit 1;
+        set @courseId = 'Fake Course';
+        select * from Courses where courseId = @courseId;
+        insert into Users_Courses (userId, courseId) values (@userId, @courseId);
     </SQLScript>
     <Result>
     </Result>
