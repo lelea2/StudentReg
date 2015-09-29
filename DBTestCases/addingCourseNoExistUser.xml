@@ -9,6 +9,8 @@
             -- Step 1: select * from Courses to get courseId
             -- Step 2: set userId to add and make sure it doesn't exist in Users;
             -- Step 3: Register course with non-existing user
+        Expected Error:
+        Cannot add or update due to referential integrity
     </CaseDescription>
     <SQLScript>
         select @courseId := courseId from Courses order by 1 limit 1;
