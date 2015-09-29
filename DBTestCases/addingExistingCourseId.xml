@@ -6,9 +6,12 @@
     </Tester>
     <CaseDescription>
         Insert exisiting courseId, query should fail
+        Expected error:
+        Can not add due to UNIQUE constraint on courseId
     </CaseDescription>
     <SQLScript>
-        INSERT INTO Courses (courseId, courseName, courseNumber, majorId, scheduleId, stateId, description, location) values (UUID(), 'Software Platforms', 272, 3, 1, 'On', 'Enterprise Software Platforms', 'Misson College');
+        select @courseId := courseId from Courses order by 1 limit 1;
+        INSERT INTO Courses (courseId, courseName, courseNumber, majorId, scheduleId, stateId, description, location) values (@courseId, 'Software Platforms', 260, 3, 1, 'On', 'Enterprise Software Platforms', 'Misson College');
     </SQLScript>
     <Result>
     </Result>
