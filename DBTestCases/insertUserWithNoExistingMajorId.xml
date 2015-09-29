@@ -1,14 +1,18 @@
 <TestCase>
     <CaseName>
-        Inserting user with no existing majorId
+        Inserting user with non-existing majorId
     </CaseName>
     <Tester>
     </Tester>
     <CaseDescription>
-        Insert user with no existing majorId, should fail insertion
+        Insert user with non-existing majorId
+        Expected error:
+        Can not add due to referential integrity
     </CaseDescription>
     <SQLScript>
-        INSERT INTO Users (userId, email, firstname, lastname, passwd, roleId, majorId) values (UUID(), 'major@test.com', 'majortest', 'majortest', PASSWORD('123efgh'), 2, 4);
+        set @email = 'major@test.com';
+        set @majorId = 4;
+	    insert into Users (userId, email, firstname, lastname, password, roleId, majorId) values (UUID(), @email, 'test', 'test', PASSWORD('123abcd'), 2, @majorId);
     </SQLScript>
     <Result>
     </Result>
