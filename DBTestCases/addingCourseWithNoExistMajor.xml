@@ -6,6 +6,8 @@
     </Tester>
     <CaseDescription>
         Insert a new course with no existing major -- queries should fail
+        Expected Error:
+        Cannot add or update due to referential integrity
     </CaseDescription>
     <SQLScript>
         -- Check courseName. The result should be null
