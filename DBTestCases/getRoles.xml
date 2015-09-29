@@ -1,0 +1,15 @@
+<TestCase>
+    <CaseName>
+        Get Roles
+    </CaseName>
+    <Tester>
+    </Tester>
+    <CaseDescription>
+        Get All Roles available
+    </CaseDescription>
+    <SQLScript>
+       SELECT * FROM Roles;
+    </SQLScript>
+    <Result>
+    </Result>
+</TestCase>
