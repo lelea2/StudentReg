@@ -7,11 +7,14 @@
     <CaseDescription>
         User register single course:
             -- Step 1: SELECT * FROM Users to get UserId (you won't need that in actual flow, since identitify user through cookies after user signin)
-            -- Step 2: SELECT * FROM Courses to get courseId
+            -- Step 2: SELECT * FROM Courses to get courseId with the same major as user's
             -- Step 3: register with userId and courseId
     </CaseDescription>
     <SQLScript>
-        INSERT INTO Users_Courses (userId, courseId) values ('0dbced6e-64cb-11e5-b364-0a184912e279', '');
+        set @majorId = 3;
+        select @userId := userId from Users where roleId = 2 and majorId = @majorId order by 1 limit 1;
+        select @courseId := courseId from Courses where majorId = @majorId order by 1 limit 1;
+        insert into Users_Courses (userId, courseId) values (@userId, @courseId);
     </SQLScript>
     <Result>
     </Result>
