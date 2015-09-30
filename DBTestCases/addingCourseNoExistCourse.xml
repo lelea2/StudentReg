@@ -13,10 +13,7 @@
         Cannot add or update due to referential integrity
     </CaseDescription>
     <SQLScript>
-        select @userId := userId from Users order by 1 limit 1;
-        set @courseId = 'Fake Course';
-        select * from Courses where courseId = @courseId;
-        insert into Users_Courses (userId, courseId) values (@userId, 'Fake Course');
+        insert into Users_Courses (userId, courseId) values ('64015c46-6724-11e5-b364-0a184912e298', 'Fake Course');
     </SQLScript>
     <Result>
     </Result>
