@@ -8,9 +8,8 @@
         Create New Student  -- Student has roleId=2, major='computer science'
     </CaseDescription>
     <SQLScript>
-        set @roleId = 2;
-        delete from Users where roleId = @roleId;
-        insert into Users (userId, email, firstname, lastname, password, roleId, majorId) values (UUID(), 'tom@cmpe272.com', 'tom', 'group8', PASSWORD('456abcd'), @roleId, 2);
+        delete from Users where roleId = 2;
+        insert into Users (userId, email, firstname, lastname, password, roleId, majorId) values ('64015c46-6724-11e5-b364-0a184912e298', 'tom@cmpe272.com', 'tom', 'group8', PASSWORD('456abcd'), 2, 2);
     </SQLScript>
     <Result>
     </Result>
