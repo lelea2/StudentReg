@@ -10,7 +10,7 @@
         Can not add due to UNIQUE constraint on email 
     </CaseDescription>
     <SQLScript>
-        insert into Users (userId, email, firstname, lastname, password, roleId, majorId) values ('64015c46-6724-11e5-b364-0a184912e379', 'test@cmpe272.com', 'admin', 'admin', PASSWORD('123abcd'), 1, 1);
+        insert into Users (userId, email, firstname, lastname, password, roleId, majorId) values ('64015c46-6724-11e5-b364-0a184912e379', 'admin@cmpe272.com', 'admin', 'admin', PASSWORD('123abcd'), 1, 1);
     </SQLScript>
     <Result>
     </Result>
