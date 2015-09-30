@@ -16,7 +16,7 @@
         select @userId := userId from Users order by 1 limit 1;
         set @courseId = 'Fake Course';
         select * from Courses where courseId = @courseId;
-        insert into Users_Courses (userId, courseId) values (@userId, @courseId);
+        insert into Users_Courses (userId, courseId) values (@userId, 'Fake Course');
     </SQLScript>
     <Result>
     </Result>
