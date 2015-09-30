@@ -10,9 +10,7 @@
         Can not add due to referential integrity
     </CaseDescription>
     <SQLScript>
-        set @email = 'major@test.com';
-        set @majorId = 4;
-	    insert into Users (userId, email, firstname, lastname, password, roleId, majorId) values (UUID(), @email, 'test', 'test', PASSWORD('123abcd'), 2, @majorId);
+	insert into Users (userId, email, firstname, lastname, password, roleId, majorId) values ('64015c46-6724-11e5-b364-0a184912e379', 'major@test.com', 'test', 'test', PASSWORD('123abcd'), 2, 4);
     </SQLScript>
     <Result>
     </Result>
