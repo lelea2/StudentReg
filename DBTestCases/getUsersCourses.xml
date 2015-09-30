@@ -8,7 +8,7 @@
         Get user-course registration result from Users_Courses
     </CaseDescription>
     <SQLScript>
-       SELECT * FROM User_Courses;
+       SELECT * FROM Users_Courses;
     </SQLScript>
     <Result>
     </Result>
