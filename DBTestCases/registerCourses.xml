@@ -11,10 +11,7 @@
             -- Step 3: register with userId and courseId
     </CaseDescription>
     <SQLScript>
-        set @majorId = 3;
-        select @userId := userId from Users where roleId = 2 and majorId = @majorId order by 1 limit 1;
-        select @courseId := courseId from Courses where majorId = @majorId order by 1 limit 1;
-        insert into Users_Courses (userId, courseId) values (@userId, @courseId);
+        insert into Users_Courses (userId, courseId) values ('64015c46-6724-11e5-b364-0a184912e298', '64015c46-6724-11e5-b364-0a184912e279');
     </SQLScript>
     <Result>
     </Result>
