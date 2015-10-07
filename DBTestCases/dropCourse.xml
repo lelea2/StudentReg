@@ -5,11 +5,11 @@
     <Tester>
     </Tester>
     <CaseDescription>
-        Handle case for user drop courses
-        -- Find courseId and userId to delete
+        Handle case for user drop courses:
+        Use passing-in courseId and userId to delete
     </CaseDescription>
     <SQLScript>
-       DELETE FROM Users_Courses where userId='' and courseId=''
+	delete from Users_Courses where userId = '64015c46-6724-11e5-b364-0a184912e298' and courseId = '64015c46-6724-11e5-b364-0a184912e279';
     </SQLScript>
     <Result>
     </Result>

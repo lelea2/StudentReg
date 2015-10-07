@@ -1,0 +1,17 @@
+<TestCase>
+    <CaseName>
+        Inserting duplicate courseName into Courses
+    </CaseName>
+    <Tester>
+    </Tester>
+    <CaseDescription>
+        Insert duplicate courseName, query should fail
+        Expected error: 
+        Can not add due to UNIQUE constraint on courseName
+    </CaseDescription>
+    <SQLScript>
+        insert into Courses (courseId, courseName, courseNumber, majorId, scheduleId, stateId, description, location) values ('64015c46-6724-11e5-b364-0a184912e294', 'Ent Software Platforms', 260, 3, 1, 'On', 'Enterprise Software Platforms', 'Misson College');
+    </SQLScript>
+    <Result>
+    </Result>
+</TestCase>

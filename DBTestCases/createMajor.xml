@@ -8,7 +8,8 @@
         Create Major: Software Engineer, Computer Sciene...
     </CaseDescription>
     <SQLScript>
-        INSERT INTO Majors (majorId, majorName) values (1, 'default'), (2, 'computer science'), (3, 'software engineering');
+        delete from Majors;
+        insert into Majors (majorId, majorName) values (1, 'default'), (2, 'computer science'), (3, 'software engineering');
     </SQLScript>
     <Result>
     </Result>

@@ -1,14 +1,16 @@
 <TestCase>
     <CaseName>
-        Adding Course with no existing major
+        Adding Course with non-existing major
     </CaseName>
     <Tester>
     </Tester>
     <CaseDescription>
-        Insert course with no exiting major -- queries should fail
+        Insert a new course with non-existing major -- queries should fail
+        Expected Error:
+        Cannot add or update due to referential integrity
     </CaseDescription>
     <SQLScript>
-        INSERT INTO Courses (courseId, courseName, courseNumber, majorId, scheduleId, stateId, description) values (UUID(), 'Acct 101', 271, 4, 1, 'On', 'Account');
+        insert into Courses (courseId, courseName, courseNumber, majorId, scheduleId, stateId, description) values ('64015c46-6724-11e5-b364-0a184912e291', 'new course', 1000, 4, 1, 'On', 'test major');
     </SQLScript>
     <Result>
     </Result>

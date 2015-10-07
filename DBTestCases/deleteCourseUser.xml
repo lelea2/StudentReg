@@ -5,10 +5,10 @@
     <Tester>
     </Tester>
     <CaseDescription>
-        Delete all entries in Users_Courses table for testing purposes.
+        Delete all entries in Users_Courses table for testing purposes
     </CaseDescription>
     <SQLScript>
-        DELETE FROM Users_Courses;
+        delect from Users_Courses;
     </SQLScript>
     <Result>
     </Result>

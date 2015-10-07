@@ -1,18 +1,19 @@
 <TestCase>
     <CaseName>
-        Register Non-existing course
+        Register non-existing course
     </CaseName>
     <Tester>
     </Tester>
     <CaseDescription>
         User register single course:
-            -- Step 1: SELECT * FROM Users to get UserId (you won't need that in actual flow, since identitify user through cookies after user signin)
-            -- Step 2: SELECT * FROM Courses to get courseId
+            -- Step 1: select * from Users to get UserId (you won't need that in actual flow, since identitify user through cookies after user signin)
+            -- Step 2: set the courseId to add and make sure courseId doesn't exist
             -- Step 3: adding non-existing course
-        Expect: error return for invalid courseId key
+        Expected Error:
+        Cannot add or update due to referential integrity
     </CaseDescription>
     <SQLScript>
-        INSERT INTO Users_Courses (userId, courseId) values ('0dbced6e-64cb-11e5-b364-0a184912e279', 'fakecourses');
+        insert into Users_Courses (userId, courseId) values ('64015c46-6724-11e5-b364-0a184912e298', 'Fake Course');
     </SQLScript>
     <Result>
     </Result>

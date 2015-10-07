@@ -1,14 +1,14 @@
 <TestCase>
     <CaseName>
-        Get Courses
+        Get Roles
     </CaseName>
     <Tester>
     </Tester>
     <CaseDescription>
-        Get All Courses available
+        Get All Roles available
     </CaseDescription>
     <SQLScript>
-       select * from Courses;
+       SELECT * FROM Roles;
     </SQLScript>
     <Result>
     </Result>

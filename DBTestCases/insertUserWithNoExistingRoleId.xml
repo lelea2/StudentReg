@@ -5,10 +5,12 @@
     <Tester>
     </Tester>
     <CaseDescription>
-        Inserting user with non-existing role, query should fail
+        Inserting user with non-existing role
+        Expected error:
+        Can not add due to referential integrity
     </CaseDescription>
     <SQLScript>
-        INSERT INTO Users (userId, email, firstname, lastname, passwd, roleId, majorId) values (UUID(), 'role@test.com', 'role', 'role', PASSWORD('123efgh'), 4, 1);
+	insert into Users (userId, email, firstname, lastname, password, roleId, majorId) values ('64015c46-6724-11e5-b364-0a184912e379', 'role@test.com', 'test', 'test', PASSWORD('123abcd'), 4, 2);	
     </SQLScript>
     <Result>
     </Result>

@@ -6,11 +6,14 @@
     </Tester>
     <CaseDescription>
         Create New Student  -- Student has roleId=2, major='computer science'
-        Step 1: Get your userId from user table. Eg: 0dbced6e-64cb-11e5-b364-0a184912e279
-        Step 2: update user firstname, lastname
+        Step 1: Get your userId from user table. Eg: top 1 from the list
+        Step 2: Get the old firstname of that user
+        Step 3: update user firstname to old_firstname+"updated_"
     </CaseDescription>
     <SQLScript>
-    UPDATE Users set firstname='tom2' where userId='0dbced6e-64cb-11e5-b364-0a184912e279';
+        select @userId := userId from Users order by 1 limit 1;
+        select @OldfirstName := firstname from Users where userId = @userId;
+        UPDATE Users set firstname = CONCAT(@OldfirstName, '_Updated') where userId=@userId;
     </SQLScript>
     <Result>
     </Result>

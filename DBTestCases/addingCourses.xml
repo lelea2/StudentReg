@@ -8,7 +8,8 @@
         Create Course: CMPE 272, CMPE283...
     </CaseDescription>
     <SQLScript>
-        INSERT INTO Courses (courseId, courseName, courseNumber, majorId, scheduleId, stateId, description, location) values (UUID(), 'Ent Software Platforms', 272, 3, 1, 'On', 'Enterprise Software Platforms', 'Misson College'), (UUID(), 'Virtualization Technology', 273, 3, 2, 'On', 'Virtualization Technology', 'Mission College');
+        delete from Courses;
+        insert into Courses (courseId, courseName, courseNumber, majorId, scheduleId, stateId, description, location) values ('64015c46-6724-11e5-b364-0a184912e279', 'Ent Software Platforms', 272, 3, 1, 'On', 'Enterprise Software Platforms', 'Misson College'), ('64015c46-6724-11e5-b364-0a184912e280', 'Virtualization Technology', 273, 3, 2, 'On', 'Virtualization Technology', 'Mission College');
     </SQLScript>
     <Result>
     </Result>

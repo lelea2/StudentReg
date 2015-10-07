@@ -1,16 +1,16 @@
 <TestCase>
     <CaseName>
-        Adding Course with no existing scheduleId
+        Adding Course with non-existing scheduleId
     </CaseName>
     <Tester>
     </Tester>
     <CaseDescription>
-        Insert course with no exiting scheduleId -- queries should fail
+        Insert a new course with non-existing scheduleId -- queries should fail
         Expected Error:
-        Cannot add or update a child row: a foreign key constraint fails (`CMPE272Database`.`Courses`, CONSTRAINT `Courses_ibfk_2` FOREIGN KEY (`scheduleId`) REFERENCES `Schedules` (`scheduleId`) ON DELETE CASCADE ON UPDATE CASCADE)
+        Cannot add or update due to referential integrity
     </CaseDescription>
     <SQLScript>
-        INSERT INTO Courses (courseId, courseName, courseNumber, majorId, scheduleId, stateId, description) values (UUID(), 'Cloud 101', 281, 3, 4, 'On', 'Cloud Technology');
+        insert into Courses (courseId, courseName, courseNumber, majorId, scheduleId, stateId, description) values ('64015c46-6724-11e5-b364-0a184912e292', 'new course', 1000, 2, 4, 'On', 'test schedule');
     </SQLScript>
     <Result>
     </Result>

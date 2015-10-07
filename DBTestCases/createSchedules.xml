@@ -5,10 +5,11 @@
     <Tester>
     </Tester>
     <CaseDescription>
-        Create Schedule: eg -- insert 2 different schedule at a time
+        Create Schedule: eg -- insert 2 different schedules
     </CaseDescription>
     <SQLScript>
-        INSERT INTO Schedules (scheduleId, day, startTime, endTime) values (1,'Mon', '9am', '11am'), (2, 'Tue', '6pm', '8pm');
+        delete from Schedules;
+        insert into Schedules (scheduleId, day, startTime, endTime) values (1,'Mon', '9am', '11am'), (2, 'Tue', '6pm', '8pm');
     </SQLScript>
     <Result>
     </Result>
