@@ -1,0 +1,67 @@
+package dto;
+
+/**
+ * Data transfer object for major
+ * Based on table
+ * CREATE TABLE Schedules(
+ *      scheduleId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ *      day VARCHAR(3) DEFAULT ‘TBA’,
+ *      startTime VARCHAR(100) DEFAULT ‘TBA’,
+ *      endTime VARCHAR(100) DEFAULT ‘TBA’
+ * );
+ */
+
+public class Schedule {
+    private int scheduleId;
+    private String day;
+    private String startTime;
+    private String endTime;
+
+    public Schedule() {}
+
+    public Schedule(int scheduleId, String day, String startTime, String endTime) {
+        super();
+        this.scheduleId = scheduleId;
+        this.day = day;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
+    public int getScheduleId() {
+        return scheduleId;
+    }
+
+    public void setScheduleId(int scheduleId) {
+        this.scheduleId = scheduleId;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Schedule [scheduleId=" + scheduleId + ", day=" + day + ", startTime=" + startTime + ", endTime=" + endTime + "]";
+    }
+
+}
