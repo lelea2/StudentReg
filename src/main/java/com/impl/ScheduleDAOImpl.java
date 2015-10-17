@@ -11,6 +11,9 @@ import org.hibernate.Criteria;
 import com.dao.ScheduleDAO;
 import com.entity.Schedule;
 
+/**
+ * Detail implemenation for schedule related
+ */
 @Repository("Schedule")
 public class ScheduleDAOImpl implements ScheduleDAO {
     private SessionFactory sessionFactory;

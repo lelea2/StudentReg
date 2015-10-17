@@ -12,6 +12,9 @@ import com.dao.CourseDAO;
 import com.entity.Course;
 import com.entity.Schedule;
 
+/**
+ * Details implementation for courses related
+ */
 @Repository("CourseDAO")
 public class CourseDAOImpl implements CourseDAO {
 
@@ -75,6 +78,19 @@ public class CourseDAOImpl implements CourseDAO {
     }
 
     /**
+     * Get array list of course with similar search name
+     * @param String courseName
+     * @return Arraylist of Course object
+     */
+    public ArrayList<Course> getCoursesByName(String courseName) {
+        Criteria cr = sessionFactory.getCurrentSession().createCriteria(Course.class, "course")
+                .createAlias("schedule", "schedule", JoinType.INNER_JOIN)
+                .add(Restrictions.like("course.courseName", courseName + "%"));
+        List<Course> list = cr.list();
+        return generateCourseList(list);
+    }
+
+    /**
      * Get courses by majorId
      * @params Integer majorId
      * @return ArrayList of course object
@@ -87,6 +103,15 @@ public class CourseDAOImpl implements CourseDAO {
                 .createAlias("schedule", "schedule", JoinType.INNER_JOIN)
                 .add(Restrictions.eq("course.majorId", majorId));
         List<Course> list = cr.list();
+        return generateCourseList(list);
+    }
+
+    /**
+     * Helper function to generate array list of courses based on result query
+     * @param List of course
+     * @return ArrayList of couse object
+     */
+    private ArrayList<Course> generateCourseList(List<Course> list) {
         ArrayList<Course> courseList = new ArrayList<Course>();
         if (list == null || list.size() == 0) { //Don't do anything
         } else {
@@ -96,5 +121,4 @@ public class CourseDAOImpl implements CourseDAO {
         }
         return courseList;
     }
-
 }

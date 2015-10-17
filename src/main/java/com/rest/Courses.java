@@ -13,13 +13,16 @@ import com.dao.CourseDAO;
 /**
  * Java class handle all API call related to courses
  */
-
 @Path("/courses")
 public class Courses {
 
     @Autowired
     private CourseDAO courseDAO;
 
+    /**
+     * Get all courses available in the databases
+     * @return ArrayList of Course object
+     */
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
@@ -34,7 +37,24 @@ public class Courses {
     }
 
     /**
-     * Get course based on courseNumber or courseName
+     * Get array list of course which have similar as requested coursename
+     * @return ArrayList of Course object
+     */
+    @GET
+    @Path("/courseName/{courseName}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public ArrayList<Course> getCoursesByName(@NotNull @PathParam("courseName") final String courseName) {
+        ArrayList<Course> courseList = new ArrayList<Course>();
+        try {
+            courseList = courseDAO.getCoursesByName(courseName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return courseList;
+    }
+
+    /**
+     * Get specific course based on courseNumber or courseName
      * @param courseNumber
      * @param courseName
      * @return

@@ -13,6 +13,9 @@ import com.entity.Major;
 import com.entity.Course;
 import com.entity.User;
 
+/**
+ * Detail implementations for user related
+ */
 @Repository("UserDAO")
 public class UserDAOImpl implements UserDAO {
 

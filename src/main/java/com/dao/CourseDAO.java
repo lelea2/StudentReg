@@ -29,9 +29,18 @@ public interface CourseDAO {
     public Course getByName(String courseName);
 
     /**
+     * Function to get courses by matching with name
+     * This will get back lists of courses which have matching/similar name
+     * @param courseName
+     * @return Arraylist of courses object
+     */
+    public ArrayList<Course> getCoursesByName(String courseName);
+
+    /**
      * Function to get course by major Id
      * @param int majorId
      * @return ArrayList of Course object
      */
-    public ArrayList<Course> getByMajor(int majorId);;
+    public ArrayList<Course> getByMajor(int majorId);
+    
 }

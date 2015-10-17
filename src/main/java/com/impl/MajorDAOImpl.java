@@ -10,6 +10,9 @@ import org.hibernate.Criteria;
 import com.dao.MajorDAO;
 import com.entity.Major;
 
+/**
+ * Detail implementation for Major related
+ */
 @Repository("Majors")
 public class MajorDAOImpl implements MajorDAO {
     private SessionFactory sessionFactory;
