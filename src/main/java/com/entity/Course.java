@@ -19,8 +19,6 @@ import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.entity.Schedule;
-
 /**
  *  Data transfer object for courses
  *  Based on table

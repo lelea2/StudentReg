@@ -10,8 +10,12 @@ import javax.ws.rs.*;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import com.domain.UserRequestBody;
 
 import com.entity.Major;
 import com.entity.Course;
@@ -62,6 +66,18 @@ public class Users {
             ex.printStackTrace();
         }
         return user;
+    }
+
+    /***
+     * Function authenticate user based on email and password
+     * @return JSON object contains userId
+     */
+    @POST
+    @Path("/login")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response logUserIn(UserRequestBody reqBody) {
+        String result = "{}";
+        return Response.status(201).entity(result).build();
     }
 
 }
