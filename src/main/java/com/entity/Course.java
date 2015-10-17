@@ -13,6 +13,8 @@ import javax.persistence.Column;
 
 import com.entity.Schedule;
 
+import java.io.Serializable;
+
 /**
  *  Data transfer object for courses
  *  Based on table
@@ -33,7 +35,7 @@ import com.entity.Schedule;
 
 @Entity
 @Table(name="Courses")
-public class Course {
+public class Course implements Serializable {
 
     @Id
     @Column(name = "courseId", unique = true)
@@ -155,7 +157,9 @@ public class Course {
     public String toString() {
         return "Course [courseId=" + courseId + ", courseName=" + courseName + ", courseNumber=" + courseNumber
                 + ", majorId=" + majorId  + ", stateId=" + stateId
-                + ", professor=" + professor + ", description=" + description + ", location=" + location + "]";
+                + ", professor=" + professor + ", description=" + description + ", location=" + location
+                + ", scheduleId=" + schedule.getScheduleId() + ", day=" + schedule.getDay()
+                + ", startTime=" + schedule.getStartTime() + ", endTime=" + schedule.getEndTime() + "]";
     }
 
 }

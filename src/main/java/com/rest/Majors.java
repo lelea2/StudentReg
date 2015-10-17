@@ -3,14 +3,17 @@ package com.rest;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.validation.constraints.NotNull;
+import javax.ws.rs.*;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import com.google.gson.Gson;
 
 import com.entity.Major;
+import com.entity.Course;
 import com.dao.MajorDAO;
+import com.dao.CourseDAO;
 
 /**
  * Java class handle all API call related to majors
@@ -21,6 +24,9 @@ public class Majors {
     @Autowired
     private MajorDAO majorDAO;
 
+    @Autowired
+    private CourseDAO courseDAO;
+
     /**
      * Get all majors available
      * @return Array contains JSON major object
@@ -28,28 +34,30 @@ public class Majors {
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
-    public String allMajors() {
-        String majors = "";
+    public ArrayList<Major> allMajors() {
         ArrayList<Major> majorList = new ArrayList<Major>();
         try {
             majorList = majorDAO.getMajors();
-            Gson gson = new Gson();
-            majors = gson.toJson(majorList);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return majors;
+        return majorList;
     }
 
     /**
      * Get all courses available for requested major
      * @return Array contains JSON course object
      */
-
     @GET
     @Path("/{majorId}/courses")
     @Produces(MediaType.APPLICATION_JSON)
-    public String coursePerMajor() {
-        return "";
+    public ArrayList<Course> coursePerMajor(@NotNull @PathParam("majorId") final int majorId) {
+        ArrayList<Course> courseList = new ArrayList<Course>();
+        try {
+            courseList = courseDAO.getByMajor(majorId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return courseList;
     }
 }

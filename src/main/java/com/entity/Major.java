@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import java.io.Serializable;
 
 /**
  *  Data transfer object for major
@@ -17,7 +18,7 @@ import javax.persistence.Column;
 
 @Entity
 @Table(name="Majors")
-public class Major {
+public class Major implements Serializable {
 
     @Id
     @Column(name="majorId", unique = true)

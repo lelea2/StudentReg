@@ -1,5 +1,9 @@
 package com.entity;
 
+import com.entity.Course;
+
+import java.util.ArrayList;
+
 /**
  * Data transfer object for major
  * Based on table
@@ -24,11 +28,12 @@ public class User {
     private String password;
     private int roleId;
     private int majorId;
+    private ArrayList<Course> courseList;
 
     public User() {
     }
 
-    public User(String userId, String email, String firstName, String lastName, String password, int roleId, int majorId) {
+    public User(String userId, String email, String firstName, String lastName, String password, int roleId, int majorId, ArrayList<Course> courseList) {
         super();
         this.userId = userId;
         this.email = email;
@@ -37,6 +42,7 @@ public class User {
         this.password = password;
         this.roleId = roleId;
         this.majorId = majorId;
+        this.courseList = courseList;
     }
 
     public String getUserId() {
@@ -94,6 +100,10 @@ public class User {
     public void setMajorId(int majorId) {
         this.majorId = majorId;
     }
+
+    public ArrayList<Course> getCourseList() { return courseList; }
+
+    public void setCourseList(ArrayList<Course> courseList) { this.courseList = courseList; }
 
     @Override
     public String toString() {

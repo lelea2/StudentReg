@@ -18,6 +18,10 @@ public class MajorDAOImpl implements MajorDAO {
         this.sessionFactory = sessionFactory;
     }
 
+    /**
+     * Function to get all existing major
+     * @return ArrayList of Major object
+     */
     @SuppressWarnings("unchecked")
     @Override
     @Transactional

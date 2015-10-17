@@ -22,6 +22,27 @@ public class CourseDAOImpl implements CourseDAO {
     }
 
     /**
+     * Function to get all course existing in DB
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    @Transactional
+    public ArrayList<Course> getAll() {
+        Criteria cr = sessionFactory.getCurrentSession().createCriteria(Course.class, "course")
+                .createAlias("schedule", "schedule", JoinType.INNER_JOIN);
+        List<Course> list = cr.list();
+        ArrayList<Course> courseList = new ArrayList<Course>();
+        if (list == null || list.size() == 0) { //Don't do anything
+        } else {
+            for (Course obj : list) {
+                courseList.add((Course) obj);
+            }
+        }
+        return courseList;
+    }
+
+    /**
      * Get course by course number
      * @params Integer courseNumber
      * @return Course object
@@ -33,7 +54,6 @@ public class CourseDAOImpl implements CourseDAO {
         Criteria cr = sessionFactory.getCurrentSession().createCriteria(Course.class, "course")
                         .createAlias("schedule", "schedule", JoinType.INNER_JOIN)
                         .add(Restrictions.eq("course.courseNumber", courseNumber));
-        List<Course>list = cr.list();
         Course course = (Course) cr.uniqueResult();
         return course;
     }
@@ -48,7 +68,7 @@ public class CourseDAOImpl implements CourseDAO {
     @Transactional
     public Course getByName(String courseName) {
         Criteria cr = sessionFactory.getCurrentSession().createCriteria(Course.class, "course")
-                        .createAlias("schedule", "schedule")
+                        .createAlias("schedule", "schedule", JoinType.INNER_JOIN)
                         .add(Restrictions.eq("course.courseName", courseName));
         Course course = (Course) cr.uniqueResult();
         return course;
@@ -59,15 +79,22 @@ public class CourseDAOImpl implements CourseDAO {
      * @params Integer majorId
      * @return ArrayList of course object
      */
+    @SuppressWarnings("unchecked")
+    @Override
+    @Transactional
     public ArrayList<Course> getByMajor(int majorId) {
-        List<Course> list = sessionFactory.getCurrentSession().createCriteria(Course.class).list();
+        Criteria cr = sessionFactory.getCurrentSession().createCriteria(Course.class, "course")
+                .createAlias("schedule", "schedule", JoinType.INNER_JOIN)
+                .add(Restrictions.eq("course.majorId", majorId));
+        List<Course> list = cr.list();
         ArrayList<Course> courseList = new ArrayList<Course>();
         if (list == null || list.size() == 0) { //Don't do anything
         } else {
-            for (Course o : list) {
-                courseList.add(new Course());
+            for (Course obj : list) {
+                courseList.add((Course) obj);
             }
         }
         return courseList;
     }
+
 }

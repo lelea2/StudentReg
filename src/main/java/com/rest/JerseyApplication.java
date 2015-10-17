@@ -8,6 +8,6 @@ public class JerseyApplication extends ResourceConfig {
         register(JacksonFeature.class);
         register(Courses.class);
         register(Majors.class);
-        register(User.class);
+        register(Users.class);
     }
 }
