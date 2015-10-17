@@ -1,4 +1,10 @@
-package dto;
+package com.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Column;
 
 /**
  *  Data transfer object for major
@@ -9,8 +15,15 @@ package dto;
  *  );
  */
 
- public class Major {
+@Entity
+@Table(name="Majors")
+public class Major {
+
+    @Id
+    @Column(name="majorId", unique = true)
     private int majorId;
+
+    @Column(name="majorName")
     private String majorName;
 
     public Major() {}

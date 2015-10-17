@@ -1,4 +1,4 @@
-package dto;
+package com.entity;
 
 /**
  * Data transfer object for major

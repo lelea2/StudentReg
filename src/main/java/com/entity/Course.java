@@ -1,4 +1,17 @@
-package dto;
+package com.entity;
+
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Column;
+
+import com.entity.Schedule;
 
 /**
  *  Data transfer object for courses
@@ -17,26 +30,49 @@ package dto;
  *       CONSTRAINT FOREIGN KEY(scheduleId) REFERENCES Schedules(scheduleId) ON UPDATE CASCADE ON DELETE CASCADE
  *   );
  */
+
+@Entity
+@Table(name="Courses")
 public class Course {
+
+    @Id
+    @Column(name = "courseId", unique = true)
     private String courseId;
+
+    @Column(name="courseName")
     private String courseName;
+
+    @Column(name="courseNumber")
     private int courseNumber;
+
+    @Column(name="majorId")
     private int majorId;
-    private int scheduleId;
+
+    @Column(name="stateId")
     private String stateId;
+
+    @Column(name="professor")
     private String professor;
-    private String description;
+
+    @Column(name="description")
+    private String description;;
+
+    @Column(name="location")
     private String location;
+
+    //select * from Courses INNER JOIN Schedules where Courses.scheduleId=Schedules.scheduleId;
+    @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+    @JoinColumn(name = "scheduleId", nullable = false)
+    private Schedule schedule;
 
     public Course() {}
 
-    public Course(String courseId, String courseName, int courseNumber, int majorId, int scheduleId, String stateId, String professor, String description, String location) {
+    public Course(String courseId, String courseName, int courseNumber, int majorId, String stateId, String professor, String description, String location) {
         super();
         this.courseId = courseId;
         this.courseName = courseName;
         this.courseNumber = courseNumber;
         this.majorId = majorId;
-        this.scheduleId = scheduleId;
         this.stateId = stateId;
         this.professor = professor;
         this.description = description;
@@ -67,20 +103,20 @@ public class Course {
         this.courseNumber = courseNumber;
     }
 
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
+    }
+
     public int getMajorId() {
         return majorId;
     }
 
     public void setMajorId(int majorId) {
         this.majorId = majorId;
-    }
-
-    public int getScheduleId() {
-        return scheduleId;
-    }
-
-    public void setScheduleId(int scheduleId) {
-        this.scheduleId = scheduleId;
     }
 
     public String getStateId() {
@@ -115,11 +151,10 @@ public class Course {
         this.location = location;
     }
 
-
     @Override
     public String toString() {
         return "Course [courseId=" + courseId + ", courseName=" + courseName + ", courseNumber=" + courseNumber
-                + ", majorId=" + majorId + ", scheduleid=" + scheduleId + ", stateId=" + stateId
+                + ", majorId=" + majorId  + ", stateId=" + stateId
                 + ", professor=" + professor + ", description=" + description + ", location=" + location + "]";
     }
 

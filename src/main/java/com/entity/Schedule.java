@@ -1,4 +1,17 @@
-package dto;
+package com.entity;
+
+import java.util.*;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
 
 /**
  * Data transfer object for major
@@ -11,11 +24,27 @@ package dto;
  * );
  */
 
+@Entity
+@Table(name="Schedules")
 public class Schedule {
+
+    @Id
+    @Column(name = "scheduleId", unique = true)
     private int scheduleId;
+
+
+    @Column(name = "day")
     private String day;
+
+    @Column(name="startTime")
     private String startTime;
+
+    @Column(name="endTime")
     private String endTime;
+
+    @OneToMany(targetEntity=Schedule.class, cascade=CascadeType.ALL)
+    @JoinColumn(name="scheduleId")
+    private List<Course> courselist = new ArrayList<Course>();
 
     public Schedule() {}
 
