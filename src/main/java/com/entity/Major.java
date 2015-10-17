@@ -1,5 +1,7 @@
 package com.entity;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,10 +23,11 @@ import java.io.*;
 public class Major {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="majorId", unique = true, nullable=false)
     private int majorId;
 
-    @Column(name="majorName")
+    @Column(name="majorName", nullable=false)
     private String majorName;
 
     public Major() {}
@@ -35,18 +38,34 @@ public class Major {
         this.majorName = majorName;
     }
 
+    /**
+     * Get course majorId
+     * @return int majorId
+     */
     public int getMajorId() {
         return majorId;
     }
 
+    /**
+     * Set course majorId
+     * @param int majorId
+     */
     public void setMajorId(int majorId) {
         this.majorId = majorId;
     }
 
+    /**
+     * Get major name
+     * @return String majorName
+     */
     public String getMajorName() {
         return majorName;
     }
 
+    /**
+     * Set major name
+     * @param String majorName
+     */
     public void setMajorName(String majorName) {
         this.majorName = majorName;
     }

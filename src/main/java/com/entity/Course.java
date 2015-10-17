@@ -88,74 +88,146 @@ public class Course {
         this.location = location;
     }
 
+    /**
+     * Get courseId
+     * @return UUID for courseId
+     */
     public UUID getCourseId() {
         return courseId;
     }
 
+    /**
+     * Set courseId
+     * @param UUID courseId
+     */
     public void setCourseId(UUID courseId) {
         this.courseId = courseId;
     }
 
+    /**
+     * Get course name
+     * @return {String} for courseName
+     */
     public String getCourseName() {
         return courseName;
     }
 
+    /**
+     * Set course name
+     * @param {String} courseName
+     */
     public void setCourseName(String courseName) {
         this.courseName = courseName;
     }
 
+    /**
+     * Get course number
+     * @return int courseNumber
+     */
     public int getCourseNumber() {
         return courseNumber;
     }
 
+    /**
+     * Get course number
+     * @param int courseNumber
+     */
     public void setCourseNumber(int courseNumber) {
         this.courseNumber = courseNumber;
     }
 
+    /**
+     * Get Schedule object for course
+     * @return Schedule object (scheduleId, date, startTime, endTime)
+     */
     public Schedule getSchedule() {
         return schedule;
     }
 
+    /**
+     * Set Schedule object for course
+     * @param Schedule object
+     */
     public void setSchedule(Schedule schedule) {
         this.schedule = schedule;
     }
 
+    /**
+     * Get course MajorId
+     * @return Major object
+     */
     public int getMajorId() {
         return majorId;
     }
 
+    /**
+     * Set course majorId
+     * @param int majorId
+     */
     public void setMajorId(int majorId) {
         this.majorId = majorId;
     }
 
+    /**
+     * Get course state (on/off)
+     * @return String courseState
+     */
     public String getStateId() {
         return stateId;
     }
 
+    /**
+     * Set course state
+     * @param stateId
+     */
     public void setStateId(String stateId) {
         this.stateId = stateId;
     }
 
+    /**
+     * Get course professor
+     * @return String course professor
+     */
     public String getProfessor() {
         return professor;
     }
 
+    /**
+     * Set course professor
+     * @param String professor
+     */
     public void setProfessor(String professor) {
         this.professor = professor;
     }
 
+    /**
+     * Get course description
+     * @return String course description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Set course description
+     * @param String description
+     */
     public void setDescription(String description) {
         this. description = description;
     }
 
+    /**
+     * Get course location
+     * @return String courseLocation
+     */
     public String getLocation() {
         return location;
     }
 
+    /**
+     * Set course location
+     * @param String location
+     */
     public void setLocation(String location) {
         this.location = location;
     }

@@ -4,6 +4,8 @@ package com.entity;
 import java.io.Serializable;
 import java.util.*;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,17 +22,18 @@ import javax.persistence.FetchType;
  * Based on table
  * CREATE TABLE Roles(
  *     roleId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
- *     roleName VARCHAR(100) NOT NULL UNIQUE
+ *     roleName VARCHAR(100) NOT NULL
  * );
  */
 
 public class Role {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="roleId", unique = true, nullable=false)
     private int roleId;
 
-    @Column(name="roleName")
+    @Column(name="roleName", nullable=false)
     private String roleName;
 
     public Role() {}
@@ -41,18 +44,34 @@ public class Role {
         this.roleName = roleName;
     }
 
+    /**
+     * Get roleId
+     * @return int roleId
+     */
     public int getRoleId() {
         return roleId;
     }
 
+    /**
+     * Set RoleId
+     * @param int roleId
+     */
     public void setRoleId(int roleId) {
         this.roleId = roleId;
     }
 
+    /**
+     * Get role name
+     * @return String rolename
+     */
     public String getRoleName() {
         return roleName;
     }
 
+    /**
+     * Set rolename
+     * @param String roleName
+     */
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }

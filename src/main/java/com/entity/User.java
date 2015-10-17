@@ -83,58 +83,114 @@ public class User {
         this.courseList = courseList;
     }
 
+    /**
+     * Get user UUID
+     * @return uuid userId
+     */
     public UUID getUserId() {
         return userId;
     }
 
+    /**
+     * Set user UUID
+     * @param userId
+     */
     public void setUserId(UUID userId) {
         this.userId = userId;
     }
 
+    /**
+     * Get user-email
+     * @return String userEmail
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * Set userEmail
+     * @param String email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * Get user firstname
+     * @return String firstname
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     * Set user firstname
+     * @param String firstName
+     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     * Get user last name
+     * @return String lastName
+     */
     public String getLastName() {
         return lastName;
     }
 
+    /**
+     * Set user lastname
+     * @param String lastName
+     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    /**
+     * Get user password
+     * @return String password
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Set user password
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * Get user role
+     * @return
+     */
     public Role getRole() {
         return role;
     }
 
+    /**
+     * Set user role
+     * @param role
+     */
     public void setRole(Role role) {
         this.role = role;
     }
 
+    /**
+     * Get user major object
+     * @return Major object
+     */
     public Major getMajor() {
         return major;
     }
 
+    /**
+     * Set user major
+     * @param major
+     */
     public void setMajor(Major major) {
         this.major = major;
     }
