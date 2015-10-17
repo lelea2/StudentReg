@@ -3,9 +3,11 @@ package com.rest;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
+import javax.validation.constraints.NotNull;
+import javax.ws.rs.*;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -26,6 +28,10 @@ public class Users {
     @Autowired
     private UserDAO userDAO;
 
+    /**
+     * Function to get all users existing in DB
+     * @return ArrayList of user object
+     */
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
@@ -37,6 +43,17 @@ public class Users {
             e.printStackTrace();
         }
         return userList;
+    }
+
+    /**
+     * Function to get User by on userId
+     * @return User object
+     */
+    @GET
+    @Path("/id/{userId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public User getUserById(@NotNull @PathParam("userId") final String userId) {
+
     }
 
 }
