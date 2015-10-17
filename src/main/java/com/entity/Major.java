@@ -20,7 +20,7 @@ import java.io.*;
 
 @Entity
 @Table(name="Majors")
-public class Major {
+public class Major implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)

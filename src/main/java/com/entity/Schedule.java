@@ -1,5 +1,6 @@
 package com.entity;
 
+import java.io.Serializable;
 import java.util.*;
 
 import javax.persistence.GeneratedValue;
@@ -28,7 +29,7 @@ import javax.persistence.FetchType;
 
 @Entity
 @Table(name="Schedules")
-public class Schedule {
+public class Schedule implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)

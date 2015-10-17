@@ -19,22 +19,35 @@ import com.entity.User;
 @Repository("UserDAO")
 public class UserDAOImpl implements UserDAO {
 
+    private SessionFactory sessionFactory;
+
+    public UserDAOImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
     /**
      * Function to get all exisiting user
      * @return Arraylist of User object
      */
     public ArrayList<User> getAll() {
-        ArrayList<User> userList = new ArrayList<User>();
-        return userList;
+        Criteria cr = sessionFactory.getCurrentSession().createCriteria(User.class, "user")
+                        .createAlias("major", "major", JoinType.INNER_JOIN)
+                        .createAlias("role", "role", JoinType.INNER_JOIN);
+        List<User> list = cr.list();
+        return generateUserList(list);
     }
 
     /**
      * Function to get user by userId
-     * @param String userId
+     * @param UUID userId
      * @return User object
      */
-    public User getById(String userId) {
-        User user = new User();
+    public User getById(UUID userId) {
+        Criteria cr = sessionFactory.getCurrentSession().createCriteria(User.class, "user")
+                        .createAlias("major", "major", JoinType.INNER_JOIN)
+                        .createAlias("role", "role", JoinType.INNER_JOIN)
+                        .add(Restrictions.eq("user.userId", userId));
+        User user = (User) cr.uniqueResult();
         return user;
     }
 
@@ -74,6 +87,22 @@ public class UserDAOImpl implements UserDAO {
      */
     public boolean deleteUser(String userId) {
         return false;
+    }
+
+    /**
+     * Helper function to generate array list of users based on result query
+     * @param List of user
+     * @return ArrayList of user object
+     */
+    private ArrayList<User> generateUserList(List<User> list) {
+        ArrayList<User> userList = new ArrayList<User>();
+        if (list == null || list.size() == 0) { //Don't do anything
+        } else {
+            for (User obj : list) {
+                userList.add((User) obj);
+            }
+        }
+        return userList;
     }
 
 

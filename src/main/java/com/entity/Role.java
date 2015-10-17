@@ -1,6 +1,6 @@
 package com.entity;
 
-
+import java.beans.Transient;
 import java.io.Serializable;
 import java.util.*;
 
@@ -26,7 +26,9 @@ import javax.persistence.FetchType;
  * );
  */
 
-public class Role {
+@Entity
+@Table(name="Roles")
+public class Role implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)

@@ -1,5 +1,6 @@
 package com.entity;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.UUID;
 
@@ -40,7 +41,7 @@ import com.entity.Schedule;
 
 @Entity
 @Table(name="Courses")
-public class Course {
+public class Course implements Serializable {
 
     @Id
     @NotNull

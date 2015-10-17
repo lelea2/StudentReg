@@ -1,6 +1,9 @@
 package com.dao;
 
+import java.util.*;
+import java.util.UUID;
 import java.util.ArrayList;
+
 import com.entity.User;
 
 /**
@@ -16,10 +19,10 @@ public interface UserDAO {
 
     /**
      * Function to get user by userId
-     * @param String userId
+     * @param UUID userId
      * @return User object
      */
-    public User getById(String userId);
+    public User getById(UUID userId);
 
     /**
      * Function to get user by email and password

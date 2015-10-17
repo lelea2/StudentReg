@@ -40,6 +40,8 @@
                 <value>com.entity.Major</value>
                 <value>com.entity.Schedule</value>
                 <value>com.entity.Course</value>
+                <value>com.entity.Role</value>
+                <value>com.entity.User</value>
             </list>
         </property>
     </bean>
@@ -63,6 +65,12 @@
     </bean>
 
     <bean id="scheduleDAO" class="com.impl.ScheduleDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="userDAO" class="com.impl.UserDAOImpl">
         <constructor-arg>
             <ref bean="sessionFactory" />
         </constructor-arg>

@@ -10,15 +10,22 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import java.io.Serializable;
 import java.util.*;
 import java.util.UUID;
 import java.util.ArrayList;
 
+import com.util.security.Crypto;
 import com.entity.Course;
 import com.entity.Role;
 
@@ -38,12 +45,14 @@ import com.entity.Role;
  * );
  */
 
-public class User {
+@Entity
+@Table(name="Users")
+public class User implements Serializable {
 
     @Id
     @NotNull
     @Type(type="uuid-binary")
-    @Column(name = "courseId", unique = true, nullable=false, updatable = false)
+    @Column(name = "userId", unique = true, nullable=false, updatable = false)
     private UUID userId;
 
     @Id
@@ -56,8 +65,10 @@ public class User {
     @Column(name="lastName", nullable=false)
     private String lastName;
 
+    @Transient
+    @JsonIgnore
     @Column(name="password", nullable=false)
-    private String password;
+    private String encryptedPassword;
 
     //select * from Users INNER JOIN Roles where Roles.roleId=Users.roleId;
     @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
@@ -68,19 +79,16 @@ public class User {
     @JoinColumn(name = "majorId", nullable = false)
     private Major major;
 
-    private ArrayList<Course> courseList;
-
     public User() {
     }
 
-    public User(UUID userId, String email, String firstName, String lastName, String password, ArrayList<Course> courseList) {
+    public User(UUID userId, String email, String firstName, String lastName, String encryptedPassword) {
         super();
         this.userId = userId;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.password = password;
-        this.courseList = courseList;
+        this.encryptedPassword = encryptedPassword;
     }
 
     /**
@@ -151,7 +159,14 @@ public class User {
      * Get user password
      * @return String password
      */
+    @JsonIgnore
     public String getPassword() {
+        String password = "";
+        try {
+            password = Crypto.decryptAndURLDecode(encryptedPassword);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
         return password;
     }
 
@@ -159,8 +174,13 @@ public class User {
      * Set user password
      * @param password
      */
+    @JsonIgnore
     public void setPassword(String password) {
-        this.password = password;
+        try {
+            this.encryptedPassword = Crypto.encryptAndURLEncode(password);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -195,15 +215,10 @@ public class User {
         this.major = major;
     }
 
-    public ArrayList<Course> getCourseList() { return courseList; }
-
-    public void setCourseList(ArrayList<Course> courseList) { this.courseList = courseList; }
-
     @Override
     public String toString() {
         return "User [userId=" + userId + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName
-                + ", password=" + password + ", roleName=" + role.getRoleName()
-                + ", majorId=" + major.getMajorId() + "]";
+                + ", roleName=" + role.getRoleName() + ", majorId=" + major.getMajorId() + "]";
     }
 
 }

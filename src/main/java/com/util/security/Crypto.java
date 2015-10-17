@@ -1,4 +1,4 @@
-package com.util;
+package com.util.security;
 
 import java.util.*;
 import java.util.Base64;

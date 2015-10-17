@@ -1,5 +1,7 @@
 package com.rest;
 
+import java.util.*;
+import java.util.UUID;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -35,7 +37,7 @@ public class Users {
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<User> getAllUser () {
+    public ArrayList<User> getAll() {
         ArrayList<User> userList = new ArrayList<User>();
         try {
             userList = userDAO.getAll();
@@ -53,7 +55,12 @@ public class Users {
     @Path("/id/{userId}")
     @Produces(MediaType.APPLICATION_JSON)
     public User getUserById(@NotNull @PathParam("userId") final String userId) {
-        User user = new User();
+        User user = null;
+        try {
+            user = userDAO.getById(UUID.fromString(userId));
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
         return user;
     }
 
