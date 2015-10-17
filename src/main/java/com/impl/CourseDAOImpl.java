@@ -30,7 +30,7 @@ public class CourseDAOImpl implements CourseDAO {
      */
     @SuppressWarnings("unchecked")
     @Override
-    @Transactional
+    @Transactional(readOnly=true, rollbackFor=Exception.class)
     public ArrayList<Course> getAll() {
         Criteria cr = sessionFactory.getCurrentSession().createCriteria(Course.class, "course")
                 .createAlias("schedule", "schedule", JoinType.INNER_JOIN);
@@ -52,7 +52,7 @@ public class CourseDAOImpl implements CourseDAO {
      */
     @SuppressWarnings("unchecked")
     @Override
-    @Transactional
+    @Transactional(readOnly=true, rollbackFor=Exception.class)
     public Course getByNumber(int courseNumber) {
         Criteria cr = sessionFactory.getCurrentSession().createCriteria(Course.class, "course")
                         .createAlias("schedule", "schedule", JoinType.INNER_JOIN)
@@ -68,7 +68,7 @@ public class CourseDAOImpl implements CourseDAO {
      */
     @SuppressWarnings("unchecked")
     @Override
-    @Transactional
+    @Transactional(readOnly=true, rollbackFor=Exception.class)
     public Course getByName(String courseName) {
         Criteria cr = sessionFactory.getCurrentSession().createCriteria(Course.class, "course")
                         .createAlias("schedule", "schedule", JoinType.INNER_JOIN)
@@ -82,6 +82,9 @@ public class CourseDAOImpl implements CourseDAO {
      * @param String courseName
      * @return Arraylist of Course object
      */
+    @SuppressWarnings("unchecked")
+    @Override
+    @Transactional(readOnly=true, rollbackFor=Exception.class)
     public ArrayList<Course> getCoursesByName(String courseName) {
         Criteria cr = sessionFactory.getCurrentSession().createCriteria(Course.class, "course")
                 .createAlias("schedule", "schedule", JoinType.INNER_JOIN)
@@ -97,7 +100,7 @@ public class CourseDAOImpl implements CourseDAO {
      */
     @SuppressWarnings("unchecked")
     @Override
-    @Transactional
+    @Transactional(readOnly=true, rollbackFor=Exception.class)
     public ArrayList<Course> getByMajor(int majorId) {
         Criteria cr = sessionFactory.getCurrentSession().createCriteria(Course.class, "course")
                 .createAlias("schedule", "schedule", JoinType.INNER_JOIN)
@@ -109,7 +112,7 @@ public class CourseDAOImpl implements CourseDAO {
     /**
      * Helper function to generate array list of courses based on result query
      * @param List of course
-     * @return ArrayList of couse object
+     * @return ArrayList of course object
      */
     private ArrayList<Course> generateCourseList(List<Course> list) {
         ArrayList<Course> courseList = new ArrayList<Course>();

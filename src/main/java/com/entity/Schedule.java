@@ -1,6 +1,5 @@
 package com.entity;
 
-import java.io.Serializable;
 import java.util.*;
 
 import javax.persistence.CascadeType;
@@ -27,20 +26,19 @@ import javax.persistence.FetchType;
 
 @Entity
 @Table(name="Schedules")
-public class Schedule implements Serializable {
+public class Schedule {
 
     @Id
-    @Column(name = "scheduleId", unique = true)
+    @Column(name = "scheduleId", unique = true, nullable = false)
     private int scheduleId;
 
-
-    @Column(name = "day")
+    @Column(name = "day", nullable = false)
     private String day;
 
-    @Column(name="startTime")
+    @Column(name="startTime", nullable = false)
     private String startTime;
 
-    @Column(name="endTime")
+    @Column(name="endTime", nullable = false)
     private String endTime;
 
     @OneToMany(targetEntity=Schedule.class, cascade=CascadeType.ALL)

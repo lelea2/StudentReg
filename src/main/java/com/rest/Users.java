@@ -53,7 +53,8 @@ public class Users {
     @Path("/id/{userId}")
     @Produces(MediaType.APPLICATION_JSON)
     public User getUserById(@NotNull @PathParam("userId") final String userId) {
-
+        User user = new User();
+        return user;
     }
 
 }

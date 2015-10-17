@@ -1,8 +1,26 @@
 package com.entity;
 
-import com.entity.Course;
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Column;
 
+import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import java.util.*;
+import java.util.UUID;
 import java.util.ArrayList;
+
+import com.entity.Course;
+import com.entity.Role;
 
 /**
  * Data transfer object for major
@@ -21,35 +39,55 @@ import java.util.ArrayList;
  */
 
 public class User {
-    private String userId;
+
+    @Id
+    @NotNull
+    @Type(type="uuid-binary")
+    @Column(name = "courseId", unique = true, nullable=false, updatable = false)
+    private UUID userId;
+
+    @Id
+    @Column(name="email", unique=true, nullable=false, updatable = false)
     private String email;
+
+    @Column(name="firstName", nullable=false)
     private String firstName;
+
+    @Column(name="lastName", nullable=false)
     private String lastName;
+
+    @Column(name="password", nullable=false)
     private String password;
-    private int roleId;
-    private int majorId;
+
+    //select * from Users INNER JOIN Roles where Roles.roleId=Users.roleId;
+    @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+    @JoinColumn(name = "roleId", nullable = false)
+    private Role role;
+
+    @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+    @JoinColumn(name = "majorId", nullable = false)
+    private Major major;
+
     private ArrayList<Course> courseList;
 
     public User() {
     }
 
-    public User(String userId, String email, String firstName, String lastName, String password, int roleId, int majorId, ArrayList<Course> courseList) {
+    public User(UUID userId, String email, String firstName, String lastName, String password, ArrayList<Course> courseList) {
         super();
         this.userId = userId;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
-        this.roleId = roleId;
-        this.majorId = majorId;
         this.courseList = courseList;
     }
 
-    public String getUserId() {
+    public UUID getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(UUID userId) {
         this.userId = userId;
     }
 
@@ -85,20 +123,20 @@ public class User {
         this.password = password;
     }
 
-    public int getRoleId() {
-        return roleId;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId=roleId;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
-    public int getMajorId() {
-        return majorId;
+    public Major getMajor() {
+        return major;
     }
 
-    public void setMajorId(int majorId) {
-        this.majorId = majorId;
+    public void setMajor(Major major) {
+        this.major = major;
     }
 
     public ArrayList<Course> getCourseList() { return courseList; }
@@ -108,7 +146,8 @@ public class User {
     @Override
     public String toString() {
         return "User [userId=" + userId + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName
-                + ", password=" + password + ", roleId=" + roleId + ", major=" + majorId + "]";
+                + ", password=" + password + ", roleName=" + role.getRoleName()
+                + ", majorId=" + major.getMajorId() + "]";
     }
 
 }

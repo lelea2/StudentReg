@@ -27,7 +27,7 @@ public class MajorDAOImpl implements MajorDAO {
      */
     @SuppressWarnings("unchecked")
     @Override
-    @Transactional
+    @Transactional(readOnly=true, rollbackFor=Exception.class)
     public ArrayList<Major> getMajors() {
         List<Major> list = sessionFactory.getCurrentSession().createCriteria(Major.class).list();
         ArrayList<Major> majorList = new ArrayList<Major>();

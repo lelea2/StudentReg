@@ -61,6 +61,7 @@ public class Courses {
      * @throws Exception
      */
     @GET
+    @Path("/course")
     @Produces(MediaType.APPLICATION_JSON)
     public Course getSpecificCourse(@QueryParam("id") Integer courseNumber,
                                     @QueryParam("name") String courseName,

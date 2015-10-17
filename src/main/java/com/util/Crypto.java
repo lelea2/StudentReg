@@ -1,5 +1,7 @@
 package com.util;
 
+import java.util.*;
+import java.util.Base64;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -13,9 +15,10 @@ import javax.crypto.spec.SecretKeySpec;
  * Utility class for crypto logic used for password encrypt & decrypt
  */
 public class Crypto {
-    private static byte[] ivBytes = new byte[] {12, 34, 44, 17, 95, 87, 65, 432};
-    private static byte[] keyBytes = new byte[] {238, 151, 31, 13, 83, 61, 56, 76};
-
+    private static String ivString = "15iPh8NcRs";
+    private static String keyString = "CMPE272_Group8";
+    private static byte[] ivBytes = ivString.getBytes();
+    private static byte[] keyBytes = keyString.getBytes();
     /**
      * General purpose encryption method
      *
@@ -31,7 +34,7 @@ public class Crypto {
 
             byte[] stringBytes = message.getBytes(Charset.forName("UTF-8"));
             byte[] raw = cipher.doFinal(stringBytes);
-            result = new String(Base64.encode(raw));
+            result = new String(Base64.getEncoder().encodeToString(raw));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -51,11 +54,11 @@ public class Crypto {
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             cipher.init(Cipher.DECRYPT_MODE, secretKey, new IvParameterSpec(ivBytes));
 
-            byte[] raw = Base64.decode(encrypted.getBytes());
+            byte[] raw = Base64.getDecoder().decode(encrypted.getBytes());
             byte[] stringBytes = cipher.doFinal(raw);
             result = new String(stringBytes, "UTF8");
         } catch (Exception e) {
-            LOGGER.error("Decryption error: " + e.getMessage());
+            e.printStackTrace();
         }
 
         return result;
@@ -94,6 +97,7 @@ public class Crypto {
         try {
             result = URLDecoder.decode(message, "UTF-8");
         } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
         result = result.replaceAll(" ", "+");
         // then decrypt the decoded string

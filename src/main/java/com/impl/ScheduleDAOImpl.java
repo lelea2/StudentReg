@@ -29,7 +29,7 @@ public class ScheduleDAOImpl implements ScheduleDAO {
      */
     @SuppressWarnings("unchecked")
     @Override
-    @Transactional
+    @Transactional(readOnly=true, rollbackFor=Exception.class)
     public Schedule getScheduleById(int scheduleId) {
         Criteria cr = sessionFactory.getCurrentSession().createCriteria(Schedule.class).add(Restrictions.eq("scheduleId", scheduleId));
         Schedule schedule = (Schedule) cr.uniqueResult();

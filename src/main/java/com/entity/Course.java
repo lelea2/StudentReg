@@ -1,5 +1,8 @@
 package com.entity;
 
+import java.util.*;
+import java.util.UUID;
+
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.Entity;
@@ -11,9 +14,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Column;
 
-import com.entity.Schedule;
+import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-import java.io.Serializable;
+import com.entity.Schedule;
 
 /**
  *  Data transfer object for courses
@@ -35,16 +40,18 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="Courses")
-public class Course implements Serializable {
+public class Course {
 
     @Id
-    @Column(name = "courseId", unique = true)
-    private String courseId;
+    @NotNull
+    @Type(type="uuid-binary")
+    @Column(name = "courseId", unique = true, nullable=false, updatable = false)
+    private UUID courseId;
 
     @Column(name="courseName")
     private String courseName;
 
-    @Column(name="courseNumber")
+    @Column(name="courseNumber", unique=true)
     private int courseNumber;
 
     @Column(name="majorId")
@@ -57,7 +64,7 @@ public class Course implements Serializable {
     private String professor;
 
     @Column(name="description")
-    private String description;;
+    private String description;
 
     @Column(name="location")
     private String location;
@@ -69,7 +76,7 @@ public class Course implements Serializable {
 
     public Course() {}
 
-    public Course(String courseId, String courseName, int courseNumber, int majorId, String stateId, String professor, String description, String location) {
+    public Course(UUID courseId, String courseName, int courseNumber, int majorId, String stateId, String professor, String description, String location) {
         super();
         this.courseId = courseId;
         this.courseName = courseName;
@@ -81,11 +88,11 @@ public class Course implements Serializable {
         this.location = location;
     }
 
-    public String getCourseId() {
+    public UUID getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(String courseId) {
+    public void setCourseId(UUID courseId) {
         this.courseId = courseId;
     }
 
