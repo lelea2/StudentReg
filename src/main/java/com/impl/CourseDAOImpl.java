@@ -16,30 +16,40 @@ import com.entity.Schedule;
  * Details implementation for courses related
  */
 @Repository("CourseDAO")
-public class CourseDAOImpl implements CourseDAO {
+public class CourseDAOImpl extends BaseDAOImpl implements CourseDAO {
 
     private SessionFactory sessionFactory;
 
+    /**
+     * Constructor class
+     * @param sessionFactory
+     */
     public CourseDAOImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+        super(sessionFactory);
     }
 
     /**
      * Function to get all course existing in DB
+     * @param String sortBy (default by courseNumber)
      * @return
      */
     @SuppressWarnings("unchecked")
     @Override
     @Transactional(readOnly=true, rollbackFor=Exception.class)
-    public ArrayList<Course> getAll() {
-        Criteria cr = sessionFactory.getCurrentSession().createCriteria(Course.class, "course")
-                .createAlias("schedule", "schedule", JoinType.INNER_JOIN);
+    public ArrayList<Course> getAll(String sortBy) {
+        Criteria cr = this.createCriteria(Course.class, "course", false)
+                        .createAlias("schedule", "schedule", JoinType.INNER_JOIN);
+        if (sortBy.equals("courseName")) {
+            cr.addOrder(Order.asc("courseName"));
+        } else {
+            cr.addOrder(Order.asc("courseNumber"));
+        }
         List<Course> list = cr.list();
         ArrayList<Course> courseList = new ArrayList<Course>();
         if (list == null || list.size() == 0) { //Don't do anything
         } else {
             for (Course obj : list) {
-                courseList.add((Course) obj);
+                courseList.add( obj);
             }
         }
         return courseList;
@@ -54,7 +64,7 @@ public class CourseDAOImpl implements CourseDAO {
     @Override
     @Transactional(readOnly=true, rollbackFor=Exception.class)
     public Course getByNumber(int courseNumber) {
-        Criteria cr = sessionFactory.getCurrentSession().createCriteria(Course.class, "course")
+        Criteria cr = this.createCriteria(Course.class, "course", false)
                         .createAlias("schedule", "schedule", JoinType.INNER_JOIN)
                         .add(Restrictions.eq("course.courseNumber", courseNumber));
         Course course = (Course) cr.uniqueResult();
@@ -70,7 +80,7 @@ public class CourseDAOImpl implements CourseDAO {
     @Override
     @Transactional(readOnly=true, rollbackFor=Exception.class)
     public Course getByName(String courseName) {
-        Criteria cr = sessionFactory.getCurrentSession().createCriteria(Course.class, "course")
+        Criteria cr = this.createCriteria(Course.class, "course", false)
                         .createAlias("schedule", "schedule", JoinType.INNER_JOIN)
                         .add(Restrictions.eq("course.courseName", courseName));
         Course course = (Course) cr.uniqueResult();
@@ -86,7 +96,7 @@ public class CourseDAOImpl implements CourseDAO {
     @Override
     @Transactional(readOnly=true, rollbackFor=Exception.class)
     public ArrayList<Course> getCoursesByName(String courseName) {
-        Criteria cr = sessionFactory.getCurrentSession().createCriteria(Course.class, "course")
+        Criteria cr = this.createCriteria(Course.class, "course", false)
                 .createAlias("schedule", "schedule", JoinType.INNER_JOIN)
                 .add(Restrictions.like("course.courseName", courseName + "%"));
         List<Course> list = cr.list();
@@ -101,10 +111,15 @@ public class CourseDAOImpl implements CourseDAO {
     @SuppressWarnings("unchecked")
     @Override
     @Transactional(readOnly=true, rollbackFor=Exception.class)
-    public ArrayList<Course> getByMajor(int majorId) {
-        Criteria cr = sessionFactory.getCurrentSession().createCriteria(Course.class, "course")
+    public ArrayList<Course> getByMajor(int majorId, String sortBy) {
+        Criteria cr = this.createCriteria(Course.class, "course", false)
                 .createAlias("schedule", "schedule", JoinType.INNER_JOIN)
                 .add(Restrictions.eq("course.majorId", majorId));
+        if (sortBy.equals("courseNumber")) {
+            cr.addOrder(Order.asc("courseNumber"));
+        } else {
+            cr.addOrder(Order.asc("courseName"));
+        }
         List<Course> list = cr.list();
         return generateCourseList(list);
     }
@@ -119,7 +134,7 @@ public class CourseDAOImpl implements CourseDAO {
         if (list == null || list.size() == 0) { //Don't do anything
         } else {
             for (Course obj : list) {
-                courseList.add((Course) obj);
+                courseList.add(obj);
             }
         }
         return courseList;

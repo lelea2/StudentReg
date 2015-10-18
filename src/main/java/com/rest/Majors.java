@@ -51,10 +51,11 @@ public class Majors {
     @GET
     @Path("/{majorId}/courses")
     @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<Course> coursePerMajor(@NotNull @PathParam("majorId") final int majorId) {
+    public ArrayList<Course> coursePerMajor(@DefaultValue("courseName") @QueryParam("sortBy") final String sortBy,
+                                            @NotNull @PathParam("majorId") final int majorId) {
         ArrayList<Course> courseList = new ArrayList<Course>();
         try {
-            courseList = courseDAO.getByMajor(majorId);
+            courseList = courseDAO.getByMajor(majorId, sortBy);
         } catch (Exception e) {
             e.printStackTrace();
         }

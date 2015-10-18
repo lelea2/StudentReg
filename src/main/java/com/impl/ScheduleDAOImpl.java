@@ -15,12 +15,14 @@ import com.entity.Schedule;
  * Detail implemenation for schedule related
  */
 @Repository("Schedule")
-public class ScheduleDAOImpl implements ScheduleDAO {
+public class ScheduleDAOImpl extends BaseDAOImpl implements ScheduleDAO {
     private SessionFactory sessionFactory;
 
-    public ScheduleDAOImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+    /**
+     * Constructor class
+     * @param sessionFactory
+     */
+    public ScheduleDAOImpl(SessionFactory sessionFactory) { super(sessionFactory); }
 
     /**
      * Get schedule based on scheduleId
@@ -31,7 +33,7 @@ public class ScheduleDAOImpl implements ScheduleDAO {
     @Override
     @Transactional(readOnly=true, rollbackFor=Exception.class)
     public Schedule getScheduleById(int scheduleId) {
-        Criteria cr = sessionFactory.getCurrentSession().createCriteria(Schedule.class).add(Restrictions.eq("scheduleId", scheduleId));
+        Criteria cr = this.createCriteria(Schedule.class, "schedule", false).add(Restrictions.eq("scheduleId", scheduleId));
         Schedule schedule = (Schedule) cr.uniqueResult();
         return schedule;
     }

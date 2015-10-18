@@ -14,6 +14,7 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.beans.factory.annotation.Autowired;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -72,11 +73,11 @@ public class User implements Serializable {
 
     //select * from Users INNER JOIN Roles where Roles.roleId=Users.roleId;
     @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-    @JoinColumn(name = "roleId", nullable = false)
+    @JoinColumn(name = "roleId", insertable=false, updatable=false, nullable = false)
     private Role role;
 
     @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-    @JoinColumn(name = "majorId", nullable = false)
+    @JoinColumn(name = "majorId", insertable=false, updatable=false, nullable = false)
     private Major major;
 
     public User() {

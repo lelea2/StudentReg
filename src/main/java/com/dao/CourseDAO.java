@@ -10,9 +10,10 @@ public interface CourseDAO {
 
     /**
      * Function to get all course existing in DB
+     * @param String sortBy (default by courseNumber)
      * @return Array list of course object
      */
-    public ArrayList<Course> getAll();
+    public ArrayList<Course> getAll(String sortBy);
 
     /**
      * Function to get course by course number
@@ -39,8 +40,9 @@ public interface CourseDAO {
     /**
      * Function to get course by major Id
      * @param int majorId
+     * @param String sortBy (Default sortBy courseName)
      * @return ArrayList of Course object
      */
-    public ArrayList<Course> getByMajor(int majorId);
-    
+    public ArrayList<Course> getByMajor(int majorId, String sortBy);
+
 }

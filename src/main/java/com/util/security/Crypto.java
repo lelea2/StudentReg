@@ -15,10 +15,10 @@ import javax.crypto.spec.SecretKeySpec;
  * Utility class for crypto logic used for password encrypt & decrypt
  */
 public class Crypto {
-    private static String ivString = "15iPh8NcRs";
-    private static String keyString = "CMPE272_Group8";
-    private static byte[] ivBytes = ivString.getBytes();
-    private static byte[] keyBytes = keyString.getBytes();
+    //Hardcode key for now
+    private static byte[] ivBytes = new byte[] {-42, -52, 62, 24, -72, -82, -65, -68, 91, 47, -81, -53, 25, -9, -88, -54};
+    private static byte[] keyBytes = new byte[] { 33, -39, -96, 71, 40, 102, 92, -6, 94, -101, 42, 3, -32, -41, 46, 14};
+
     /**
      * General purpose encryption method
      *

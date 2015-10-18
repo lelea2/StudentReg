@@ -80,4 +80,21 @@ public class Users {
         return Response.status(201).entity(result).build();
     }
 
+    @GET
+    @Path("/create")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createUser() {
+        try {
+            Boolean success = userDAO.createUser("", "", "", "", 1, 1);
+            if (success.equals(true)) {
+                return Response.status(200).entity("").build();
+            } else {
+                throw new Exception();
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+            return Response.status(500).entity("").build();
+        }
+    }
+
 }

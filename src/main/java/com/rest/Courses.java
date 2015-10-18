@@ -26,10 +26,10 @@ public class Courses {
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<Course> getAllCourses() {
+    public ArrayList<Course> getAllCourses(@DefaultValue("courseNumber") @QueryParam("sortBy") final String sortBy) {
         ArrayList<Course> courseList = new ArrayList<Course>();
         try {
-            courseList = courseDAO.getAll();
+            courseList = courseDAO.getAll(sortBy);
         } catch (Exception e) {
             e.printStackTrace();
         }
