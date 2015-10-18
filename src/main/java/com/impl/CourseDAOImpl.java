@@ -125,6 +125,23 @@ public class CourseDAOImpl extends BaseDAOImpl implements CourseDAO {
     }
 
     /**
+     * Get array list of courses based on scheduleId (search course by schedule)
+     * @param int scheduleId
+     * @return ArrayList of course object
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    @Transactional(readOnly=true, rollbackFor=Exception.class)
+    public ArrayList<Course> getBySchedule(int scheduleId) {
+        Criteria cr = this.createCriteria(Course.class, "course", false)
+                .createAlias("schedule", "schedule", JoinType.INNER_JOIN)
+                .add(Restrictions.eq("schedule.scheduleId", scheduleId))
+                .addOrder(Order.asc("courseName"));
+        List<Course> list = cr.list();
+        return generateCourseList(list);
+    }
+
+    /**
      * Helper function to generate array list of courses based on result query
      * @param List of course
      * @return ArrayList of course object

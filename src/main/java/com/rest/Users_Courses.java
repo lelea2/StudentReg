@@ -13,7 +13,7 @@ import com.dao.CourseDAO;
 /**
  * Java class handle all API call related to users course registration call
  */
-@Path("/users/courses/")
+@Path("/courses/users")
 public class Users_Courses {
 
 }

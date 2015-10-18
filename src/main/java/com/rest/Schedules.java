@@ -16,5 +16,19 @@ import com.dao.ScheduleDAO;
 @Path("/schedules")
 public class Schedules {
 
+    @Autowired
+    private ScheduleDAO scheduleDAO;
 
+    @GET
+    @Path("/all")
+    @Produces(MediaType.APPLICATION_JSON)
+    public ArrayList<Schedule> getAll() {
+        ArrayList<Schedule> scheduleList = new ArrayList<Schedule>();
+        try {
+            scheduleList = scheduleDAO.getAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return scheduleList;
+    }
 }

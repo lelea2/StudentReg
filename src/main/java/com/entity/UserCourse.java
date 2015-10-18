@@ -44,15 +44,13 @@ import com.entity.Course;
 @Table(name="Users_Courses")
 public class UserCourse implements Serializable {
 
-    @Id
-    @NotNull
-    @Type(type="uuid-char")
-    @Column(name = "userId", unique = true, nullable=false, updatable = false)
-    private UUID userId;
+    @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+    @JoinColumn(name = "userId", referencedColumnName="userId", nullable = false)
+    private User user;
 
     //select * from Users_Courses INNER JOIN Courses where Courses.courseId=Users_Courses.courseId;
     @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-    @JoinColumn(name = "courseId", nullable = false)
+    @JoinColumn(name = "courseId", referencedColumnName="courseId", nullable = false)
     private Course course;
 
     /**
@@ -61,27 +59,27 @@ public class UserCourse implements Serializable {
     public UserCourse() {
     }
 
-    public UserCourse(UUID userId) {
-        super();
-        this.userId = userId;
+    public UserCourse(User user, Course course) {
+        this.user = user;
+        this.course = course;
     }
 
     /**
-     * Get userId
+     * Get user
      *
-     * @return UUID userId
+     * @return User user
      */
-    public UUID getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
     /**
-     * Set userId
+     * Set user
      *
-     * @param UUID userId
+     * @param User userId
      */
-    public void setUserId(UUID userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     /**

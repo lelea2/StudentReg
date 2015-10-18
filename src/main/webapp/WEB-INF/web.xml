@@ -24,6 +24,10 @@
             <param-value>com.rest.JerseyApplication</param-value>
         </init-param>
         <init-param>
+            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
             <param-value>com.rest</param-value>
         </init-param>

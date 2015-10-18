@@ -54,6 +54,24 @@ public class Courses {
     }
 
     /**
+     * Get array list of courses based on scheduleId
+     * @param int scheduleId
+     * @return Array list of Course object
+     */
+    @GET
+    @Path("/schedule/{scheduleId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public ArrayList<Course> getCoursesByScheduleId(@NotNull @PathParam("scheduleId") final int scheduleId) {
+        ArrayList<Course> courseList = new ArrayList<Course>();
+        try {
+            courseList = courseDAO.getBySchedule(scheduleId);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return courseList;
+    }
+
+    /**
      * Get specific course based on courseNumber or courseName
      * @param courseNumber
      * @param courseName

@@ -45,4 +45,11 @@ public interface CourseDAO {
      */
     public ArrayList<Course> getByMajor(int majorId, String sortBy);
 
+    /**
+     * Function to get course by scheduleId
+     * @param int ScheduleId
+     * @return
+     */
+    public ArrayList<Course> getBySchedule(int scheduleId);
+
 }
