@@ -3,6 +3,8 @@ package com.rest;
 import java.util.*;
 import java.util.UUID;
 import java.util.ArrayList;
+
+import com.domain.UserRegisterBody;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.constraints.NotNull;
@@ -14,8 +16,10 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import com.domain.UserRequestBody;
+import com.domain.UserRegisterBody;
 
 import com.entity.Major;
 import com.entity.Course;
@@ -75,25 +79,43 @@ public class Users {
     @POST
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response logUserIn(UserRequestBody reqBody) {
-        String result = "{}";
-        return Response.status(201).entity(result).build();
+    public Response logUserIn(UserRequestBody obj) {
+        try {
+            User user = userDAO.getByEmail(obj.getUserName(), obj.getUserPassword());
+            if (user != null) {
+                UUID userId = user.getUserId();
+                return Response.status(Status.OK).entity("{'token': '" + userId + "'}").build();
+            } else {
+                throw new NullPointerException();
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+            return Response.status(Status.INTERNAL_SERVER_ERROR).entity("{'status': 'FAIL'}").build();
+        }
     }
 
-    @GET
+    /**
+     * Function to register user
+     *
+     * @param UserRegisterBody object has user infomration for registration
+     * @return statusCode 200 for success, 500 for failure
+     *
+     */
+    @PUT
     @Path("/create")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createUser() {
+    public Response createUser(UserRegisterBody obj) {
         try {
-            Boolean success = userDAO.createUser("", "", "", "", 1, 1);
+            Boolean success = userDAO.createUser(obj.getUserEmail(), obj.getUserPassword(),
+                    obj.getFirstName(), obj.getLastName(), obj.getRoleId(), obj.getMajorId());
             if (success.equals(true)) {
-                return Response.status(200).entity("").build();
+                return Response.status(Status.CREATED).entity("{'status': 'SUCCESS'}").build();
             } else {
                 throw new Exception();
             }
         } catch(Exception e) {
             e.printStackTrace();
-            return Response.status(500).entity("").build();
+            return Response.status(Status.INTERNAL_SERVER_ERROR).entity("{'status': 'FAIL'}").build();
         }
     }
 

@@ -52,7 +52,7 @@ public class User implements Serializable {
 
     @Id
     @NotNull
-    @Type(type="uuid-binary")
+    @Type(type="uuid-char")
     @Column(name = "userId", unique = true, nullable=false, updatable = false)
     private UUID userId;
 
@@ -66,30 +66,29 @@ public class User implements Serializable {
     @Column(name="lastName", nullable=false)
     private String lastName;
 
-    @Transient
     @JsonIgnore
     @Column(name="password", nullable=false)
     private String encryptedPassword;
 
     //select * from Users INNER JOIN Roles where Roles.roleId=Users.roleId;
     @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-    @JoinColumn(name = "roleId", insertable=false, updatable=false, nullable = false)
+    @JoinColumn(name = "roleId", referencedColumnName="roleId", nullable = false)
     private Role role;
 
     @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-    @JoinColumn(name = "majorId", insertable=false, updatable=false, nullable = false)
+    @JoinColumn(name = "majorId", referencedColumnName="majorId", nullable = false)
     private Major major;
 
     public User() {
     }
 
-    public User(UUID userId, String email, String firstName, String lastName, String encryptedPassword) {
+    public User(UUID userId, String email, String password, String firstName, String lastName) {
         super();
         this.userId = userId;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.encryptedPassword = encryptedPassword;
+        this.encryptedPassword = Crypto.encrypt(password);
     }
 
     /**
@@ -164,7 +163,7 @@ public class User implements Serializable {
     public String getPassword() {
         String password = "";
         try {
-            password = Crypto.decryptAndURLDecode(encryptedPassword);
+            password = Crypto.decrypt(encryptedPassword);
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -178,7 +177,7 @@ public class User implements Serializable {
     @JsonIgnore
     public void setPassword(String password) {
         try {
-            this.encryptedPassword = Crypto.encryptAndURLEncode(password);
+            this.encryptedPassword = Crypto.encrypt(password);
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -219,7 +218,8 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "User [userId=" + userId + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName
-                + ", roleName=" + role.getRoleName() + ", majorId=" + major.getMajorId() + "]";
+                + ", password=" + getPassword() + ", roleName=" + role.getRoleName()
+                + ", majorId=" + major.getMajorId() + "]";
     }
 
 }

@@ -9,6 +9,7 @@ import org.hibernate.criterion.*;
 import org.hibernate.Criteria;
 import org.hibernate.sql.JoinType;
 
+import com.util.security.Crypto;
 import com.dao.UserDAO;
 import com.entity.Major;
 import com.entity.Course;
@@ -37,6 +38,9 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
      * Function to get all exisiting user
      * @return Arraylist of User object
      */
+    @SuppressWarnings("unchecked")
+    @Override
+    @Transactional(readOnly=true, rollbackFor=Exception.class)
     public ArrayList<User> getAll() {
         Criteria cr = this.createCriteria(User.class, "user", false)
                         .createAlias("major", "major", JoinType.INNER_JOIN)
@@ -50,6 +54,9 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
      * @param UUID userId
      * @return User object
      */
+    @SuppressWarnings("unchecked")
+    @Override
+    @Transactional(readOnly=true, rollbackFor=Exception.class)
     public User getById(UUID userId) {
         Criteria cr = this.createCriteria(User.class, "user", false)
                         .createAlias("major", "major", JoinType.INNER_JOIN)
@@ -65,8 +72,16 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
      * @param String pwd
      * @return User object
      */
+    @SuppressWarnings("unchecked")
+    @Override
+    @Transactional(readOnly=true, rollbackFor=Exception.class)
     public User getByEmail(String email, String pwd) {
-        User user = new User();
+        Criteria cr = this.createCriteria(User.class, "user", false)
+                        .createAlias("major", "major", JoinType.INNER_JOIN)
+                        .createAlias("role", "role", JoinType.INNER_JOIN)
+                        .add(Restrictions.eq("user.email", email))
+                        .add(Restrictions.eq("user.password", Crypto.encrypt(pwd)));
+        User user = (User) cr.uniqueResult();
         return user;
     }
 
@@ -75,6 +90,9 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
      * @param User user object
      * @return Boolean value for SUCCESS/FAILURE
      */
+    @SuppressWarnings("unchecked")
+    @Override
+    @Transactional(rollbackFor=Exception.class)
     public boolean updateUser(User user) {
         return false;
     }
@@ -84,17 +102,16 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
      * @param User user object
      * @return Boolean value for SUCCESS/FAILURE
      */
-    public boolean createUser(String email, String firstName, String lastName, String pwd, int majorId, int roleId) {
+    @SuppressWarnings("unchecked")
+    @Override
+    @Transactional(rollbackFor=Exception.class)
+    public boolean createUser(String email, String pwd, String firstName, String lastName, int roleId, int majorId) {
         try {
             Major major = (Major) this.get(Major.class, majorId);
             Role role = (Role) this.get(Role.class, roleId);
-            UUID userId = UUID.randomUUID();
-            User user = new User();
-            user.setUserId(userId);
-            user.setEmail("kdao@test.com");
-            user.setPassword("testing123");
-            user.setLastName("Dao");
-            user.setFirstName("Khanh");
+            UUID userId = UUID.randomUUID(); //Generate random uuid
+            //User(UUID userId, String email, String password, String firstName, String lastName)
+            User user = new User(userId, email, pwd, firstName, lastName);
             user.setMajor(major);
             user.setRole(role);
             this.save(user, userId);

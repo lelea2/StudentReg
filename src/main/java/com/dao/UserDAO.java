@@ -58,7 +58,7 @@ public interface UserDAO {
      *
      * @return Boolean value for SUCCESS/FAILURE
      */
-    public boolean createUser(String email, String firstName, String lastName, String pwd, int majorId, int roleId);
+    public boolean createUser(String email, String pwd, String firstName, String lastName, int roleId, int majorId);
 
     /**
      * Function to delete user by userId

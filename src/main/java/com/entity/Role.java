@@ -37,7 +37,7 @@ public class Role implements Serializable {
 
     @Column(name="roleName", nullable=false)
     private String roleName;
-
+    
     public Role() {}
 
     public Role(int roleId, String roleName) {
