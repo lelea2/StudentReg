@@ -64,44 +64,4 @@ public class Crypto {
         return result;
     }
 
-    /**
-     * Encrypts and URL-encodes a string so that the encrypted text can be passed as a query arg
-     *
-     * @param message The text to be encrypted/encoded
-     * @return
-     */
-    public static String encryptAndURLEncode(String message) {
-        // encrypt the string
-        String result = encrypt(message);
-
-        try {
-            // URLencode the base64 string so it can be transferred as a query arg
-            result = URLEncoder.encode(result, "UTF-8");
-            // we need a 2nd encoding because the browser automatically does a decode
-            result = URLEncoder.encode(result, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    /**
-     * Decrypts & URL-decodes a string created by encryptAndURLEncode()
-     *
-     * @param message
-     * @return
-     */
-    public static String decryptAndURLDecode(String message) {
-        // first decode the URL encoding
-        String result = "";
-        try {
-            result = URLDecoder.decode(message, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        result = result.replaceAll(" ", "+");
-        // then decrypt the decoded string
-        result = decrypt(result);
-        return result;
-    }
 }

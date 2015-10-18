@@ -40,7 +40,7 @@ public interface UserDAO {
     /**
      * Function to update exisiting user
      *
-     * @param String email
+     * @param UUID userId
      * @param String firstName
      * @param String lastName
      * @param String pwd
@@ -49,7 +49,7 @@ public interface UserDAO {
      *
      * @return Boolean value for SUCCESS/FAILURE
      */
-    public boolean updateUser(String email, String pwd, String firstName, String lastName, int roleId, int majorId);
+    public boolean updateUser(UUID userId, String pwd, String firstName, String lastName, int roleId, int majorId);
 
     /**
      * Function to create user
@@ -69,7 +69,7 @@ public interface UserDAO {
      * Function to delete user by userId
      *
      * @param String userId
-     * @return Boolen value for SUCCESS/FAILURE
+     * @return Boolean value for SUCCESS/FAILURE
      *
      */
     public boolean deleteUser(String userId);

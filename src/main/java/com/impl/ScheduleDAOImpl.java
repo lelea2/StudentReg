@@ -25,6 +25,22 @@ public class ScheduleDAOImpl extends BaseDAOImpl implements ScheduleDAO {
     public ScheduleDAOImpl(SessionFactory sessionFactory) { super(sessionFactory); }
 
     /**
+     * Get all schedules available
+     * @return ArrayList of schedules
+     */
+    public ArrayList<Schedule> getAll() {
+        List<Schedule> list = this.createCriteria(Schedule.class, "schedule", false).list();
+        ArrayList<Schedule> scheduleList = new ArrayList<Schedule>();
+        if (list == null || list.size() == 0) { //Don't do anything
+        } else {
+            for (Schedule o : list) {
+                scheduleList.add(new Schedule(o.getScheduleId(), o.getDay(), o.getStartTime(), o.getEndTime()));
+            }
+        }
+        return scheduleList;
+    }
+
+    /**
      * Get schedule based on scheduleId
      * @param Integer scheduleId
      * @return
@@ -33,7 +49,8 @@ public class ScheduleDAOImpl extends BaseDAOImpl implements ScheduleDAO {
     @Override
     @Transactional(readOnly=true, rollbackFor=Exception.class)
     public Schedule getScheduleById(int scheduleId) {
-        Criteria cr = this.createCriteria(Schedule.class, "schedule", false).add(Restrictions.eq("scheduleId", scheduleId));
+        Criteria cr = this.createCriteria(Schedule.class, "schedule", false)
+                            .add(Restrictions.eq("scheduleId", scheduleId));
         Schedule schedule = (Schedule) cr.uniqueResult();
         return schedule;
     }

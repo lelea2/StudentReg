@@ -37,7 +37,10 @@ public class Role implements Serializable {
 
     @Column(name="roleName", nullable=false)
     private String roleName;
-    
+
+    /**
+     * Class Constructor
+     */
     public Role() {}
 
     public Role(int roleId, String roleName) {
@@ -48,6 +51,7 @@ public class Role implements Serializable {
 
     /**
      * Get roleId
+     *
      * @return int roleId
      */
     public int getRoleId() {
@@ -56,6 +60,7 @@ public class Role implements Serializable {
 
     /**
      * Set RoleId
+     *
      * @param int roleId
      */
     public void setRoleId(int roleId) {
@@ -64,6 +69,7 @@ public class Role implements Serializable {
 
     /**
      * Get role name
+     *
      * @return String rolename
      */
     public String getRoleName() {
@@ -72,6 +78,7 @@ public class Role implements Serializable {
 
     /**
      * Set rolename
+     *
      * @param String roleName
      */
     public void setRoleName(String roleName) {

@@ -87,19 +87,51 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
 
     /**
      * Function to update exisiting user
-     * @param User user object
+     *
+     * @param UUID userId
+     * @param String firstName
+     * @param String lastName
+     * @param String pwd
+     * @param int majorId
+     * @param int roleId
+     *
+     * NOTE: update will ignore email field so, if user try to manipulate it, they can't
+     *       This eventually will be handled in UI, but REST making sure this value will not be updated
+     *
      * @return Boolean value for SUCCESS/FAILURE
      */
     @SuppressWarnings("unchecked")
     @Override
     @Transactional(rollbackFor=Exception.class)
-    public boolean updateUser(String email, String pwd, String firstName, String lastName, int roleId, int majorId) {
-        return false;
+    public boolean updateUser(UUID userId, String pwd, String firstName, String lastName, int roleId, int majorId) {
+        try {
+            Major major = (Major) this.get(Major.class, majorId);
+            Role role = (Role) this.get(Role.class, roleId);
+            //User(UUID userId, String email, String password, String firstName, String lastName)
+            User user = new User();
+            user.setPassword(pwd);
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+            user.setMajor(major);
+            user.setRole(role);
+            this.save(user, userId);
+            return true;
+        } catch(Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**
      * Function to create user
-     * @param User user object
+     *
+     * @param String email
+     * @param String firstName
+     * @param String lastName
+     * @param String pwd
+     * @param int majorId
+     * @param int roleId
+     *
      * @return Boolean value for SUCCESS/FAILURE
      */
     @SuppressWarnings("unchecked")
@@ -125,7 +157,7 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
     /**
      * Function to delete user by userId
      * @param String userId
-     * @return Boolen value for SUCCESS/FAILURE
+     * @return Boolean value for SUCCESS/FAILURE
      */
     public boolean deleteUser(String userId) {
         return false;

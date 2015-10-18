@@ -11,6 +11,8 @@ public class JerseyApplication extends ResourceConfig {
         register(JacksonFeature.class);
         register(Courses.class);
         register(Majors.class);
+        register(Schedules.class);
         register(Users.class);
+        register(Users_Courses.class);
     }
 }

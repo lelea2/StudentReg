@@ -73,6 +73,9 @@ public class Course implements Serializable {
     @JoinColumn(name = "scheduleId", nullable = false)
     private Schedule schedule;
 
+    /**
+     * Class Constructor
+     */
     public Course() {}
 
     public Course(UUID courseId, String courseName, int courseNumber, int majorId, String stateId, String professor, String description, String location) {
@@ -89,6 +92,7 @@ public class Course implements Serializable {
 
     /**
      * Get courseId
+     *
      * @return UUID for courseId
      */
     public UUID getCourseId() {
@@ -97,6 +101,7 @@ public class Course implements Serializable {
 
     /**
      * Set courseId
+     *
      * @param UUID courseId
      */
     public void setCourseId(UUID courseId) {
@@ -105,6 +110,7 @@ public class Course implements Serializable {
 
     /**
      * Get course name
+     *
      * @return {String} for courseName
      */
     public String getCourseName() {
@@ -113,6 +119,7 @@ public class Course implements Serializable {
 
     /**
      * Set course name
+     *
      * @param {String} courseName
      */
     public void setCourseName(String courseName) {
@@ -121,6 +128,7 @@ public class Course implements Serializable {
 
     /**
      * Get course number
+     *
      * @return int courseNumber
      */
     public int getCourseNumber() {
@@ -129,6 +137,7 @@ public class Course implements Serializable {
 
     /**
      * Get course number
+     *
      * @param int courseNumber
      */
     public void setCourseNumber(int courseNumber) {
@@ -137,6 +146,7 @@ public class Course implements Serializable {
 
     /**
      * Get Schedule object for course
+     *
      * @return Schedule object (scheduleId, date, startTime, endTime)
      */
     public Schedule getSchedule() {
@@ -145,6 +155,7 @@ public class Course implements Serializable {
 
     /**
      * Set Schedule object for course
+     *
      * @param Schedule object
      */
     public void setSchedule(Schedule schedule) {
@@ -153,6 +164,7 @@ public class Course implements Serializable {
 
     /**
      * Get course MajorId
+     *
      * @return Major object
      */
     public int getMajorId() {
@@ -161,6 +173,7 @@ public class Course implements Serializable {
 
     /**
      * Set course majorId
+     *
      * @param int majorId
      */
     public void setMajorId(int majorId) {
@@ -169,6 +182,7 @@ public class Course implements Serializable {
 
     /**
      * Get course state (on/off)
+     *
      * @return String courseState
      */
     public String getStateId() {
@@ -177,6 +191,7 @@ public class Course implements Serializable {
 
     /**
      * Set course state
+     *
      * @param stateId
      */
     public void setStateId(String stateId) {
@@ -185,6 +200,7 @@ public class Course implements Serializable {
 
     /**
      * Get course professor
+     *
      * @return String course professor
      */
     public String getProfessor() {
@@ -193,6 +209,7 @@ public class Course implements Serializable {
 
     /**
      * Set course professor
+     *
      * @param String professor
      */
     public void setProfessor(String professor) {
@@ -201,6 +218,7 @@ public class Course implements Serializable {
 
     /**
      * Get course description
+     *
      * @return String course description
      */
     public String getDescription() {
@@ -209,6 +227,7 @@ public class Course implements Serializable {
 
     /**
      * Set course description
+     *
      * @param String description
      */
     public void setDescription(String description) {
@@ -217,6 +236,7 @@ public class Course implements Serializable {
 
     /**
      * Get course location
+     *
      * @return String courseLocation
      */
     public String getLocation() {
@@ -225,6 +245,7 @@ public class Course implements Serializable {
 
     /**
      * Set course location
+     *
      * @param String location
      */
     public void setLocation(String location) {

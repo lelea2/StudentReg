@@ -55,4 +55,49 @@ public class UserCourse implements Serializable {
     @JoinColumn(name = "courseId", nullable = false)
     private Course course;
 
+    /**
+     * Class constructor
+     */
+    public UserCourse() {
+    }
+
+    public UserCourse(UUID userId) {
+        super();
+        this.userId = userId;
+    }
+
+    /**
+     * Get userId
+     *
+     * @return UUID userId
+     */
+    public UUID getUserId() {
+        return userId;
+    }
+
+    /**
+     * Set userId
+     *
+     * @param UUID userId
+     */
+    public void setUserId(UUID userId) {
+        this.userId = userId;
+    }
+
+    /**
+     * Get course
+     * @return
+     */
+    public Course getCourse() {
+        return course;
+    }
+
+    /**
+     * Set course
+     * @param Course course
+     */
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
 }

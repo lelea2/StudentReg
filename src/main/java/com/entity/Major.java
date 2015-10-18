@@ -30,6 +30,9 @@ public class Major implements Serializable {
     @Column(name="majorName", nullable=false)
     private String majorName;
 
+    /**
+     * Class Constructor
+     */
     public Major() {}
 
     public Major(int majorId, String majorName) {
@@ -40,6 +43,7 @@ public class Major implements Serializable {
 
     /**
      * Get course majorId
+     *
      * @return int majorId
      */
     public int getMajorId() {
@@ -48,6 +52,7 @@ public class Major implements Serializable {
 
     /**
      * Set course majorId
+     *
      * @param int majorId
      */
     public void setMajorId(int majorId) {
@@ -56,6 +61,7 @@ public class Major implements Serializable {
 
     /**
      * Get major name
+     *
      * @return String majorName
      */
     public String getMajorName() {
@@ -64,6 +70,7 @@ public class Major implements Serializable {
 
     /**
      * Set major name
+     *
      * @param String majorName
      */
     public void setMajorName(String majorName) {

@@ -49,6 +49,9 @@ public class Schedule implements Serializable {
     @JoinColumn(name="scheduleId")
     private List<Course> courselist = new ArrayList<Course>();
 
+    /**
+     * Class Constructor
+     */
     public Schedule() {}
 
     public Schedule(int scheduleId, String day, String startTime, String endTime) {
@@ -61,6 +64,7 @@ public class Schedule implements Serializable {
 
     /**
      * Get scheduleid
+     *
      * @return int scheduleId
      */
     public int getScheduleId() {
@@ -77,6 +81,7 @@ public class Schedule implements Serializable {
 
     /**
      * Get schedule day
+     *
      * @return String schedule day
      */
     public String getDay() {
@@ -85,6 +90,7 @@ public class Schedule implements Serializable {
 
     /**
      * Set schedule day
+     *
      * @param String day
      */
     public void setDay(String day) {
@@ -93,6 +99,7 @@ public class Schedule implements Serializable {
 
     /**
      * Get schedule start-time
+     *
      * @return string time
      */
     public String getStartTime() {
@@ -101,6 +108,7 @@ public class Schedule implements Serializable {
 
     /**
      * Set schedule start-time
+     *
      * @param String startTime
      */
     public void setStartTime(String startTime) {
@@ -109,6 +117,7 @@ public class Schedule implements Serializable {
 
     /**
      * Get schedule end time
+     *
      * @return String endtime
      */
     public String getEndTime() {
@@ -117,6 +126,7 @@ public class Schedule implements Serializable {
 
     /**
      * Set schedule end time
+     *
      * @param String endTime
      */
     public void setEndTime(String endTime) {

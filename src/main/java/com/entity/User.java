@@ -67,6 +67,7 @@ public class User implements Serializable {
     @Column(name="lastName", nullable=false)
     private String lastName;
 
+    @JsonIgnore
     @Column(name="password", nullable=false)
     private String encryptedPassword;
 
@@ -79,6 +80,9 @@ public class User implements Serializable {
     @JoinColumn(name = "majorId", referencedColumnName="majorId", nullable = false)
     private Major major;
 
+    /**
+     * Class Constructor
+     */
     public User() {
     }
 
@@ -88,7 +92,7 @@ public class User implements Serializable {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.encryptedPassword = Crypto.encrypt(password);
+        this.encryptedPassword = Crypto.encrypt(password); //password set always need to be encrypted
     }
 
     /**
@@ -160,6 +164,7 @@ public class User implements Serializable {
      * Get user password
      * @return String password
      */
+    @JsonIgnore
     public String getPassword() {
         String password = "";
         try {
