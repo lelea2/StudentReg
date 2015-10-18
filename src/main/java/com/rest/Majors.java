@@ -1,6 +1,8 @@
 package com.rest;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.constraints.NotNull;
@@ -34,14 +36,16 @@ public class Majors {
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<Major> allMajors() {
+    public HashMap<String, ArrayList<Major>> allMajors() {
         ArrayList<Major> majorList = new ArrayList<Major>();
+        HashMap<String, ArrayList<Major>> map = new HashMap<String, ArrayList<Major>>();
         try {
             majorList = majorDAO.getMajors();
+            map.put("data", majorList);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return majorList;
+        return map;
     }
 
     /**
