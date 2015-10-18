@@ -80,7 +80,7 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
                         .createAlias("major", "major", JoinType.INNER_JOIN)
                         .createAlias("role", "role", JoinType.INNER_JOIN)
                         .add(Restrictions.eq("user.email", email))
-                        .add(Restrictions.eq("user.password", Crypto.encrypt(pwd)));
+                        .add(Restrictions.eq("user.encryptedPassword", Crypto.encrypt(pwd)));
         User user = (User) cr.uniqueResult();
         return user;
     }
@@ -93,7 +93,7 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
     @SuppressWarnings("unchecked")
     @Override
     @Transactional(rollbackFor=Exception.class)
-    public boolean updateUser(User user) {
+    public boolean updateUser(String email, String pwd, String firstName, String lastName, int roleId, int majorId) {
         return false;
     }
 

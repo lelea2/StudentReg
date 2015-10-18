@@ -26,9 +26,7 @@ import java.util.*;
 import java.util.UUID;
 import java.util.ArrayList;
 
-import com.util.security.Crypto;
 import com.entity.Course;
-import com.entity.Role;
 
 /**
  * Data transfer object for Users_Courses
@@ -42,8 +40,19 @@ import com.entity.Role;
  * );
  */
 
- @Entity
- @Table(name="UsersCourses")
- public class UserCourse implements Serializable {
+@Entity
+@Table(name="Users_Courses")
+public class UserCourse implements Serializable {
 
- }
+    @Id
+    @NotNull
+    @Type(type="uuid-char")
+    @Column(name = "userId", unique = true, nullable=false, updatable = false)
+    private UUID userId;
+
+    //select * from Users_Courses INNER JOIN Courses where Courses.courseId=Users_Courses.courseId;
+    @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+    @JoinColumn(name = "courseId", nullable = false)
+    private Course course;
+
+}

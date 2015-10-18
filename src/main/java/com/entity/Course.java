@@ -43,7 +43,7 @@ public class Course implements Serializable {
 
     @Id
     @NotNull
-    @Type(type="uuid-binary")
+    @Type(type="uuid-char")
     @Column(name = "courseId", unique = true, nullable=false, updatable = false)
     private UUID courseId;
 

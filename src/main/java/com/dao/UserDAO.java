@@ -40,11 +40,16 @@ public interface UserDAO {
     /**
      * Function to update exisiting user
      *
-     * @param User user object
+     * @param String email
+     * @param String firstName
+     * @param String lastName
+     * @param String pwd
+     * @param int majorId
+     * @param int roleId
      *
      * @return Boolean value for SUCCESS/FAILURE
      */
-    public boolean updateUser(User user);
+    public boolean updateUser(String email, String pwd, String firstName, String lastName, int roleId, int majorId);
 
     /**
      * Function to create user

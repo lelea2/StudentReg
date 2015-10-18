@@ -20,6 +20,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.util.*;
@@ -66,7 +67,6 @@ public class User implements Serializable {
     @Column(name="lastName", nullable=false)
     private String lastName;
 
-    @JsonIgnore
     @Column(name="password", nullable=false)
     private String encryptedPassword;
 
@@ -119,6 +119,7 @@ public class User implements Serializable {
      * Set userEmail
      * @param String email
      */
+    @JsonProperty("email")
     public void setEmail(String email) {
         this.email = email;
     }
@@ -159,7 +160,6 @@ public class User implements Serializable {
      * Get user password
      * @return String password
      */
-    @JsonIgnore
     public String getPassword() {
         String password = "";
         try {
