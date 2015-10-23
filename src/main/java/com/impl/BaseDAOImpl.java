@@ -20,8 +20,14 @@ public abstract class BaseDAOImpl {
 
     protected SessionFactory sessionFactory;
 
+    /**
+     * Class constructor
+     */
     public BaseDAOImpl() {}
 
+    /**
+     * Class constructor
+     */
     public BaseDAOImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }

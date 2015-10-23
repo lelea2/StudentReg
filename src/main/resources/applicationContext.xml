@@ -44,6 +44,7 @@
                 <value>com.entity.Course</value>
                 <value>com.entity.Role</value>
                 <value>com.entity.User</value>
+                <!--<value>com.entity.UserCourse</value>-->
             </list>
         </property>
     </bean>
@@ -65,13 +66,19 @@
         </constructor-arg>
     </bean>
 
-    <bean id="scheduleDAO" class="com.impl.ScheduleDAOImpl">
+    <bean id="scheduleDao" class="com.impl.ScheduleDAOImpl">
         <constructor-arg>
             <ref bean="sessionFactory" />
         </constructor-arg>
     </bean>
 
-    <bean id="userDAO" class="com.impl.UserDAOImpl">
+    <bean id="userDao" class="com.impl.UserDAOImpl">
+        <constructor-arg>
+            <ref bean="sessionFactory" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="userCourseDao" class="com.impl.UserCourseDAOImpl">
         <constructor-arg>
             <ref bean="sessionFactory" />
         </constructor-arg>

@@ -10,7 +10,6 @@ import org.hibernate.sql.JoinType;
 
 import com.dao.CourseDAO;
 import com.entity.Course;
-import com.entity.Schedule;
 
 /**
  * Details implementation for courses related

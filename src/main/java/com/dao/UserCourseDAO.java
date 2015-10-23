@@ -1,12 +1,9 @@
 package com.dao;
 
-import java.util.*;
 import java.util.UUID;
 import java.util.ArrayList;
 
-import com.entity.User;
 import com.entity.Course;
-import com.entity.UserCourse;
 
 /**
  * Object interface for UserCourse
@@ -23,16 +20,17 @@ public interface UserCourseDAO {
     /**
      * Register courses
      * @param UUID userId
-     * @param ArrayList of courses to be register
+     * @param ArrayList of courseId to be register
      * @return
      */
-    public Boolean registerCourses(UUID userId, ArrayList<Course> courses);
+    public Boolean registerCourses(UUID userId, ArrayList<UUID> courseId);
 
     /**
      * Drop courses
      * @param UUID userId
-     * @param ArrayList of courses to be dropped
+     * @param ArrayList of courseId to be dropped
      * @return
      */
-    public Boolean dropCourses(UUID userId, ArrayList<Course> course);
+    public Boolean dropCourses(UUID userId, ArrayList<UUID> courseId);
+
 }

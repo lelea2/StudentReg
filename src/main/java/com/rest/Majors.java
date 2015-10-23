@@ -2,6 +2,7 @@ package com.rest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+//import com.util.response.ComponentResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,6 +30,9 @@ public class Majors {
     @Autowired
     private CourseDAO courseDAO;
 
+    /*@Autowired
+    private ComponentResponse componentResponse;*/
+
     /**
      * Get all majors available
      * @return Array contains JSON major object
@@ -55,14 +59,16 @@ public class Majors {
     @GET
     @Path("/{majorId}/courses")
     @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<Course> coursePerMajor(@DefaultValue("courseName") @QueryParam("sortBy") final String sortBy,
+    public HashMap<String, ArrayList<Course>> coursePerMajor(@DefaultValue("courseName") @QueryParam("sortBy") final String sortBy,
                                             @NotNull @PathParam("majorId") final int majorId) {
         ArrayList<Course> courseList = new ArrayList<Course>();
+        HashMap<String, ArrayList<Course>> map = new HashMap<String, ArrayList<Course>>();
         try {
             courseList = courseDAO.getByMajor(majorId, sortBy);
+            map.put("data", courseList);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return courseList;
+        return map;
     }
 }
