@@ -19,6 +19,10 @@ public class Schedules {
     @Autowired
     private ScheduleDAO scheduleDAO;
 
+    /**
+     * Function to get all schedules available
+     * @return Arraylist of Schedule object
+     */
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)

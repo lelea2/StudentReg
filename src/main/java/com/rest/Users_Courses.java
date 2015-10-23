@@ -2,11 +2,6 @@ package com.rest;
 
 import java.util.ArrayList;
 import java.util.UUID;
-
-import com.dao.UserCourseDAO;
-import com.dao.UserDAO;
-import com.entity.User;
-import com.util.constant.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.constraints.NotNull;
@@ -16,6 +11,8 @@ import javax.ws.rs.core.Response;
 
 import com.entity.Course;
 import com.dao.UserCourseDAO;
+import com.domain.CourseRegisterBody;
+import com.util.constant.Constant;
 
 /**
  * Java class handle all API call related to users course registration call
@@ -26,6 +23,12 @@ public class Users_Courses {
     @Autowired
     private UserCourseDAO userCourseDAO;
 
+    /**
+     * Function to get all registered courses per userId
+     *
+     * @param UUID userId
+     * @return ArrayList of courses
+     */
     @GET
     @Path("/registered/{userId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -38,4 +41,35 @@ public class Users_Courses {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(Constant.Status.FAIL).build();
         }
     }
+
+    /**
+     * Function to register course per userId
+     *
+     * @param String UUID userId
+     * @param CourseResgiteredBody obj
+     * @return 201 statuscode for success, 500 for failure
+     */
+    @PUT
+    @Path("/add")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addCourses(@NotNull @QueryParam("userId") final String userId,
+                               CourseRegisterBody obj) {
+        return Response.status(Response.Status.CREATED).entity("").build();
+    }
+
+    /**
+     * Function drop registered course(s) per userId
+     *
+     * @param String UUID userId
+     * @param CourseRegisteredBody obj
+     * @return 200 statuscode for success, 500 for failure
+     */
+    @DELETE
+    @Path("/delete")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteCourse(@NotNull @QueryParam("userId") final String userId,
+                                 CourseRegisterBody obj) {
+        return Response.status(Response.Status.OK).entity("").build();
+    }
+
 }

@@ -142,6 +142,12 @@ public class Users {
         }
     }
 
+    /**
+     * Function to delete specifc user based on userId
+     *
+     * @param UUID userId
+     * @return statusCode 200 for success, 500 for failure
+     */
     @DELETE
     @Path("/delete/{userId}")
     @Produces(MediaType.APPLICATION_JSON)

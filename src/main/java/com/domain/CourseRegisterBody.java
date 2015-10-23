@@ -15,24 +15,7 @@ public class CourseRegisterBody implements  Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private UUID userId;
     private ArrayList<UUID> courseIds;
-
-    /**
-     * Get userID
-     * @return UUID userId
-     */
-    public UUID getUserId() {
-        return userId;
-    }
-
-    /**
-     * Set userId
-     * @param UUID userId
-     */
-    public void setUserId(UUID userId) {
-        this.userId = userId;
-    }
 
     /**
      * Get courseIds array
@@ -55,19 +38,17 @@ public class CourseRegisterBody implements  Serializable {
         if (this == o) return true;
         if (!(o instanceof CourseRegisterBody)) return false;
         CourseRegisterBody that = (CourseRegisterBody) o;
-        return Objects.equals(courseIds, that.courseIds) &&
-                Objects.equals(userId, that.userId);
+        return Objects.equals(courseIds, that.courseIds);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(courseIds, userId);
+        return Objects.hash(courseIds);
     }
 
     @Override
     public String toString() {
         return "CourseRegisterBody{" +
-                ", userId='" + userId + '\'' +
                 ", courseIds='" + courseIds.toString() +
                 '}';
     }
