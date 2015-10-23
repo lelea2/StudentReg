@@ -37,6 +37,14 @@ public abstract class BaseDAOImpl {
     }
 
     /**
+     * Helper function to get current session
+     * @return Session current session
+     */
+    private Session getSession() {
+        return this.sessionFactory.getCurrentSession();
+    }
+
+    /**
      * Save an entity
      *
      * @param Object entity
@@ -45,7 +53,7 @@ public abstract class BaseDAOImpl {
      */
     @SuppressWarnings("unchecked")
     protected void save(Object entity, Object id) throws Exception {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = this.getSession();
         Set<EntityKey> keys = session.getStatistics().getEntityKeys();
         for (EntityKey key : keys) {
             if (key.getIdentifier().equals(id)) {
@@ -65,7 +73,7 @@ public abstract class BaseDAOImpl {
      */
     @SuppressWarnings("unchecked")
     protected <T> boolean deleteById(Class<T> type, Serializable id) throws Exception {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = this.getSession();
         Object persistentInstance = session.load(type, id);
         if (persistentInstance != null) {
             session.delete(persistentInstance);
@@ -83,7 +91,7 @@ public abstract class BaseDAOImpl {
      * @throws Exception
      */
     protected <T> Object get(Class<T> entityClass, Serializable id) throws Exception {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = this.getSession();
         return session.load(entityClass, id);
     }
 
@@ -97,7 +105,7 @@ public abstract class BaseDAOImpl {
      * throws Exception
      */
     protected <T> Criteria createCriteria(Class<T> entityClass, String entityName, boolean forUpdate) {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = this.getSession();
         Criteria criteria = session.createCriteria(entityClass, entityName);
         if (forUpdate) {
             criteria.setLockMode(LockMode.PESSIMISTIC_WRITE);
