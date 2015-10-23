@@ -35,8 +35,8 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
     }
 
     /**
-     * Function to get all exisiting user
-     * @return Arraylist of User object
+     * Function to get all existing user
+     * @return Arraylist of User object (sorted by lastname)
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -45,7 +45,8 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
         try {
             Criteria cr = this.createCriteria(User.class, "user", false)
                     .createAlias("major", "major", JoinType.INNER_JOIN)
-                    .createAlias("role", "role", JoinType.INNER_JOIN);
+                    .createAlias("role", "role", JoinType.INNER_JOIN)
+                    .addOrder(Order.asc("lastName"));
             return generateUserList(cr.list());
         } catch(Exception e) {
             String msg = String.format("Error getting all users, Message : %s", e.getMessage());

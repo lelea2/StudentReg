@@ -41,6 +41,10 @@ public class Major implements Serializable {
     @OneToMany(mappedBy="major",cascade=CascadeType.ALL)
     private Set<User> users;
 
+    @JsonIgnore
+    @OneToMany(mappedBy="major",cascade=CascadeType.ALL)
+    private Set<Course> courses;
+
     /**
      * Class Constructor
      */
@@ -90,10 +94,18 @@ public class Major implements Serializable {
 
     /**
      * Total count of user with assigned role
-     * @return Integer count
+     * @return Integer user count
      */
-    public int totalCount() {
+    public int totalUsers() {
         return users.size();
+    }
+
+    /**
+     * Total count of courses in major
+     * @return Integer courses count
+     */
+    public int totalCourses() {
+        return courses.size();
     }
 
     @Override

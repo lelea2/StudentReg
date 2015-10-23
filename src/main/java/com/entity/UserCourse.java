@@ -3,6 +3,7 @@ package com.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.Entity;
+import javax.persistence.IdClass;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -10,17 +11,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Column;
-import javax.persistence.Transient;
 
+import java.util.*;
 import org.hibernate.annotations.Type;
-import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.beans.factory.annotation.Autowired;
-import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.io.Serializable;
 
 /**
@@ -37,13 +30,18 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="Users_Courses")
+@IdClass(UserCourse.class)
 public class UserCourse implements Serializable {
 
+    @Id
+    @Type(type="uuid-char")
     @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
     @JoinColumn(name = "userId", referencedColumnName="userId", nullable = false)
     private User user;
 
     //select * from Users_Courses INNER JOIN Courses where Courses.courseId=Users_Courses.courseId;
+    @Id
+    @Type(type="uuid-char")
     @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
     @JoinColumn(name = "courseId", referencedColumnName="courseId", nullable = false)
     private Course course;
@@ -54,6 +52,11 @@ public class UserCourse implements Serializable {
     public UserCourse() {
     }
 
+    /**
+     * Class constructor
+     * @param User user object
+     * @param Course course object
+     */
     public UserCourse(User user, Course course) {
         this.user = user;
         this.course = course;

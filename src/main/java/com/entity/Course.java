@@ -53,8 +53,9 @@ public class Course implements Serializable {
     @Column(name="courseNumber", unique=true)
     private int courseNumber;
 
-    @Column(name="majorId")
-    private int majorId;
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "majorId", referencedColumnName="majorId", nullable = false)
+    private Major major;
 
     @Column(name="stateId")
     private String stateId;
@@ -70,7 +71,7 @@ public class Course implements Serializable {
 
     //select * from Courses INNER JOIN Schedules where Courses.scheduleId=Schedules.scheduleId;
     @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name = "scheduleId", nullable = false)
+    @JoinColumn(name = "scheduleId", referencedColumnName="scheduleId", nullable = false)
     private Schedule schedule;
 
     /**
@@ -78,12 +79,11 @@ public class Course implements Serializable {
      */
     public Course() {}
 
-    public Course(UUID courseId, String courseName, int courseNumber, int majorId, String stateId, String professor, String description, String location) {
+    public Course(UUID courseId, String courseName, int courseNumber, String stateId, String professor, String description, String location) {
         super();
         this.courseId = courseId;
         this.courseName = courseName;
         this.courseNumber = courseNumber;
-        this.majorId = majorId;
         this.stateId = stateId;
         this.professor = professor;
         this.description = description;
@@ -163,21 +163,21 @@ public class Course implements Serializable {
     }
 
     /**
-     * Get course MajorId
+     * Get course major object
      *
      * @return Major object
      */
-    public int getMajorId() {
-        return majorId;
+    public Major getMajor() {
+        return major;
     }
 
     /**
-     * Set course majorId
+     * Set course major object
      *
-     * @param int majorId
+     * @param Major major object
      */
-    public void setMajorId(int majorId) {
-        this.majorId = majorId;
+    public void setMajor(Major major) {
+        this.major = major;
     }
 
     /**
@@ -255,7 +255,7 @@ public class Course implements Serializable {
     @Override
     public String toString() {
         return "Course [courseId=" + courseId + ", courseName=" + courseName + ", courseNumber=" + courseNumber
-                + ", majorId=" + majorId  + ", stateId=" + stateId
+                + ", majorId=" + major.getMajorId()  + ", stateId=" + stateId
                 + ", professor=" + professor + ", description=" + description + ", location=" + location
                 + ", scheduleId=" + schedule.getScheduleId() + ", day=" + schedule.getDay()
                 + ", startTime=" + schedule.getStartTime() + ", endTime=" + schedule.getEndTime() + "]";

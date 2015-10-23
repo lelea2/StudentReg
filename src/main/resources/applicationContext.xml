@@ -45,7 +45,7 @@
                 <value>com.entity.Course</value>
                 <value>com.entity.Role</value>
                 <value>com.entity.User</value>
-                <!--<value>com.entity.UserCourse</value>-->
+                <value>com.entity.UserCourse</value>
             </list>
         </property>
     </bean>

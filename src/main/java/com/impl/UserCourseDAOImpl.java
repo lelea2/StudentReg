@@ -40,12 +40,18 @@ public class UserCourseDAOImpl extends BaseDAOImpl implements UserCourseDAO {
     @Override
     @Transactional(readOnly=true, rollbackFor=Exception.class)
     public ArrayList<Course> getRegisteredCourses(UUID userId) throws DAOException {
-        Criteria cr = this.createCriteria(UserCourse.class, "user_course", false)
-                .createAlias("course", "course", JoinType.INNER_JOIN)
-                .add(Restrictions.eq("user_course.userId", userId))
-                .addOrder(Order.asc("course.courseName"));
-        List<UserCourse> list = cr.list();
-        return generateCourseList(list);
+        try {
+            Criteria cr = this.createCriteria(UserCourse.class, "user_course", false)
+                    .createAlias("user", "user", JoinType.INNER_JOIN)
+                    .createAlias("course", "course", JoinType.INNER_JOIN)
+                    .add(Restrictions.eq("user.userId", userId))
+                    .addOrder(Order.asc("course.courseName"));
+            return generateCourseList(cr.list());
+        } catch(Exception e) {
+            String msg = String.format("Error getting registered courses userId=%d, Message : %s", userId.toString(), e.getMessage());
+            this.getLogger().error(msg);
+            throw new DAOException(msg);
+        }
     }
 
     /**

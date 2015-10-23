@@ -13,7 +13,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -23,11 +22,7 @@ import com.domain.UserRequestBody;
 import com.domain.UserRegisterBody;
 import com.util.constant.Constant;
 
-import com.entity.Major;
-import com.entity.Course;
 import com.entity.User;
-import com.dao.MajorDAO;
-import com.dao.CourseDAO;
 import com.dao.UserDAO;
 
 /**
