@@ -69,7 +69,7 @@ public class Course implements Serializable {
     private String location;
 
     //select * from Courses INNER JOIN Schedules where Courses.scheduleId=Schedules.scheduleId;
-    @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "scheduleId", nullable = false)
     private Schedule schedule;
 

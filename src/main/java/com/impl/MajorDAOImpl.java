@@ -3,6 +3,7 @@ package com.impl;
 import java.util.*;
 
 import com.entity.Course;
+import com.util.exception.DAOException;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,15 +34,21 @@ public class MajorDAOImpl extends BaseDAOImpl implements MajorDAO {
     @SuppressWarnings("unchecked")
     @Override
     @Transactional(readOnly=true, rollbackFor=Exception.class)
-    public ArrayList<Major> getMajors() {
-        List<Major> list = this.createCriteria(Major.class, "major", false).addOrder(Order.asc("majorName")).list();
-        ArrayList<Major> majorList = new ArrayList<Major>();
-        if (list == null || list.size() == 0) { //Don't do anything
-        } else {
-            for (Major o : list) {
-                majorList.add(new Major(o.getMajorId(), o.getMajorName()));
+    public ArrayList<Major> getMajors() throws DAOException {
+        try {
+            List<Major> list = this.createCriteria(Major.class, "major", false).addOrder(Order.asc("majorName")).list();
+            ArrayList<Major> majorList = new ArrayList<Major>();
+            if (list == null || list.size() == 0) { //Don't do anything
+            } else {
+                for (Major o : list) {
+                    majorList.add(new Major(o.getMajorId(), o.getMajorName()));
+                }
             }
+            return majorList;
+        } catch(Exception e) {
+            String msg = String.format("Error getting all major, Message : %s", e.getMessage());
+            this.getLogger().error(msg);
+            throw new DAOException(msg);
         }
-        return majorList;
     }
 }

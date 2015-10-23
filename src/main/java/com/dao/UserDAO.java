@@ -4,6 +4,7 @@ import java.util.UUID;
 import java.util.ArrayList;
 
 import com.entity.User;
+import com.util.exception.DAOException;
 
 /**
  * User object interface
@@ -16,7 +17,7 @@ public interface UserDAO {
      * @return ArrayList of User object
      *
      */
-    public ArrayList<User> getAll();
+    public ArrayList<User> getAll() throws DAOException;
 
     /**
      * Function to get user by userId
@@ -25,7 +26,7 @@ public interface UserDAO {
      *
      * @return User object
      */
-    public User getById(UUID userId);
+    public User getById(UUID userId) throws DAOException;
 
     /**
      * Function to get user by email and password
@@ -34,7 +35,7 @@ public interface UserDAO {
      * @param String pwd
      * @return User object
      */
-    public User getByEmail(String email, String pwd);
+    public User getByEmail(String email, String pwd) throws DAOException;
 
     /**
      * Function to update exisiting user
@@ -48,7 +49,7 @@ public interface UserDAO {
      *
      * @return Boolean value for SUCCESS/FAILURE
      */
-    public boolean updateUser(UUID userId, String pwd, String firstName, String lastName, int roleId, int majorId);
+    public boolean updateUser(UUID userId, String pwd, String firstName, String lastName, int roleId, int majorId) throws DAOException;
 
     /**
      * Function to create user
@@ -62,15 +63,15 @@ public interface UserDAO {
      *
      * @return Boolean value for SUCCESS/FAILURE
      */
-    public boolean createUser(String email, String pwd, String firstName, String lastName, int roleId, int majorId);
+    public boolean createUser(String email, String pwd, String firstName, String lastName, int roleId, int majorId) throws DAOException;
 
     /**
      * Function to delete user by userId
      *
-     * @param String userId
+     * @param UUID userId
      * @return Boolean value for SUCCESS/FAILURE
      *
      */
-    public boolean deleteUser(String userId);
+    public boolean deleteUser(UUID userId) throws DAOException;
 
 }

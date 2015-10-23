@@ -2,6 +2,7 @@ package com.dao;
 
 import java.util.ArrayList;
 import com.entity.Course;
+import com.util.exception.DAOException;
 
 /**
  *  Course object interface
@@ -13,21 +14,21 @@ public interface CourseDAO {
      * @param String sortBy (default by courseNumber)
      * @return Array list of course object
      */
-    public ArrayList<Course> getAll(String sortBy);
+    public ArrayList<Course> getAll(String sortBy) throws DAOException;
 
     /**
      * Function to get course by course number
      * @param int courseNumber
      * @return Course object or null
      */
-    public Course getByNumber(int courseNumber);
+    public Course getByNumber(int courseNumber) throws DAOException;
 
     /**
      * Function to get course by matching course name
      * @param String courseName
      * @return Course object or null
      */
-    public Course getByName(String courseName);
+    public Course getByName(String courseName) throws DAOException;
 
     /**
      * Function to get courses by matching with name
@@ -35,7 +36,7 @@ public interface CourseDAO {
      * @param courseName
      * @return Arraylist of courses object
      */
-    public ArrayList<Course> getCoursesByName(String courseName);
+    public ArrayList<Course> getCoursesByName(String courseName) throws DAOException;
 
     /**
      * Function to get course by major Id
@@ -43,13 +44,13 @@ public interface CourseDAO {
      * @param String sortBy (Default sortBy courseName)
      * @return ArrayList of Course object
      */
-    public ArrayList<Course> getByMajor(int majorId, String sortBy);
+    public ArrayList<Course> getByMajor(int majorId, String sortBy) throws DAOException;
 
     /**
      * Function to get course by scheduleId
      * @param int ScheduleId
      * @return
      */
-    public ArrayList<Course> getBySchedule(int scheduleId);
+    public ArrayList<Course> getBySchedule(int scheduleId) throws DAOException;
 
 }

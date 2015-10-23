@@ -133,6 +133,14 @@ public class Schedule implements Serializable {
         this.endTime = endTime;
     }
 
+    /**
+     * Get total course with given scheduleId
+     * @return Integer count
+     */
+    public int totalCount() {
+        return courselist.size();
+    }
+
     @Override
     public String toString() {
         return "Schedule [scheduleId=" + scheduleId + ", day=" + day + ", startTime=" + startTime + ", endTime=" + endTime + "]";

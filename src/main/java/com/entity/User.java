@@ -57,7 +57,6 @@ public class User implements Serializable {
     @Column(name = "userId", unique = true, nullable=false, updatable = false)
     private UUID userId;
 
-    @Id
     @Column(name="email", unique=true, nullable=false, updatable = false)
     private String email;
 
@@ -72,11 +71,11 @@ public class User implements Serializable {
     private String encryptedPassword;
 
     //select * from Users INNER JOIN Roles where Roles.roleId=Users.roleId;
-    @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "roleId", referencedColumnName="roleId", nullable = false)
     private Role role;
 
-    @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "majorId", referencedColumnName="majorId", nullable = false)
     private Major major;
 

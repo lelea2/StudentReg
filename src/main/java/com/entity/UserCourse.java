@@ -22,11 +22,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
-import java.util.*;
-import java.util.UUID;
-import java.util.ArrayList;
-
-import com.entity.Course;
 
 /**
  * Data transfer object for Users_Courses
@@ -96,6 +91,11 @@ public class UserCourse implements Serializable {
      */
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    @Override
+    public String toString() {
+        return "UserCourse [userId=" + user.getUserId() + ", courseId=" + course.getCourseId() +  "]";
     }
 
 }

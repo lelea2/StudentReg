@@ -7,7 +7,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.*;
+
 import java.io.*;
+import java.util.Set;
 
 /**
  *  Data transfer object for major
@@ -29,6 +36,10 @@ public class Major implements Serializable {
 
     @Column(name="majorName", nullable=false)
     private String majorName;
+
+    @JsonIgnore
+    @OneToMany(mappedBy="major",cascade=CascadeType.ALL)
+    private Set<User> users;
 
     /**
      * Class Constructor
@@ -75,6 +86,14 @@ public class Major implements Serializable {
      */
     public void setMajorName(String majorName) {
         this.majorName = majorName;
+    }
+
+    /**
+     * Total count of user with assigned role
+     * @return Integer count
+     */
+    public int totalCount() {
+        return users.size();
     }
 
     @Override

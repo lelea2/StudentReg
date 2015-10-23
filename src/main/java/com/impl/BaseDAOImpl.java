@@ -10,7 +10,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.engine.spi.EntityKey;
-import org.omg.CORBA.OBJ_ADAPTER;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * BaseDAO for entity Daos that use Hibernate with a relational
@@ -19,6 +21,8 @@ import org.omg.CORBA.OBJ_ADAPTER;
 public abstract class BaseDAOImpl {
 
     protected SessionFactory sessionFactory;
+
+    private Logger logger; // Logger
 
     /**
      * Class constructor
@@ -40,7 +44,7 @@ public abstract class BaseDAOImpl {
      *
      */
     @SuppressWarnings("unchecked")
-    public void save(Object entity, Object id) throws Exception {
+    protected void save(Object entity, Object id) throws Exception {
         Session session = this.sessionFactory.getCurrentSession();
         Set<EntityKey> keys = session.getStatistics().getEntityKeys();
         for (EntityKey key : keys) {
@@ -53,6 +57,24 @@ public abstract class BaseDAOImpl {
     }
 
     /**
+     * Delete transient entity from data store
+     * @param type
+     * @param id
+     * @return Boolean value for delete result
+     * @throws Exception
+     */
+    @SuppressWarnings("unchecked")
+    protected <T> boolean deleteById(Class<T> type, Serializable id) throws Exception {
+        Session session = this.sessionFactory.getCurrentSession();
+        Object persistentInstance = session.load(type, id);
+        if (persistentInstance != null) {
+            session.delete(persistentInstance);
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Get value of an entity
      *
      * @param Class entityClass
@@ -62,7 +84,7 @@ public abstract class BaseDAOImpl {
      */
     protected <T> Object get(Class<T> entityClass, Serializable id) throws Exception {
         Session session = this.sessionFactory.getCurrentSession();
-        return session.get(entityClass, id);
+        return session.load(entityClass, id);
     }
 
     /**
@@ -83,6 +105,18 @@ public abstract class BaseDAOImpl {
             criteria.setLockMode(LockMode.NONE);
         }
         return criteria;
+    }
+
+    /**
+     * Get logger
+     *
+     * @return Logger for this instance
+     */
+    protected Logger getLogger() {
+        if (this.logger == null) {
+            this.logger = LoggerFactory.getLogger(this.getClass());
+        }
+        return this.logger;
     }
 
 }

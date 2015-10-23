@@ -17,6 +17,9 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.FetchType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.*;
+
 /**
  * Data transfer object for major
  * Based on table
@@ -37,6 +40,10 @@ public class Role implements Serializable {
 
     @Column(name="roleName", nullable=false)
     private String roleName;
+
+    @JsonIgnore
+    @OneToMany(mappedBy="role", cascade=CascadeType.ALL)
+    private Set<User> users;
 
     /**
      * Class Constructor
@@ -83,6 +90,14 @@ public class Role implements Serializable {
      */
     public void setRoleName(String roleName) {
         this.roleName = roleName;
+    }
+
+    /**
+     * Total count of user with assigned role
+     * @return Integer count
+     */
+    public int totalCount() {
+        return users.size();
     }
 
     @Override

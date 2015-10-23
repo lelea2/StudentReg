@@ -141,8 +141,25 @@ public class Users {
             } else {
                 throw new Exception();
             }
-        } catch(Exception ex) {
-            ex.printStackTrace();
+        } catch(Exception e) {
+            e.printStackTrace();
+            return Response.status(Status.INTERNAL_SERVER_ERROR).entity(Constant.Status.FAIL).build();
+        }
+    }
+
+    @DELETE
+    @Path("/delete/{userId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteUser(@NotNull @PathParam("userId") final String userId) {
+        try {
+            Boolean success = userDAO.deleteUser(UUID.fromString(userId));
+            if (success.equals(true)) {
+                return Response.status(Status.CREATED).entity(Constant.Status.SUCCESS).build();
+            } else {
+                throw new Exception();
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
             return Response.status(Status.INTERNAL_SERVER_ERROR).entity(Constant.Status.FAIL).build();
         }
     }

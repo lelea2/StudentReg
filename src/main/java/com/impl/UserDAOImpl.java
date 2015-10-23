@@ -1,6 +1,8 @@
 package com.impl;
 
 import java.util.*;
+
+import com.util.exception.DAOException;
 import org.hibernate.SessionFactory;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -39,12 +41,17 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
     @SuppressWarnings("unchecked")
     @Override
     @Transactional(readOnly=true, rollbackFor=Exception.class)
-    public ArrayList<User> getAll() {
-        Criteria cr = this.createCriteria(User.class, "user", false)
-                        .createAlias("major", "major", JoinType.INNER_JOIN)
-                        .createAlias("role", "role", JoinType.INNER_JOIN);
-        List<User> list = cr.list();
-        return generateUserList(list);
+    public ArrayList<User> getAll() throws DAOException {
+        try {
+            Criteria cr = this.createCriteria(User.class, "user", false)
+                    .createAlias("major", "major", JoinType.INNER_JOIN)
+                    .createAlias("role", "role", JoinType.INNER_JOIN);
+            return generateUserList(cr.list());
+        } catch(Exception e) {
+            String msg = String.format("Error getting all users, Message : %s", e.getMessage());
+            this.getLogger().error(msg);
+            throw new DAOException(msg);
+        }
     }
 
     /**
@@ -55,13 +62,18 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
     @SuppressWarnings("unchecked")
     @Override
     @Transactional(readOnly=true, rollbackFor=Exception.class)
-    public User getById(UUID userId) {
-        Criteria cr = this.createCriteria(User.class, "user", false)
-                        .createAlias("major", "major", JoinType.INNER_JOIN)
-                        .createAlias("role", "role", JoinType.INNER_JOIN)
-                        .add(Restrictions.eq("user.userId", userId));
-        User user = (User) cr.uniqueResult();
-        return user;
+    public User getById(UUID userId) throws DAOException {
+        try {
+            Criteria cr = this.createCriteria(User.class, "user", false)
+                    .createAlias("major", "major", JoinType.INNER_JOIN)
+                    .createAlias("role", "role", JoinType.INNER_JOIN)
+                    .add(Restrictions.eq("user.userId", userId));
+            return (User) cr.uniqueResult();
+        } catch(Exception e) {
+            String msg = String.format("Error getting user, userId=%s, Message : %s", userId.toString(), e.getMessage());
+            this.getLogger().error(msg);
+            throw new DAOException(msg);
+        }
     }
 
     /**
@@ -73,14 +85,19 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
     @SuppressWarnings("unchecked")
     @Override
     @Transactional(readOnly=true, rollbackFor=Exception.class)
-    public User getByEmail(String email, String pwd) {
-        Criteria cr = this.createCriteria(User.class, "user", false)
-                        .createAlias("major", "major", JoinType.INNER_JOIN)
-                        .createAlias("role", "role", JoinType.INNER_JOIN)
-                        .add(Restrictions.eq("user.email", email))
-                        .add(Restrictions.eq("user.encryptedPassword", Crypto.encrypt(pwd)));
-        User user = (User) cr.uniqueResult();
-        return user;
+    public User getByEmail(String email, String pwd) throws DAOException {
+        try {
+            Criteria cr = this.createCriteria(User.class, "user", false)
+                    .createAlias("major", "major", JoinType.INNER_JOIN)
+                    .createAlias("role", "role", JoinType.INNER_JOIN)
+                    .add(Restrictions.eq("user.email", email))
+                    .add(Restrictions.eq("user.encryptedPassword", Crypto.encrypt(pwd)));
+            return (User) cr.uniqueResult();
+        } catch(Exception e) {
+            String msg = String.format("Error getting user, userEmail=%s, Message : %s", email, e.getMessage());
+            this.getLogger().error(msg);
+            throw new DAOException(msg);
+        }
     }
 
     /**
@@ -101,7 +118,7 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
     @SuppressWarnings("unchecked")
     @Override
     @Transactional(rollbackFor=Exception.class)
-    public boolean updateUser(UUID userId, String pwd, String firstName, String lastName, int roleId, int majorId) {
+    public boolean updateUser(UUID userId, String pwd, String firstName, String lastName, int roleId, int majorId) throws DAOException {
         try {
             Major major = (Major) this.get(Major.class, majorId);
             Role role = (Role) this.get(Role.class, roleId);
@@ -115,8 +132,9 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
             this.save(user, userId);
             return true;
         } catch(Exception e) {
-            e.printStackTrace();
-            return false;
+            String msg = String.format("Error update user, userId=%s, Message : %s", userId.toString(), e.getMessage());
+            this.getLogger().error(msg);
+            throw new DAOException(msg);
         }
     }
 
@@ -135,7 +153,7 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
     @SuppressWarnings("unchecked")
     @Override
     @Transactional(rollbackFor=Exception.class)
-    public boolean createUser(String email, String pwd, String firstName, String lastName, int roleId, int majorId) {
+    public boolean createUser(String email, String pwd, String firstName, String lastName, int roleId, int majorId) throws DAOException {
         try {
             Major major = (Major) this.get(Major.class, majorId);
             Role role = (Role) this.get(Role.class, roleId);
@@ -147,18 +165,29 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
             this.save(user, userId);
             return true;
         } catch(Exception e) {
-            e.printStackTrace();
-            return false;
+            String msg = String.format("Error create user, userEmail=%s, Message : %s", email, e.getMessage());
+            this.getLogger().error(msg);
+            throw new DAOException(msg);
         }
     }
 
     /**
      * Function to delete user by userId
-     * @param String userId
+     * @param UUID userId
      * @return Boolean value for SUCCESS/FAILURE
      */
-    public boolean deleteUser(String userId) {
-        return false;
+    @SuppressWarnings("unchecked")
+    @Override
+    @Transactional(rollbackFor=Exception.class)
+    public boolean deleteUser(UUID userId) throws DAOException {
+        try {
+            boolean result = this.deleteById(User.class, userId);
+            return result;
+        } catch(Exception e) {
+            String msg = String.format("Error delete user, userId=%s, Message : %s", userId.toString(), e.getMessage());
+            this.getLogger().error(msg);
+            throw new DAOException(msg);
+        }
     }
 
     /**

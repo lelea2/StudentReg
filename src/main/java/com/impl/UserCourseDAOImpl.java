@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 import com.dao.CourseDAO;
+import com.util.exception.DAOException;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,7 +39,7 @@ public class UserCourseDAOImpl extends BaseDAOImpl implements UserCourseDAO {
     @SuppressWarnings("unchecked")
     @Override
     @Transactional(readOnly=true, rollbackFor=Exception.class)
-    public ArrayList<Course> getRegisteredCourses(UUID userId) {
+    public ArrayList<Course> getRegisteredCourses(UUID userId) throws DAOException {
         Criteria cr = this.createCriteria(UserCourse.class, "user_course", false)
                 .createAlias("course", "course", JoinType.INNER_JOIN)
                 .add(Restrictions.eq("user_course.userId", userId))
@@ -56,7 +57,7 @@ public class UserCourseDAOImpl extends BaseDAOImpl implements UserCourseDAO {
     @SuppressWarnings("unchecked")
     @Override
     @Transactional(rollbackFor=Exception.class)
-    public Boolean registerCourses(UUID userId, ArrayList<UUID> courseIds) {
+    public Boolean registerCourses(UUID userId, ArrayList<UUID> courseIds) throws DAOException {
         return true;
     }
 
@@ -69,7 +70,7 @@ public class UserCourseDAOImpl extends BaseDAOImpl implements UserCourseDAO {
     @SuppressWarnings("unchecked")
     @Override
     @Transactional(rollbackFor=Exception.class)
-    public Boolean dropCourses(UUID userId, ArrayList<UUID> courseIds) {
+    public Boolean dropCourses(UUID userId, ArrayList<UUID> courseIds) throws DAOException {
         return true;
     }
 
