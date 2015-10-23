@@ -17,7 +17,6 @@ import com.entity.Major;
  */
 @Repository("Majors")
 public class MajorDAOImpl extends BaseDAOImpl implements MajorDAO {
-    private SessionFactory sessionFactory;
 
     /**
      * Constructor class

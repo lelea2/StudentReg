@@ -33,7 +33,6 @@ import com.dao.UserDAO;
 /**
  * Java class handle all API call related to users
  */
-
 @Path("/users")
 public class Users {
 

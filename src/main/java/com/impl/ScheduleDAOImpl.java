@@ -16,7 +16,6 @@ import com.entity.Schedule;
  */
 @Repository("Schedule")
 public class ScheduleDAOImpl extends BaseDAOImpl implements ScheduleDAO {
-    private SessionFactory sessionFactory;
 
     /**
      * Constructor class

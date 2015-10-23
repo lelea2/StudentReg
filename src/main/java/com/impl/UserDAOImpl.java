@@ -24,8 +24,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Repository("UserDAO")
 public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
 
-    private SessionFactory sessionFactory;
-
     /**
      * Constructor class
      * @param SessionFactory object sessionFactory

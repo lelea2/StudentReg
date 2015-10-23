@@ -22,8 +22,6 @@ import com.entity.Course;
 @Repository("UserCourseDAO")
 public class UserCourseDAOImpl extends BaseDAOImpl implements UserCourseDAO {
 
-    private SessionFactory sessionFactory;
-
     /**
      * Constructor class
      * @param SessionFactory object sessionFactory
