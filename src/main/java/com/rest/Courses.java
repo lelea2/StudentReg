@@ -1,14 +1,17 @@
 package com.rest;
 
 import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.entity.Course;
 import com.dao.CourseDAO;
+import com.util.response.ComponentResponse;
 
 /**
  * Java class handle all API call related to courses
@@ -26,14 +29,14 @@ public class Courses {
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<Course> getAllCourses(@DefaultValue("courseNumber") @QueryParam("sortBy") final String sortBy) {
-        ArrayList<Course> courseList = new ArrayList<Course>();
+    public Response getAllCourses(@DefaultValue("courseNumber") @QueryParam("sortBy") final String sortBy) {
         try {
-            courseList = courseDAO.getAll(sortBy);
+            ArrayList<Course> courseList = courseDAO.getAll(sortBy);
+            return ComponentResponse.okResponse(courseList);
         } catch (Exception e) {
             e.printStackTrace();
+            return ComponentResponse.errorResponse();
         }
-        return courseList;
     }
 
     /**
@@ -43,14 +46,14 @@ public class Courses {
     @GET
     @Path("/courseName/{courseName}")
     @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<Course> getCoursesByName(@NotNull @PathParam("courseName") final String courseName) {
-        ArrayList<Course> courseList = new ArrayList<Course>();
+    public Response getCoursesByName(@NotNull @PathParam("courseName") final String courseName) {
         try {
-            courseList = courseDAO.getCoursesByName(courseName);
+            ArrayList<Course> courseList = courseDAO.getCoursesByName(courseName);
+            return ComponentResponse.okResponse(courseList);
         } catch (Exception e) {
             e.printStackTrace();
+            return ComponentResponse.errorResponse();
         }
-        return courseList;
     }
 
     /**
@@ -61,14 +64,14 @@ public class Courses {
     @GET
     @Path("/schedule/{scheduleId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<Course> getCoursesByScheduleId(@NotNull @PathParam("scheduleId") final int scheduleId) {
-        ArrayList<Course> courseList = new ArrayList<Course>();
+    public Response getCoursesByScheduleId(@NotNull @PathParam("scheduleId") final int scheduleId) {
         try {
-            courseList = courseDAO.getBySchedule(scheduleId);
+            ArrayList<Course> courseList = courseDAO.getBySchedule(scheduleId);
+            return ComponentResponse.okResponse(courseList);
         } catch(Exception e) {
             e.printStackTrace();
+            return ComponentResponse.errorResponse();
         }
-        return courseList;
     }
 
     /**
@@ -81,19 +84,20 @@ public class Courses {
     @GET
     @Path("/course")
     @Produces(MediaType.APPLICATION_JSON)
-    public Course getSpecificCourse(@QueryParam("id") Integer courseNumber,
+    public Response getSpecificCourse(@QueryParam("id") Integer courseNumber,
                                     @QueryParam("name") String courseName,
                                     @DefaultValue("courseName") @QueryParam ("type") String type) throws Exception {
-        Course course = null;
         try {
+            Course course = null;
             if (type.equals("courseNumber")) {
                 course = courseDAO.getByNumber(courseNumber);
             } else { //Search by course name
                 course = courseDAO.getByName(courseName);
             }
+            return ComponentResponse.okResponse(course);
         } catch(Exception e) {
             e.printStackTrace();
+            return ComponentResponse.errorResponse();
         }
-        return course;
     }
 }

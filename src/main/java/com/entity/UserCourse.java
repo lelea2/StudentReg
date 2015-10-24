@@ -35,14 +35,14 @@ public class UserCourse implements Serializable {
 
     @Id
     @Type(type="uuid-char")
-    @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "userId", referencedColumnName="userId", nullable = false)
     private User user;
 
     //select * from Users_Courses INNER JOIN Courses where Courses.courseId=Users_Courses.courseId;
     @Id
     @Type(type="uuid-char")
-    @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "courseId", referencedColumnName="courseId", nullable = false)
     private Course course;
 

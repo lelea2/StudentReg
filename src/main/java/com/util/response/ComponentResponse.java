@@ -2,71 +2,76 @@ package com.util.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import java.io.Serializable;
-import java.util.AbstractMap;
-import java.util.Map;
+import java.util.*;
+import javax.ws.rs.core.Response;
+import com.util.constant.Constant;
 
 /**
- * Object representing a Component Response
+ * Generate common response
  */
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class ComponentResponse<T> implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-    private Map.Entry<String, T> data;
+public class ComponentResponse {
 
     /**
-     * Get data
-     *
-     * @return data
+     * Function return ok status with response {status: 'SUCCESS'}
+     * @return
      */
-    public Map.Entry<String, T> getData() {
-        return data;
+    public static Response okResponse() {
+        return Response.status(Response.Status.OK).entity(Constant.Status.SUCCESS).build();
     }
 
     /**
-     * Set data
-     *
+     * Function return ok response 200 with object as array data
      * @param data
+     * @param <T>
+     * @return
      */
-    public void setData(Map.Entry<String, T> data) {
-        this.data = data;
+    public static<T> Response okResponse(List<T> data) {
+        return Response.status(Response.Status.OK).entity(generateCommonResponse(data)).build();
     }
 
     /**
-     * Set data
-     *
-     * @param dataType
-     * @param t
+     * Function return ok response with object data
+     * @param data
+     * @return
      */
-    public void setData(T t) {
-        this.data = new AbstractMap.SimpleEntry<String, T>("data", t);
+    public static Response okResponse(Object data) {
+        return Response.status(Response.Status.OK).entity(generateCommonResponse(data)).build();
     }
 
-
-    @Override
-    public String toString() {
-        return "ComponentResponse{" +
-                "data=" + data +
-                '}';
+    public static Response createdResponse() {
+        return Response.status(Response.Status.CREATED).entity("").build();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ComponentResponse that = (ComponentResponse) o;
-
-        if (data != null ? !data.equals(that.data) : that.data != null) return false;
-
-        return true;
+    public static Response createdResponse(Object data) {
+        return Response.status(Response.Status.CREATED).entity(generateCommonResponse(data)).build();
     }
 
-    @Override
-    public int hashCode() {
-        int result = data != null ? data.hashCode() : 0;
-        return result;
+    public static Response errorResponse() {
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(Constant.Status.FAIL).build();
+    }
+
+    /**
+     * Helper function generate response object in standardize format
+     * @param data
+     * @param <T>
+     * @return
+     */
+    private static<T> HashMap<String, List<T>> generateCommonResponse(List<T> data) {
+        HashMap<String, List<T>> resp = new HashMap<String, List<T>>();
+        resp.put("data", data);
+        return resp;
+    }
+
+    /**
+     * Helper function generate response object in standardize format
+     * @param data
+     * @param <T>
+     * @return
+     */
+    private static<T> HashMap<String, T> generateCommonResponse(T data) {
+        HashMap<String, T> resp = new HashMap<String, T>();
+        resp.put("data", data);
+        return resp;
     }
 }
 

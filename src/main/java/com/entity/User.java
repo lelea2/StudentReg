@@ -8,24 +8,22 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
-import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.beans.factory.annotation.Autowired;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
+import java.util.Set;
 import java.util.UUID;
 
 import com.util.security.Crypto;
-import com.entity.Course;
-import com.entity.Role;
 
 /**
  * Data transfer object for major
@@ -74,6 +72,10 @@ public class User implements Serializable {
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "majorId", referencedColumnName="majorId", nullable = false)
     private Major major;
+
+    @JsonIgnore
+    @OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+    private Set<UserCourse> usercourses;
 
     /**
      * Class Constructor
@@ -213,6 +215,14 @@ public class User implements Serializable {
      */
     public void setMajor(Major major) {
         this.major = major;
+    }
+
+    /**
+     * Return number of courses that user has registered
+     * @return integer number of registered courses
+     */
+    public int getCoursesCount() {
+        return usercourses.size();
     }
 
     @Override

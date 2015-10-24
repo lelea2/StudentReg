@@ -1,5 +1,6 @@
 package com.impl;
 
+import java.rmi.server.ExportException;
 import java.util.Set;
 import java.io.Serializable;
 
@@ -80,6 +81,16 @@ public abstract class BaseDAOImpl {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Clear current session (used during batch update/insert/delete)
+     * @throws Exception
+     */
+    protected void clearSession() throws Exception {
+        Session session = this.getSession();
+        session.flush();
+        session.clear();
     }
 
     /**

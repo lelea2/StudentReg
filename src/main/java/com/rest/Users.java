@@ -1,11 +1,8 @@
 package com.rest;
 
-import java.util.*;
 import java.util.UUID;
 import java.util.ArrayList;
 
-import com.domain.UserRegisterBody;
-import com.util.constant.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.constraints.NotNull;
@@ -16,11 +13,11 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
 import com.domain.UserRequestBody;
 import com.domain.UserRegisterBody;
-import com.util.constant.Constant;
+import com.domain.UserResponseBody;
+import com.util.response.ComponentResponse;
 
 import com.entity.User;
 import com.dao.UserDAO;
@@ -41,14 +38,14 @@ public class Users {
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<User> getAll() {
-        ArrayList<User> userList = new ArrayList<User>();
+    public Response getAll() {
         try {
-            userList = userDAO.getAll();
+            ArrayList<User> userList = userDAO.getAll();
+            return ComponentResponse.okResponse(userList);
         } catch (Exception e) {
             e.printStackTrace();
+            return ComponentResponse.errorResponse();
         }
-        return userList;
     }
 
     /**
@@ -58,14 +55,14 @@ public class Users {
     @GET
     @Path("/id/{userId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public User getUserById(@NotNull @PathParam("userId") final String userId) {
-        User user = null;
+    public Response getUserById(@NotNull @PathParam("userId") final String userId) {
         try {
-            user = userDAO.getById(UUID.fromString(userId));
+            User user = userDAO.getById(UUID.fromString(userId));
+            return ComponentResponse.okResponse(user);
         } catch(Exception ex) {
             ex.printStackTrace();
+            return ComponentResponse.errorResponse();
         }
-        return user;
     }
 
     /***
@@ -80,13 +77,13 @@ public class Users {
             User user = userDAO.getByEmail(obj.getUserName(), obj.getUserPassword());
             if (user != null) {
                 UUID userId = user.getUserId();
-                return Response.status(Status.OK).entity("{'token': '" + userId + "'}").build();
+                return ComponentResponse.okResponse(new UserResponseBody(userId));
             } else {
                 throw new NullPointerException();
             }
         } catch(Exception e) {
             e.printStackTrace();
-            return Response.status(Status.INTERNAL_SERVER_ERROR).entity(Constant.Status.FAIL).build();
+            return ComponentResponse.errorResponse();
         }
     }
 
@@ -102,16 +99,16 @@ public class Users {
     @Produces(MediaType.APPLICATION_JSON)
     public Response createUser(UserRegisterBody obj) {
         try {
-            Boolean success = userDAO.createUser(obj.getUserEmail(), obj.getUserPassword(),
+            UUID userId = userDAO.createUser(obj.getUserEmail(), obj.getUserPassword(),
                     obj.getFirstName(), obj.getLastName(), obj.getRoleId(), obj.getMajorId());
-            if (success.equals(true)) {
-                return Response.status(Status.CREATED).entity(Constant.Status.SUCCESS).build();
+            if (!userId.toString().isEmpty()) {
+                return ComponentResponse.createdResponse(new UserResponseBody(userId));
             } else {
                 throw new Exception();
             }
         } catch(Exception e) {
             e.printStackTrace();
-            return Response.status(Status.INTERNAL_SERVER_ERROR).entity(Constant.Status.FAIL).build();
+            return ComponentResponse.errorResponse();
         }
     }
 
@@ -132,13 +129,13 @@ public class Users {
             Boolean success = userDAO.updateUser(UUID.fromString(userId), obj.getUserPassword(), obj.getFirstName(),
                                 obj.getLastName(), obj.getRoleId(), obj.getMajorId());
             if (success.equals(true)) {
-                return Response.status(Status.CREATED).entity(Constant.Status.SUCCESS).build();
+                return ComponentResponse.createdResponse();
             } else {
                 throw new Exception();
             }
         } catch(Exception e) {
             e.printStackTrace();
-            return Response.status(Status.INTERNAL_SERVER_ERROR).entity(Constant.Status.FAIL).build();
+            return ComponentResponse.errorResponse();
         }
     }
 
@@ -155,13 +152,13 @@ public class Users {
         try {
             Boolean success = userDAO.deleteUser(UUID.fromString(userId));
             if (success.equals(true)) {
-                return Response.status(Status.CREATED).entity(Constant.Status.SUCCESS).build();
+                return ComponentResponse.okResponse();
             } else {
                 throw new Exception();
             }
         } catch(Exception e) {
             e.printStackTrace();
-            return Response.status(Status.INTERNAL_SERVER_ERROR).entity(Constant.Status.FAIL).build();
+            return ComponentResponse.errorResponse();
         }
     }
 

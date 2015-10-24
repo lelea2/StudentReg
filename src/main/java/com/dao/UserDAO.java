@@ -61,9 +61,9 @@ public interface UserDAO {
      * @param int majorId
      * @param int roleId
      *
-     * @return Boolean value for SUCCESS/FAILURE
+     * @return new userId created
      */
-    public boolean createUser(String email, String pwd, String firstName, String lastName, int roleId, int majorId) throws DAOException;
+    public UUID createUser(String email, String pwd, String firstName, String lastName, int roleId, int majorId) throws DAOException;
 
     /**
      * Function to delete user by userId

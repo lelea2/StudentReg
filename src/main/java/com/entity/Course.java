@@ -12,9 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Column;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -73,6 +75,10 @@ public class Course implements Serializable {
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "scheduleId", referencedColumnName="scheduleId", nullable = false)
     private Schedule schedule;
+
+    @JsonIgnore
+    @OneToMany(mappedBy="course", cascade=CascadeType.ALL)
+    private Set<UserCourse> usercourses;
 
     /**
      * Class Constructor
@@ -250,6 +256,14 @@ public class Course implements Serializable {
      */
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    /**
+     * Get total heads count of students registered for courses
+     * @return interger count
+     */
+    public int getTotalHeadCount() {
+        return usercourses.size();
     }
 
     @Override

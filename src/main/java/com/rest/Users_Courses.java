@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 import com.entity.Course;
 import com.dao.UserCourseDAO;
 import com.domain.CourseRegisterBody;
-import com.util.constant.Constant;
+import com.util.response.ComponentResponse;
 
 /**
  * Java class handle all API call related to users course registration call
@@ -35,10 +35,10 @@ public class Users_Courses {
     public Response getUserCourseRegistered(@NotNull @PathParam("userId") final String userId) {
         try {
             ArrayList<Course> courses = userCourseDAO.getRegisteredCourses(UUID.fromString(userId));
-            return Response.status(Response.Status.OK).entity(courses).build();
+            return ComponentResponse.okResponse(courses);
         } catch(Exception ex) {
             ex.printStackTrace();
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(Constant.Status.FAIL).build();
+            return ComponentResponse.errorResponse();
         }
     }
 

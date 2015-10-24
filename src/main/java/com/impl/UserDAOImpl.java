@@ -154,7 +154,7 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
     @SuppressWarnings("unchecked")
     @Override
     @Transactional(rollbackFor=Exception.class)
-    public boolean createUser(String email, String pwd, String firstName, String lastName, int roleId, int majorId) throws DAOException {
+    public UUID createUser(String email, String pwd, String firstName, String lastName, int roleId, int majorId) throws DAOException {
         try {
             Major major = (Major) this.get(Major.class, majorId);
             Role role = (Role) this.get(Role.class, roleId);
@@ -164,7 +164,7 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
             user.setMajor(major);
             user.setRole(role);
             this.save(user, userId);
-            return true;
+            return userId;
         } catch(Exception e) {
             String msg = String.format("Error create user, userEmail=%s, Message : %s", email, e.getMessage());
             this.getLogger().error(msg);
