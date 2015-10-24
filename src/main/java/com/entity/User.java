@@ -218,6 +218,23 @@ public class User implements Serializable {
     }
 
     /**
+     * Get usercourses
+     *
+     * @return Set of usercourses
+     */
+    public Set<UserCourse> getUsercourses() {
+        return usercourses;
+    }
+
+    /**
+     * Set usercourses
+     * @param Set usercourses
+     */
+    public void setUsercourses(Set<UserCourse> usercourses) {
+        this.usercourses = usercourses;
+    }
+
+    /**
      * Return number of courses that user has registered
      * @return integer number of registered courses
      */

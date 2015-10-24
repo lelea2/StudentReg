@@ -1,7 +1,5 @@
 package com.util.response;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 import java.util.*;
 import javax.ws.rs.core.Response;
 import com.util.constant.Constant;
@@ -38,14 +36,27 @@ public class ComponentResponse {
         return Response.status(Response.Status.OK).entity(generateCommonResponse(data)).build();
     }
 
+    /**
+     * Function return 201 response with status: "SUCCESS"
+     * @return
+     */
     public static Response createdResponse() {
-        return Response.status(Response.Status.CREATED).entity("").build();
+        return Response.status(Response.Status.CREATED).entity(Constant.Status.SUCCESS).build();
     }
 
+    /**
+     * Function return 201 with response contain data obj
+     * @param data
+     * @return
+     */
     public static Response createdResponse(Object data) {
         return Response.status(Response.Status.CREATED).entity(generateCommonResponse(data)).build();
     }
 
+    /**
+     * Function return error response
+     * @return
+     */
     public static Response errorResponse() {
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(Constant.Status.FAIL).build();
     }

@@ -259,6 +259,23 @@ public class Course implements Serializable {
     }
 
     /**
+     * Get usercourses
+     *
+     * @return Set of usercourses
+     */
+    public Set<UserCourse> getUsercourses() {
+        return usercourses;
+    }
+
+    /**
+     * Set usercourses
+     * @param Set usercourses
+     */
+    public void setUsercourses(Set<UserCourse> usercourses) {
+        this.usercourses = usercourses;
+    }
+
+    /**
      * Get total heads count of students registered for courses
      * @return interger count
      */

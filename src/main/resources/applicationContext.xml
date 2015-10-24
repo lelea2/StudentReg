@@ -36,7 +36,9 @@
                 <prop key="hibernate.format_sql">true</prop>
                 <prop key="hibernate.use_sql_comments">true</prop>
                 <!-- enable batch size and inprove hibernate performance -->
-                <prop key="hibernate.jdbc.batch_size">50</prop>
+                <prop key="hibernate.default_batch_fetch_size">20</prop>
+                <prop  key="hibernate.jdbc.fetch_size">20</prop>
+                <prop key="hibernate.jdbc.batch_size">20</prop>
                 <prop key="hibernate.order_inserts">true</prop>
                 <prop key="hibernate.order_updates">true</prop>
             </props>

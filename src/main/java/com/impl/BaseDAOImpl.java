@@ -1,7 +1,6 @@
 package com.impl;
 
-import java.rmi.server.ExportException;
-import java.util.Set;
+import java.util.*;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
@@ -84,10 +83,27 @@ public abstract class BaseDAOImpl {
     }
 
     /**
+     * Update/save in batch
+     * @param type
+     * @param entity
+     * @param <T>
+     */
+    @SuppressWarnings("unchecked")
+    protected <T> void saveBatch(Class<T> type, List<T> entity) throws Exception {
+        Session session = this.getSession();
+        for (int i = 0; i < entity.size(); i++) {
+            session.save(entity);
+            if (i % 20 == 0 && i > 0) {
+                clearSession();
+            }
+        }
+    }
+
+    /**
      * Clear current session (used during batch update/insert/delete)
      * @throws Exception
      */
-    protected void clearSession() throws Exception {
+    private void clearSession() {
         Session session = this.getSession();
         session.flush();
         session.clear();
@@ -119,6 +135,7 @@ public abstract class BaseDAOImpl {
         Session session = this.getSession();
         Criteria criteria = session.createCriteria(entityClass, entityName);
         if (forUpdate) {
+            //Locking the parent objects is sufficient. Deadlocks won't necessarily occur
             criteria.setLockMode(LockMode.PESSIMISTIC_WRITE);
         } else {
             criteria.setLockMode(LockMode.NONE);
