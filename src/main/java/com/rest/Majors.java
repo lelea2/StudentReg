@@ -11,6 +11,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import java.util.concurrent.TimeUnit;
+import com.util.cache.CacheAnnotations.CacheMaxAge;
 import com.entity.Major;
 import com.entity.Course;
 import com.dao.MajorDAO;
@@ -34,6 +36,7 @@ public class Majors {
      * @return Array contains JSON major object
      */
     @GET
+    @CacheMaxAge(time = 10, unit = TimeUnit.MINUTES)
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
     public Response allMajors() {
@@ -51,6 +54,7 @@ public class Majors {
      * @return Array contains JSON course object
      */
     @GET
+    @CacheMaxAge(time = 10, unit = TimeUnit.MINUTES)
     @Path("/{majorId}/courses")
     @Produces(MediaType.APPLICATION_JSON)
     public Response coursePerMajor(@DefaultValue("courseName") @QueryParam("sortBy") final String sortBy,

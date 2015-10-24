@@ -25,7 +25,7 @@ public class CacheFilterFactory implements ResourceFilterFactory {
     public List<ResourceFilter> create(AbstractMethod am) {
         if (am.isAnnotationPresent(CacheMaxAge.class)) {
             CacheMaxAge maxAge = am.getAnnotation(CacheMaxAge.class);
-            return newCacheFilter("max-age= " + maxAge.unit().toSeconds(maxAge.time()));
+            return newCacheFilter("max-age=" + maxAge.unit().toSeconds(maxAge.time()));
         } else if (am.isAnnotationPresent(NoCache.class)) {
             return newCacheFilter("no-cache");
         } else {
