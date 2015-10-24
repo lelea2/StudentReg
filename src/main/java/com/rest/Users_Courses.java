@@ -54,7 +54,17 @@ public class Users_Courses {
     @Produces(MediaType.APPLICATION_JSON)
     public Response addCourses(@NotNull @QueryParam("userId") final String userId,
                                CourseRegisterBody obj) {
-        return Response.status(Response.Status.CREATED).entity("").build();
+        try {
+            Boolean success = userCourseDAO.registerCourses(UUID.fromString(userId), obj.getCourseIds());
+            if (success.equals(true)) {
+                return ComponentResponse.createdResponse();
+            } else {
+                throw new Exception();
+            }
+        } catch(Exception ex) {
+            ex.printStackTrace();
+            return ComponentResponse.errorResponse();
+        }
     }
 
     /**
@@ -69,7 +79,17 @@ public class Users_Courses {
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteCourse(@NotNull @QueryParam("userId") final String userId,
                                  CourseRegisterBody obj) {
-        return Response.status(Response.Status.OK).entity("").build();
+        try {
+            Boolean success = userCourseDAO.dropCourses(UUID.fromString(userId), obj.getCourseIds());
+            if (success.equals(true)) {
+                return ComponentResponse.okResponse();
+            } else {
+                throw new Exception();
+            }
+        } catch(Exception ex) {
+            ex.printStackTrace();
+            return ComponentResponse.errorResponse();
+        }
     }
 
 }

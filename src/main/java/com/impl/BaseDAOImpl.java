@@ -84,16 +84,32 @@ public abstract class BaseDAOImpl {
 
     /**
      * Update/save in batch
-     * @param type
-     * @param entity
+     * @param Class entity
+     * @param Arraylist of entity to update
      * @param <T>
      */
     @SuppressWarnings("unchecked")
     protected <T> void saveBatch(Class<T> type, List<T> entity) throws Exception {
         Session session = this.getSession();
         for (int i = 0; i < entity.size(); i++) {
-            session.save(entity);
-            if (i % 20 == 0 && i > 0) {
+            session.save(entity.get(i));
+            if (i % 20 == 0 && i > 0) { //size from config. TODO: need to get from config
+                clearSession();
+            }
+        }
+    }
+
+    /**
+     * Delete in batch
+     * @param Class entity
+     * @param Arraylist of entity to update
+     * @param <T>
+     */
+    protected <T> void deleteBatch(Class<T> type, List<T> entity) throws Exception {
+        Session session = this.getSession();
+        for (int i = 0; i < entity.size(); i++) {
+            session.delete(entity.get(i));
+            if (i % 20 == 0 && i > 0) { //size from config. TODO: need to get from config
                 clearSession();
             }
         }
