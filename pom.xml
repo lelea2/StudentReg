@@ -63,7 +63,30 @@
             <artifactId>jersey-media-json-jackson</artifactId>
             <version>${jersey.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-bundle</artifactId>
+            <version>1.10-b01</version>
+        </dependency>
         <!-- End Jersey config-->
+        <!-- Jackson JSON mapper -->
+        <!-- Jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.6.2</version>
+        </dependency>
+        <!-- End Jackson JSON mapper -->
         <!-- spring -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -141,6 +164,13 @@
             <artifactId>jta</artifactId>
             <version>1.1</version>
         </dependency>
+        <!-- Log4j Properties -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+        <!-- End Log4j -->
         <!-- JPA -->
         <dependency>
             <groupId>org.springframework.data</groupId>
@@ -165,11 +195,6 @@
             <groupId>javax.persistence</groupId>
             <artifactId>persistence-api</artifactId>
             <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>4.2.16.Final</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
