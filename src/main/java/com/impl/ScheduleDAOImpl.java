@@ -31,7 +31,7 @@ public class ScheduleDAOImpl extends BaseDAOImpl implements ScheduleDAO {
      */
     public ArrayList<Schedule> getAll() throws DAOException {
         try {
-            List<Schedule> list = this.createCriteria(Schedule.class, "schedule", false).list();
+            List<Schedule> list = this.createCriteria(Schedule.class, "schedule", false).setCacheable(true).list();
             ArrayList<Schedule> scheduleList = new ArrayList<Schedule>();
             if (list == null || list.size() == 0) { //Don't do anything
             } else {
@@ -57,8 +57,7 @@ public class ScheduleDAOImpl extends BaseDAOImpl implements ScheduleDAO {
     @Transactional(readOnly=true, rollbackFor=Exception.class)
     public Schedule getScheduleById(int scheduleId) throws DAOException {
         try {
-            Criteria cr = this.createCriteria(Schedule.class, "schedule", false)
-                    .add(Restrictions.eq("scheduleId", scheduleId));
+            Criteria cr = this.createCriteria(Schedule.class, "schedule", false).setCacheable(true).add(Restrictions.eq("scheduleId", scheduleId));
             return (Schedule) cr.uniqueResult();
         } catch(Exception e) {
             String msg = String.format("Error getting schedule, scheduleId=%d, Message : %s", scheduleId, e.getMessage());

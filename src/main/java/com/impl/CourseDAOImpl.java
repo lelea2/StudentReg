@@ -37,6 +37,7 @@ public class CourseDAOImpl extends BaseDAOImpl implements CourseDAO {
     public ArrayList<Course> getAll(String sortBy) throws DAOException {
         try {
             Criteria cr = this.createCriteria(Course.class, "course", false)
+                    .setCacheable(true)
                     .createAlias("major", "major", JoinType.INNER_JOIN)
                     .createAlias("schedule", "schedule", JoinType.INNER_JOIN);
             if (sortBy.equals("courseName")) {
@@ -63,6 +64,7 @@ public class CourseDAOImpl extends BaseDAOImpl implements CourseDAO {
     public Course getByNumber(int courseNumber) throws DAOException {
         try {
             Criteria cr = this.createCriteria(Course.class, "course", false)
+                    .setCacheable(true)
                     .createAlias("major", "major", JoinType.INNER_JOIN)
                     .createAlias("schedule", "schedule", JoinType.INNER_JOIN)
                     .add(Restrictions.eq("course.courseNumber", courseNumber));
@@ -85,6 +87,7 @@ public class CourseDAOImpl extends BaseDAOImpl implements CourseDAO {
     public Course getByName(String courseName) throws DAOException {
         try {
             Criteria cr = this.createCriteria(Course.class, "course", false)
+                    .setCacheable(true)
                     .createAlias("major", "major", JoinType.INNER_JOIN)
                     .createAlias("schedule", "schedule", JoinType.INNER_JOIN)
                     .add(Restrictions.eq("course.courseName", courseName));
@@ -107,6 +110,7 @@ public class CourseDAOImpl extends BaseDAOImpl implements CourseDAO {
     public ArrayList<Course> getCoursesByName(String courseName) throws DAOException {
         try {
             Criteria cr = this.createCriteria(Course.class, "course", false)
+                    .setCacheable(true)
                     .createAlias("major", "major", JoinType.INNER_JOIN)
                     .createAlias("schedule", "schedule", JoinType.INNER_JOIN)
                     .add(Restrictions.like("course.courseName", courseName + "%"));
@@ -129,6 +133,7 @@ public class CourseDAOImpl extends BaseDAOImpl implements CourseDAO {
     public ArrayList<Course> getByMajor(int majorId, String sortBy) throws DAOException {
         try {
             Criteria cr = this.createCriteria(Course.class, "course", false)
+                    .setCacheable(true)
                     .createAlias("major", "major", JoinType.INNER_JOIN)
                     .createAlias("schedule", "schedule", JoinType.INNER_JOIN)
                     .add(Restrictions.eq("major.majorId", majorId));
@@ -156,6 +161,7 @@ public class CourseDAOImpl extends BaseDAOImpl implements CourseDAO {
     public ArrayList<Course> getBySchedule(int scheduleId) throws DAOException {
         try {
             Criteria cr = this.createCriteria(Course.class, "course", false)
+                    .setCacheable(true)
                     .createAlias("major", "major", JoinType.INNER_JOIN)
                     .createAlias("schedule", "schedule", JoinType.INNER_JOIN)
                     .add(Restrictions.eq("schedule.scheduleId", scheduleId))

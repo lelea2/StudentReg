@@ -36,8 +36,9 @@ public class MajorDAOImpl extends BaseDAOImpl implements MajorDAO {
     @Transactional(readOnly=true, rollbackFor=Exception.class)
     public ArrayList<Major> getMajors() throws DAOException {
         try {
-            List<Major> list = this.createCriteria(Major.class, "major", false).addOrder(Order.asc("majorName")).list();
+            Criteria cr = this.createCriteria(Major.class, "major", false).setCacheable(true).addOrder(Order.asc("majorName"));
             ArrayList<Major> majorList = new ArrayList<Major>();
+            List<Major> list = cr.list();
             if (list == null || list.size() == 0) { //Don't do anything
             } else {
                 for (Major o : list) {
