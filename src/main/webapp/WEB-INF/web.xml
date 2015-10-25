@@ -28,12 +28,12 @@
             <param-value>true</param-value>
         </init-param>
         <init-param>
-            <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>com.rest</param-value>
-        </init-param>
-        <init-param>
             <param-name>com.sun.jersey.spi.container.ResourceFilters</param-name>
             <param-value>com.util.cache.CacheFilterFactory</param-value>
+        </init-param>
+        <init-param>
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>com.rest</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
         <async-supported>true</async-supported>

@@ -1,17 +1,14 @@
 package com.entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Column;
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.*;
+import org.hibernate.annotations.Cache;
 
 import java.io.*;
 import java.util.Set;
@@ -27,6 +24,8 @@ import java.util.Set;
 
 @Entity
 @Table(name="Majors")
+@Cacheable
+@Cache(usage=CacheConcurrencyStrategy.READ_ONLY, region="majors")
 public class Major implements Serializable {
 
     @Id

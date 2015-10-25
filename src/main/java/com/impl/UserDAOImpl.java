@@ -123,8 +123,8 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
         try {
             Major major = (Major) this.get(Major.class, majorId);
             Role role = (Role) this.get(Role.class, roleId);
+            User user = (User) this.get(User.class, userId);
             //User(UUID userId, String email, String password, String firstName, String lastName)
-            User user = new User();
             user.setPassword(pwd);
             user.setFirstName(firstName);
             user.setLastName(lastName);

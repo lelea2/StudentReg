@@ -4,21 +4,15 @@ import java.beans.Transient;
 import java.io.Serializable;
 import java.util.*;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Column;
-import javax.persistence.FetchType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.*;
+import org.hibernate.annotations.Cache;
 
 /**
  * Data transfer object for major
@@ -31,6 +25,8 @@ import org.hibernate.annotations.*;
 
 @Entity
 @Table(name="Roles")
+@Cacheable
+@Cache(usage=CacheConcurrencyStrategy.READ_ONLY, region="roles")
 public class Role implements Serializable {
 
     @Id

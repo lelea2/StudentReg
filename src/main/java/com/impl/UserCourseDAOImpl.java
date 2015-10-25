@@ -1,10 +1,7 @@
 package com.impl;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
-import com.dao.CourseDAO;
-import com.rest.Users_Courses;
 import com.util.exception.DAOException;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;

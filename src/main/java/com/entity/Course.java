@@ -4,22 +4,19 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.UUID;
 
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Column;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotBlank;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.Cache;
 
 /**
  *  Data transfer object for courses
@@ -41,6 +38,8 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="Courses")
+@Cacheable
+@Cache(usage=CacheConcurrencyStrategy.READ_ONLY, region="courses")
 public class Course implements Serializable {
 
     @Id
