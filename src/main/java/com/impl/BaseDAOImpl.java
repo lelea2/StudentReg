@@ -53,7 +53,7 @@ public abstract class BaseDAOImpl {
      *
      */
     @SuppressWarnings("unchecked")
-    protected void save(Object entity, Object id) Exception {
+    protected void save(Object entity, Object id) throws Exception {
         Session session = this.getSession();
         Set<EntityKey> keys = session.getStatistics().getEntityKeys();
         for (EntityKey key : keys) {

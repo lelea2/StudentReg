@@ -167,8 +167,6 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
             user.setRole(role);
             this.save(user, userId);
             return userId;
-        } catch (SQLIntegrityConstraintViolationException e) {
-            catch
         } catch (Exception e) {
             String msg = String.format("Error create user, userEmail=%s, Message : %s", email, e.getMessage());
             this.getLogger().error(msg);
