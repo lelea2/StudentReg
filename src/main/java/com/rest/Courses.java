@@ -16,6 +16,7 @@ import com.util.response.ComponentResponse;
 /**
  * Java class handle all API call related to courses
  */
+
 @Path("/courses")
 public class Courses {
 

@@ -7,14 +7,16 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.annotation.Propagation;
+
 import org.hibernate.criterion.*;
 import org.hibernate.Criteria;
 import org.hibernate.sql.JoinType;
+import java.sql.*;
 
 import com.util.security.Crypto;
 import com.dao.UserDAO;
 import com.entity.Major;
-import com.entity.Course;
 import com.entity.User;
 import com.entity.Role;
 
@@ -153,7 +155,7 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
      */
     @SuppressWarnings("unchecked")
     @Override
-    @Transactional(rollbackFor=Exception.class)
+    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor=Exception.class)
     public UUID createUser(String email, String pwd, String firstName, String lastName, int roleId, int majorId) throws DAOException {
         try {
             Major major = (Major) this.get(Major.class, majorId);
@@ -165,7 +167,9 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
             user.setRole(role);
             this.save(user, userId);
             return userId;
-        } catch(Exception e) {
+        } catch (SQLIntegrityConstraintViolationException e) {
+            catch
+        } catch (Exception e) {
             String msg = String.format("Error create user, userEmail=%s, Message : %s", email, e.getMessage());
             this.getLogger().error(msg);
             throw new DAOException(msg);

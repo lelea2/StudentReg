@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.engine.spi.EntityKey;
+import java.sql.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,7 +53,7 @@ public abstract class BaseDAOImpl {
      *
      */
     @SuppressWarnings("unchecked")
-    protected void save(Object entity, Object id) throws Exception {
+    protected void save(Object entity, Object id) Exception {
         Session session = this.getSession();
         Set<EntityKey> keys = session.getStatistics().getEntityKeys();
         for (EntityKey key : keys) {
