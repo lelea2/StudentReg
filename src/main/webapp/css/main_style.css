@@ -210,7 +210,7 @@ td{
     padding-right: 5px;
     padding-left: 5px;
     float:left;
-    height: 24px;
+    height: 25px;
     width:100px;
     color: white;
     background-color: lightblue;
@@ -238,6 +238,21 @@ td{
 #pageC{
     display:none;
 }
+.dropButton{
+     margin-top: 10px;
+     padding-right: 5px;
+     padding-left: 5px;
+     float:left;
+     height: 25px;
+     width:100px;
+     color: white;
+     background-color: #ff3e3e;
+     line-height: 25px;
+     text-align: center;
+     border: solid 1px;
+     border-radius: 1%;
+     cursor:pointer;
+ }
 /*Right Side Page Style End*/
 
 .footer{
@@ -248,21 +263,7 @@ td{
     background-color: #353535;
     z-index: 999;
 }
-.dropButton{
-    margin-top: 10px;
-    padding-right: 5px;
-    padding-left: 5px;
-    float:left;
-    height: 25px;
-    width:100px;
-    color: white;
-    background-color: #ff3e3e;
-    line-height: 25px;
-    text-align: center;
-    border: solid 1px;
-    border-radius: 1%;
-    cursor:pointer;
-}
+
 
 /*Animation */
 .leftSide li:hover{
