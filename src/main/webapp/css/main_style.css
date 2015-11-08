@@ -16,7 +16,8 @@ ol,ul{
     list-style:none;
 }
 a{
-    text-decroation:none;
+    text-decoration-line: none;
+    color: white;
 }
 .wrap {
     margin: auto;
@@ -86,12 +87,11 @@ h4{
 /* Left Side Menu Bar Style Begin*/
 .leftSide{
     margin-top:60px;
-    display: none;
     float: left;
     position: fixed;
     background-color: #f3f3f3;
     height: 100%;
-    width:20%;
+    width:15%;
     z-index: 150;
 }
 .leftSide ul{
@@ -129,7 +129,7 @@ h4{
     margin-top:4%;
     float: right;
     height:94%;
-    width:100%;
+    width:85%;
 }
 .rightSide li{
     margin:0 0 0 0;
@@ -160,7 +160,7 @@ h4{
 }
 #pageA table{
     margin-top: 10px;
-    margin-left: 10px;
+
 }
 thead{
     color: #8c8c8c;
@@ -169,8 +169,9 @@ thead{
 td{
     height:30px;
 }
+
 .cn{
-    width:20%;
+    width:15%;
 }
 .cnb{
     width: 8%;
@@ -188,7 +189,7 @@ td{
     width:10%;
 }
 .des{
-    width:17%;
+    width:15%;
 }
 .add{
     width:17%;
@@ -196,9 +197,10 @@ td{
 .drop{
     width:17%;
 }
-#pageB{
-    display: none;
+.opt{
+    width:8%;
 }
+
 #searchBar{
     margin-top: 10px;
     float: left;
@@ -220,13 +222,13 @@ td{
     border-radius: 1%;
     cursor:pointer;
 }
-.addButton{
+.greenButton{
     margin-top: 10px;
     padding-right: 5px;
     padding-left: 5px;
     float:left;
     height: 25px;
-    width:100px;
+    width:50px;
     color: white;
     background-color: green;
     line-height: 25px;
@@ -235,16 +237,14 @@ td{
     border-radius: 1%;
     cursor:pointer;
 }
-#pageC{
-    display:none;
-}
-.dropButton{
+
+.redButton{
      margin-top: 10px;
      padding-right: 5px;
      padding-left: 5px;
      float:left;
      height: 25px;
-     width:100px;
+     width:50px;
      color: white;
      background-color: #ff3e3e;
      line-height: 25px;
@@ -272,10 +272,10 @@ td{
 #searchButton:hover{
     opacity: 0.7;
 }
-.addButton:hover{
+.greenButton:hover{
     opacity: 0.7;
 }
-.dropButton:hover{
+.redButton:hover{
     opacity: 0.7;
 }
 @-webkit-keyframes flashIn{
@@ -327,4 +327,95 @@ td{
     -moz-animation: flashIn 2s infinite ease-in-out;
     -ms-animation: flashIn 2s infinite ease-in-out;
     animation: flashIn 2s infinite ease-in-out;
+}
+
+
+/*--Create Course--*/
+.creatBox{
+    width:900px;
+}
+.inputBox{
+    margin-top:100px;
+    margin-left:50px;
+    width:880px;
+}
+.createBox span{
+    float:left;
+    font-size:30px;
+    color: #8c8c8c;
+    line-height: 50px;
+}
+.createBox input{
+    margin-left:10px;
+    float:right;
+    width:500px;
+    height:50px;
+    border-radius: 10px;
+    font-size:35px;
+    color:#8c8c8c;
+}
+.createBox select{
+    margin-left:10px;
+    float:right;
+    width:500px;
+    height:50px;
+    border-radius: 10px;
+    font-size:35px;
+    color:#8c8c8c;
+}
+.marginTop{
+    margin-top:10px;
+}
+
+.buttonRow{
+    margin-top:100px;
+
+}
+#createButton{
+
+    margin-right:10px;
+    float:right;
+    height: 50px;
+    width:200px;
+    color: white;
+    font-size:25px;
+    background-color: dodgerblue;
+    line-height: 50px;
+    text-align: center;
+    border: solid 1px;
+    border-color: dodgerblue;
+    border-radius: 10px;
+    cursor:pointer;
+}
+#resetButton{
+    margin-right:10px;
+    float:right;
+    height: 50px;
+    width:200px;
+    color: white;
+    font-size:25px;
+    background-color: red;
+    line-height: 50px;
+    text-align: center;
+    border: solid 1px;
+    border-color: red;
+    border-radius: 10px;
+    cursor:pointer;
+}
+.floatA{
+    float:left;
+}
+
+.footer{
+    bottom: 0;
+    position: fixed;
+    height: 150px;
+    width: 100%;
+    background-color: #353535;
+    z-index: 999;
+}
+
+/*Animation*/
+#submitButton:hover , #resetButton:hover{
+    opacity: 0.7;
 }
