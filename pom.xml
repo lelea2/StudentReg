@@ -245,7 +245,7 @@
                         </systemProperty>
                     </systemProperties>
                     <httpConnector>
-                        <port>8000</port>
+                        <port>8080</port>
                     </httpConnector>
                     <webApp>
                         <contextPath>/services</contextPath>
