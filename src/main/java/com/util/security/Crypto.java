@@ -1,7 +1,7 @@
 package com.util.security;
 
 import java.util.*;
-import java.util.Base64;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -10,6 +10,8 @@ import java.nio.charset.Charset;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import org.springframework.security.crypto.codec.Base64;
+
 
 /**
  * Utility class for crypto logic used for password encrypt & decrypt
@@ -34,7 +36,7 @@ public class Crypto {
 
             byte[] stringBytes = message.getBytes(Charset.forName("UTF-8"));
             byte[] raw = cipher.doFinal(stringBytes);
-            result = new String(Base64.getEncoder().encodeToString(raw));
+            result = new String(Base64.encode(raw));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -54,7 +56,7 @@ public class Crypto {
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             cipher.init(Cipher.DECRYPT_MODE, secretKey, new IvParameterSpec(ivBytes));
 
-            byte[] raw = Base64.getDecoder().decode(encrypted.getBytes());
+            byte[] raw = Base64.decode(encrypted.getBytes());
             byte[] stringBytes = cipher.doFinal(raw);
             result = new String(stringBytes, "UTF8");
         } catch (Exception e) {
