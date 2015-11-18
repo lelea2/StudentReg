@@ -146,6 +146,7 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.1</version>
         </dependency>
+
         <!-- MariaDB client -->
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
@@ -257,6 +258,20 @@
                         <overrideDescriptor>src/main/webapp/WEB-INF/web.xml</overrideDescriptor>-->
                         <webInfIncludeJarPattern>.*/.*jersey-[^/]\.jar$</webInfIncludeJarPattern>
                     </webApp>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
         </plugins>
