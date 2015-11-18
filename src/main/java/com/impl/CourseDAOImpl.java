@@ -34,12 +34,14 @@ public class CourseDAOImpl extends BaseDAOImpl implements CourseDAO {
     @SuppressWarnings("unchecked")
     @Override
     @Transactional(readOnly=true, rollbackFor=Exception.class)
-    public ArrayList<Course> getAll(String sortBy) throws DAOException {
+    public ArrayList<Course> getAll(String sortBy, int pageNumber, int pageSize) throws DAOException {
         try {
             Criteria cr = this.createCriteria(Course.class, "course", false)
                     .setCacheable(true)
                     .createAlias("major", "major", JoinType.INNER_JOIN)
                     .createAlias("schedule", "schedule", JoinType.INNER_JOIN);
+            cr.setFirstResult((pageNumber - 1) * pageSize);
+            cr.setMaxResults(pageSize);
             if (sortBy.equals("courseName")) {
                 cr.addOrder(Order.asc("courseName"));
             } else {

@@ -43,12 +43,14 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
     @SuppressWarnings("unchecked")
     @Override
     @Transactional(readOnly=true, rollbackFor=Exception.class)
-    public ArrayList<User> getAll() throws DAOException {
+    public ArrayList<User> getAll(int pageNumber, int pageSize) throws DAOException {
         try {
             Criteria cr = this.createCriteria(User.class, "user", false)
                     .createAlias("major", "major", JoinType.INNER_JOIN)
                     .createAlias("role", "role", JoinType.INNER_JOIN)
                     .addOrder(Order.asc("lastName"));
+            cr.setFirstResult((pageNumber - 1) * pageSize);
+            cr.setMaxResults(pageSize);
             return generateUserList(cr.list());
         } catch(Exception e) {
             String msg = String.format("Error getting all users, Message : %s", e.getMessage());
@@ -127,7 +129,11 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
             Role role = (Role) this.get(Role.class, roleId);
             User user = (User) this.get(User.class, userId);
             //User(UUID userId, String email, String password, String firstName, String lastName)
-            user.setPassword(pwd);
+            if (pwd.equals("") || pwd.equals("default")) {
+                //Don't update password
+            } else {
+                user.setPassword(pwd);
+            }
             user.setFirstName(firstName);
             user.setLastName(lastName);
             user.setMajor(major);
@@ -208,6 +214,5 @@ public class UserDAOImpl extends BaseDAOImpl implements UserDAO {
         }
         return userList;
     }
-
 
 }

@@ -60,7 +60,6 @@ public class User implements Serializable {
     @Column(name="lastName", nullable=false)
     private String lastName;
 
-    @JsonIgnore
     @Column(name="password", nullable=false)
     private String encryptedPassword;
 

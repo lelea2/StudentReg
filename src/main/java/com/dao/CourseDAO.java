@@ -14,7 +14,7 @@ public interface CourseDAO {
      * @param String sortBy (default by courseNumber)
      * @return Array list of course object
      */
-    public ArrayList<Course> getAll(String sortBy) throws DAOException;
+    public ArrayList<Course> getAll(String sortBy, int pageNumber, int pageSize) throws DAOException;
 
     /**
      * Function to get course by course number

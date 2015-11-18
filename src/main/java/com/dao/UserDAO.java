@@ -17,7 +17,7 @@ public interface UserDAO {
      * @return ArrayList of User object
      *
      */
-    public ArrayList<User> getAll() throws DAOException;
+    public ArrayList<User> getAll(int pageNumber, int pageSize) throws DAOException;
 
     /**
      * Function to get user by userId

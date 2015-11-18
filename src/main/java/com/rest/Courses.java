@@ -30,9 +30,11 @@ public class Courses {
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllCourses(@DefaultValue("courseNumber") @QueryParam("sortBy") final String sortBy) {
+    public Response getAllCourses(@DefaultValue("courseNumber") @QueryParam("sortBy") final String sortBy,
+                                  @DefaultValue("0") @QueryParam("startIndex") final Integer pageNumber,
+                                  @DefaultValue("100") @QueryParam("number") final Integer pageSize) {
         try {
-            ArrayList<Course> courseList = courseDAO.getAll(sortBy);
+            ArrayList<Course> courseList = courseDAO.getAll(sortBy, pageNumber, pageSize);
             return ComponentResponse.okResponse(courseList);
         } catch (Exception e) {
             e.printStackTrace();

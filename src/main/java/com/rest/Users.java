@@ -13,6 +13,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.annotation.security.*;
 
 import com.domain.UserRequestBody;
 import com.domain.UserRegisterBody;
@@ -26,6 +27,7 @@ import com.dao.UserDAO;
  * Java class handle all API call related to users
  */
 @Path("/users")
+@PermitAll
 public class Users {
 
     @Autowired
@@ -38,9 +40,10 @@ public class Users {
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAll() {
+    public Response getAll(@DefaultValue("0") @QueryParam("startIndex") final Integer pageNumber,
+                           @DefaultValue("100") @QueryParam("number") final Integer pageSize) {
         try {
-            ArrayList<User> userList = userDAO.getAll();
+            ArrayList<User> userList = userDAO.getAll(pageNumber, pageSize);
             return ComponentResponse.okResponse(userList);
         } catch (Exception e) {
             e.printStackTrace();
