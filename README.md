@@ -20,6 +20,8 @@ kdao-ltm:StudentReg kdao$ vi ~/.profile
 
 kdao-ltm:StudentReg kdao$ source ~/.profile
 ```
-
+* Run mvn command
+```
 kdao-ltm:StudentReg kdao$ mvn clean
 kdao-ltm:StudentReg kdao$ mvn package
+```
